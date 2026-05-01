@@ -1840,5 +1840,97 @@
   });
 </script>
 
+<script>
+(function() {
+  document.body.style.cursor = 'none';
+
+  const COLORS = ['#00f5ff', '#bf00ff', '#39ff14', '#ffd700', '#ff006e'];
+  const TRAIL_COUNT = 20;
+  const dots = [];
+  const positions = Array.from({ length: TRAIL_COUNT }, () => ({ x: -100, y: -100 }));
+  let mouseX = -100, mouseY = -100;
+  let isHovering = false;
+
+  for (let i = 0; i < TRAIL_COUNT; i++) {
+    const dot = document.createElement('div');
+    const color = COLORS[i % COLORS.length];
+    const fraction = 1 - (i / TRAIL_COUNT);
+    const size = Math.round(14 * fraction) + 2;
+    const opacity = 0.8 - (i / TRAIL_COUNT) * 0.2;
+    dot.style.cssText = [
+      'position:fixed',
+      'pointer-events:none',
+      'border-radius:50%',
+      'z-index:999999',
+      'transform:translate(-50%,-50%)',
+      `width:${size}px`,
+      `height:${size}px`,
+      `background:${color}`,
+      `opacity:${opacity}`,
+      `box-shadow:0 0 ${size * 2}px ${size}px ${color}88`,
+      'transition:width 0.15s ease,height 0.15s ease,box-shadow 0.15s ease,opacity 0.15s ease',
+      'will-change:transform',
+    ].join(';');
+    dot._baseSize = size;
+    dot._color = color;
+    dot._opacity = opacity;
+    document.body.appendChild(dot);
+    dots.push(dot);
+  }
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest('a, button, [role="button"]')) {
+      isHovering = true;
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest('a, button, [role="button"]')) {
+      isHovering = false;
+    }
+  });
+
+  const easing = 0.35;
+
+  function animate() {
+    positions[0].x += (mouseX - positions[0].x) * easing;
+    positions[0].y += (mouseY - positions[0].y) * easing;
+
+    for (let i = 1; i < TRAIL_COUNT; i++) {
+      const lag = 0.28 - (i / TRAIL_COUNT) * 0.18;
+      positions[i].x += (positions[i - 1].x - positions[i].x) * lag;
+      positions[i].y += (positions[i - 1].y - positions[i].y) * lag;
+    }
+
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const dot = dots[i];
+      dot.style.left = positions[i].x + 'px';
+      dot.style.top = positions[i].y + 'px';
+
+      if (isHovering) {
+        const bigSize = dot._baseSize * 1.7;
+        dot.style.width = bigSize + 'px';
+        dot.style.height = bigSize + 'px';
+        dot.style.opacity = Math.min(dot._opacity * 1.3, 1);
+        dot.style.boxShadow = `0 0 ${bigSize * 2.5}px ${bigSize}px ${dot._color}cc`;
+      } else {
+        dot.style.width = dot._baseSize + 'px';
+        dot.style.height = dot._baseSize + 'px';
+        dot.style.opacity = dot._opacity;
+        dot.style.boxShadow = `0 0 ${dot._baseSize * 2}px ${dot._baseSize}px ${dot._color}88`;
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
+</script>
+
 </body>
 </html>
