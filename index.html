@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Overhill Valley Digital Ventures — Where we are going we don't need employees. AI-powered newsletter brands for solopreneurs and seniors." />
+  <title>Overhill Valley Digital Ventures</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --neon-cyan:    #00f5ff;
+      --neon-purple:  #bf00ff;
+      --neon-green:   #39ff14;
+      --neon-pink:    #ff006e;
+      --neon-gold:    #ffd700;
+      --bg-dark:      #050510;
+      --bg-card:      #0a0a1e;
+      --bg-card2:     #0d0d25;
+      --text-primary: #e8e8ff;
+      --text-muted:   #8888aa;
+      --border-glow:  rgba(0, 245, 255, 0.25);
+      --font-display: 'Orbitron', monospace;
+      --font-body:    'Space Grotesk', sans-serif;
+      --font-ui:      'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Animated Background Grid ──────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0%   { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    /* ─── Starfield Particles ─────────────────────────────────────── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.4); }
+    }
+
+    /* ─── Utility ─────────────────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── Navigation ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(5,5,16,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,245,255,0.15);
+      transition: background 0.3s ease;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--neon-cyan);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px var(--neon-cyan);
+    }
+
+    .nav-cta {
+      background: transparent !important;
+      border: 1px solid var(--neon-cyan) !important;
+      color: var(--neon-cyan) !important;
+      padding: 7px 18px;
+      border-radius: 4px;
+    }
+
+    .nav-cta:hover {
+      background: rgba(0,245,255,0.1) !important;
+      box-shadow: 0 0 20px rgba(0,245,255,0.3) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--neon-cyan);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(5,5,16,0.98);
+      border-top: 1px solid rgba(0,245,255,0.12);
+      padding: 16px 24px;
+      gap: 12px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--neon-cyan); }
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background-image: url('images/boardroom.png');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(5,5,20,0.65) 0%,
+        rgba(0,0,15,0.48) 40%,
+        rgba(5,5,20,0.68) 100%
+      );
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+    .hero-eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .hero-title .line1 {
+      display: block;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title .line2 { display: block; color: var(--text-primary); }
+
+    .hero-title .line3 {
+      display: block;
+      background: linear-gradient(135deg, var(--neon-gold), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-motto {
+      font-family: var(--font-display);
+      font-size: clamp(0.8rem, 2vw, 1.05rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--neon-green);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+      text-shadow: 0 0 20px rgba(57,255,20,0.4);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.9s forwards;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.1s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 34px;
+      background: linear-gradient(135deg, rgba(0,245,255,0.12), rgba(191,0,255,0.12));
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 30px rgba(0,245,255,0.35), 0 0 60px rgba(0,245,255,0.1);
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(191,0,255,0.2));
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 34px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--neon-purple);
+      color: var(--neon-purple);
+      box-shadow: 0 0 20px rgba(191,0,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Ticker ──────────────────────────────────────────────────── */
+    .ticker-wrap {
+      background: rgba(0,245,255,0.04);
+      border-top: 1px solid rgba(0,245,255,0.12);
+      border-bottom: 1px solid rgba(0,245,255,0.12);
+      padding: 12px 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 60px;
+      width: max-content;
+      animation: tickerScroll 35s linear infinite;
+    }
+
+    .ticker-item {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ticker-item i { color: var(--neon-green); font-size: 0.5rem; }
+
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── Sections ────────────────────────────────────────────────── */
+    section { padding: 100px 0; position: relative; }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ─── Stats Band ────────────────────────────────────────────── */
+    .stats-band {
+      padding: 60px 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-number.cyan   { color: var(--neon-cyan);   text-shadow: 0 0 20px rgba(0,245,255,0.5); }
+    .stat-number.purple { color: var(--neon-purple);  text-shadow: 0 0 20px rgba(191,0,255,0.5); }
+    .stat-number.green  { color: var(--neon-green);   text-shadow: 0 0 20px rgba(57,255,20,0.5); }
+    .stat-number.gold   { color: var(--neon-gold);    text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+
+    .stat-label {
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── Newsletter Cards ──────────────────────────────────────── */
+    #newsletters { background: var(--bg-dark); }
+
+    .newsletters-header { text-align: center; margin-bottom: 72px; }
+
+    .newsletter-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .newsletter-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .newsletter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .newsletter-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .newsletter-card:hover { transform: translateY(-8px); }
+    .newsletter-card:hover::after { opacity: 1; }
+
+    .card-toga::before  { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple)); }
+    .card-toga::after   { background: radial-gradient(ellipse at top, rgba(0,245,255,0.06), transparent 60%); }
+    .card-toga:hover    { border-color: rgba(0,245,255,0.3); box-shadow: 0 20px 60px rgba(0,245,255,0.1); }
+
+    .card-aife::before  { background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan)); }
+    .card-aife::after   { background: radial-gradient(ellipse at top, rgba(57,255,20,0.05), transparent 60%); }
+    .card-aife:hover    { border-color: rgba(57,255,20,0.3); box-shadow: 0 20px 60px rgba(57,255,20,0.08); }
+
+    .card-siai::before  { background: linear-gradient(90deg, var(--neon-gold), var(--neon-pink)); }
+    .card-siai::after   { background: radial-gradient(ellipse at top, rgba(255,215,0,0.05), transparent 60%); }
+    .card-siai:hover    { border-color: rgba(255,215,0,0.3); box-shadow: 0 20px 60px rgba(255,215,0,0.08); }
+
+    .card-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      font-size: 1.6rem;
+      position: relative;
+    }
+
+    .card-toga .card-icon-wrap { background: rgba(0,245,255,0.1);  color: var(--neon-cyan);   box-shadow: 0 0 20px rgba(0,245,255,0.15); }
+    .card-aife .card-icon-wrap { background: rgba(57,255,20,0.09); color: var(--neon-green);  box-shadow: 0 0 20px rgba(57,255,20,0.12); }
+    .card-siai .card-icon-wrap { background: rgba(255,215,0,0.09); color: var(--neon-gold);   box-shadow: 0 0 20px rgba(255,215,0,0.12); }
+
+    .card-badge {
+      position: absolute;
+      top: -6px; right: -6px;
+      background: var(--neon-green);
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 0.42rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      padding: 3px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .card-number {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .card-toga .card-name  { color: var(--neon-cyan); }
+    .card-aife .card-name  { color: var(--neon-green); }
+    .card-siai .card-name  { color: var(--neon-gold); }
+
+    .card-tagline {
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .card-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 20px 0; }
+
+    .card-desc {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .card-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 0.87rem;
+      color: var(--text-muted);
+    }
+
+    .card-features li i { font-size: 0.68rem; flex-shrink: 0; }
+    .card-toga .card-features li i { color: var(--neon-cyan); }
+    .card-aife .card-features li i { color: var(--neon-green); }
+    .card-siai .card-features li i { color: var(--neon-gold); }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 24px;
+      border-radius: 6px;
+      border: 1px solid;
+      transition: all 0.25s ease;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .card-toga .card-cta { color: var(--neon-cyan);   border-color: rgba(0,245,255,0.35);  background: rgba(0,245,255,0.05); }
+    .card-aife .card-cta { color: var(--neon-green);  border-color: rgba(57,255,20,0.35);  background: rgba(57,255,20,0.04); }
+    .card-siai .card-cta { color: var(--neon-gold);   border-color: rgba(255,215,0,0.35);  background: rgba(255,215,0,0.04); }
+
+    .card-toga .card-cta:hover { background: rgba(0,245,255,0.12); box-shadow: 0 0 20px rgba(0,245,255,0.2); }
+    .card-aife .card-cta:hover { background: rgba(57,255,20,0.1);  box-shadow: 0 0 20px rgba(57,255,20,0.15); }
+    .card-siai .card-cta:hover { background: rgba(255,215,0,0.1);  box-shadow: 0 0 20px rgba(255,215,0,0.15); }
+
+    /* ─── Mission ────────────────────────────────────────────────── */
+    #mission {
+      background: var(--bg-card);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .mission-hex-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mission-hex {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 8px;
+      font-family: var(--font-display);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .mission-hex:hover { transform: scale(1.06); }
+    .mission-hex i { font-size: 1.4rem; margin-bottom: 4px; }
+
+    .mh-1 { background: rgba(0,245,255,0.07);   border: 1px solid rgba(0,245,255,0.2);   color: var(--neon-cyan);   }
+    .mh-2 { background: rgba(191,0,255,0.07);   border: 1px solid rgba(191,0,255,0.2);   color: var(--neon-purple); }
+    .mh-3 { background: rgba(57,255,20,0.07);   border: 1px solid rgba(57,255,20,0.2);   color: var(--neon-green);  }
+    .mh-4 { background: rgba(255,215,0,0.07);   border: 1px solid rgba(255,215,0,0.2);   color: var(--neon-gold);   }
+    .mh-5 { background: rgba(255,0,110,0.07);   border: 1px solid rgba(255,0,110,0.2);   color: var(--neon-pink);   }
+    .mh-6 { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);  }
+
+    .mh-1:hover { box-shadow: 0 0 25px rgba(0,245,255,0.2); }
+    .mh-2:hover { box-shadow: 0 0 25px rgba(191,0,255,0.2); }
+    .mh-3:hover { box-shadow: 0 0 25px rgba(57,255,20,0.2); }
+    .mh-4:hover { box-shadow: 0 0 25px rgba(255,215,0,0.2); }
+    .mh-5:hover { box-shadow: 0 0 25px rgba(255,0,110,0.2); }
+
+    .mission-content .section-subtitle { max-width: 100%; margin-bottom: 32px; }
+
+    .mission-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 0;
+    }
+
+    .mission-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .m-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .mission-list li:nth-child(1) .m-icon { background: rgba(0,245,255,0.1);  color: var(--neon-cyan); }
+    .mission-list li:nth-child(2) .m-icon { background: rgba(191,0,255,0.1);  color: var(--neon-purple); }
+    .mission-list li:nth-child(3) .m-icon { background: rgba(57,255,20,0.1);  color: var(--neon-green); }
+
+    .mission-list li strong { color: var(--text-primary); }
+
+    /* ─── How It Works ──────────────────────────────────────────── */
+    #how-it-works { background: var(--bg-dark); }
+    .hiw-header { text-align: center; margin-bottom: 72px; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+
+    .step-card {
+      background: var(--bg-card2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,245,255,0.07);
+    }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.35;
+    }
+
+    .step-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── Manifesto ─────────────────────────────────────────────── */
+    .manifesto-section {
+      padding: 100px 0;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(5,5,30,1) 50%, var(--bg-dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .manifesto-bg-text {
+      font-family: var(--font-display);
+      font-size: 22vw;
+      font-weight: 900;
+      color: rgba(0,245,255,0.02);
+      white-space: nowrap;
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .manifesto-content { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+
+    .manifesto-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+    }
+
+    .manifesto-quote em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .manifesto-attr {
+      font-family: var(--font-display);
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--neon-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      text-shadow: 0 0 15px rgba(57,255,20,0.4);
+    }
+
+    .manifesto-attr::before,
+    .manifesto-attr::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--neon-green);
+      box-shadow: 0 0 8px var(--neon-green);
+    }
+
+    /* ─── Subscribe ─────────────────────────────────────────────── */
+    #subscribe {
+      background: var(--bg-card);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .subscribe-header { text-align: center; margin-bottom: 64px; }
+
+    .subscribe-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .sub-card {
+      background: var(--bg-dark);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 32px 28px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .sub-card:hover { border-color: rgba(0,245,255,0.18); }
+
+    .sub-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .sub-brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .sub-toga .sub-brand-icon { background: rgba(0,245,255,0.1);  color: var(--neon-cyan); }
+    .sub-aife .sub-brand-icon { background: rgba(57,255,20,0.1);  color: var(--neon-green); }
+    .sub-siai .sub-brand-icon { background: rgba(255,215,0,0.1);  color: var(--neon-gold); }
+
+    .sub-brand-name {
+      font-family: var(--font-display);
+      font-size: 0.83rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .sub-toga .sub-brand-name { color: var(--neon-cyan); }
+    .sub-aife .sub-brand-name { color: var(--neon-green); }
+    .sub-siai .sub-brand-name { color: var(--neon-gold); }
+
+    .sub-brand-tag {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .sub-form { display: flex; flex-direction: column; gap: 12px; }
+
+    .sub-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .sub-input:focus {
+      border-color: rgba(0,245,255,0.35);
+      box-shadow: 0 0 0 3px rgba(0,245,255,0.07);
+    }
+
+    .sub-input::placeholder { color: var(--text-muted); }
+
+    .sub-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .sub-toga .sub-btn { background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(191,0,255,0.25)); color: var(--neon-cyan);  border: 1px solid rgba(0,245,255,0.35); }
+    .sub-aife .sub-btn { background: linear-gradient(135deg, rgba(57,255,20,0.2),  rgba(0,245,255,0.2));  color: var(--neon-green); border: 1px solid rgba(57,255,20,0.35); }
+    .sub-siai .sub-btn { background: linear-gradient(135deg, rgba(255,215,0,0.2),  rgba(255,0,110,0.2));  color: var(--neon-gold);  border: 1px solid rgba(255,215,0,0.35); }
+
+    .sub-toga .sub-btn:hover { box-shadow: 0 0 20px rgba(0,245,255,0.22); transform: translateY(-1px); }
+    .sub-aife .sub-btn:hover { box-shadow: 0 0 20px rgba(57,255,20,0.18); transform: translateY(-1px); }
+    .sub-siai .sub-btn:hover { box-shadow: 0 0 20px rgba(255,215,0,0.18); transform: translateY(-1px); }
+
+    .sub-note { font-size: 0.7rem; color: var(--text-muted); text-align: center; }
+
+    /* ─── About ─────────────────────────────────────────────────── */
+    #about { background: var(--bg-dark); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .founder-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 36px;
+      text-align: center;
+      position: sticky;
+      top: 100px;
+    }
+
+    .founder-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(191,0,255,0.25));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 20px;
+      border: 2px solid rgba(0,245,255,0.3);
+      box-shadow: 0 0 30px rgba(0,245,255,0.12);
+    }
+
+    .founder-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      margin-bottom: 4px;
+    }
+
+    .founder-title {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      line-height: 1.5;
+    }
+
+    .founder-socials { display: flex; gap: 10px; justify-content: center; }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      background: rgba(0,245,255,0.1);
+      border-color: rgba(0,245,255,0.3);
+      color: var(--neon-cyan);
+    }
+
+    .about-content p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .about-content p strong { color: var(--text-primary); font-weight: 600; }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .value-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .value-item:hover { border-color: rgba(0,245,255,0.18); }
+
+    .value-icon { font-size: 1.2rem; margin-bottom: 8px; display: block; }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .value-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ─── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 64px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-logo-name {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+      margin-bottom: 12px;
+    }
+
+    .footer-tagline {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 280px;
+    }
+
+    .footer-socials { display: flex; gap: 10px; }
+
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.87rem;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .footer-links a:hover { color: var(--neon-cyan); }
+    .footer-links a i { font-size: 0.6rem; opacity: 0.5; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy { font-family: var(--font-ui); font-size: 0.78rem; color: var(--text-muted); }
+    .footer-copy a { color: var(--neon-cyan); text-decoration: none; }
+
+    .footer-motto {
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon-green);
+      text-shadow: 0 0 15px rgba(57,255,20,0.3);
+    }
+
+    /* ─── Scroll Reveal ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── Scanline ──────────────────────────────────────────────── */
+    .scanline {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.025) 2px,
+        rgba(0,0,0,0.025) 4px
+      );
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .mission-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .founder-card { position: static; max-width: 320px; margin: 0 auto; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 72px 0; }
+      .hero {
+        padding: 100px 24px 60px;
+        background-attachment: scroll;
+        background-position: center center;
+      }
+      .values-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .newsletter-cards,
+      .subscribe-cards,
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Feature Images ─────────────────────────────────────────── */
+    .feature-img {
+      display: block;
+      width: auto;
+      object-fit: contain;
+      max-width: 100%;
+    }
+
+    .feature-img-woman {
+      float: right;
+      max-height: 400px;
+      margin: 0 0 28px 40px;
+    }
+
+    .feature-img-man {
+      float: left;
+      max-height: 380px;
+      margin: 0 40px 28px 0;
+    }
+
+    /* contain floats within grid columns */
+    .mission-content,
+    .about-content { display: flow-root; }
+
+    @media (max-width: 768px) {
+      .feature-img-woman,
+      .feature-img-man {
+        float: none;
+        margin: 0 auto 28px;
+        max-height: 260px;
+        max-width: 70%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scanline overlay -->
+<div class="scanline"></div>
+
+<!-- Starfield -->
+<div id="particles"></div>
+
+<!-- ─── Navigation ──────────────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Overhill Valley Digital Ventures</a>
+    <ul class="nav-links">
+      <li><a href="#newsletters">Brands</a></li>
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#how-it-works">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#subscribe" class="nav-cta">Subscribe</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#newsletters">Our Brands</a>
+    <a href="#mission">Mission</a>
+    <a href="#how-it-works">Process</a>
+    <a href="#about">About</a>
+    <a href="#subscribe">Subscribe Free</a>
+  </div>
+</nav>
+
+<!-- ─── Hero ─────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Overhill Valley Digital Ventures</p>
+
+    <h1 class="hero-title">
+      <span class="line1">Powered by AI.</span>
+      <span class="line2">Built for the Bold.</span>
+      <span class="line3">Owned by The Old Guy.</span>
+    </h1>
+
+    <p class="hero-motto">&ldquo;Where we are going, we don&rsquo;t need employees.&rdquo;</p>
+
+    <p class="hero-sub">
+      Three flagship newsletter brands delivering AI intelligence to solopreneurs, every age group, and the generation that built the modern world.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#newsletters" class="btn-primary">
+        <i class="fa-solid fa-rocket"></i>
+        Explore Our Brands
+      </a>
+      <a href="#subscribe" class="btn-secondary">
+        <i class="fa-regular fa-envelope"></i>
+        Subscribe Free
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Ticker ──────────────────────────────────────────────────── -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> The Old Guy AI &mdash; AI Tools for Solopreneurs</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> AI for Every1 &mdash; AI Clarity for All Ages</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> Senior Intelligence AI &mdash; Your Best Years. Don&rsquo;t Let AI Pass You By.</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> 100% Solo-Operated</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> Zero Employees</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> Infinite Leverage</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> The Old Guy AI &mdash; AI Tools for Solopreneurs</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> AI for Every1 &mdash; AI Clarity for All Ages</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> Senior Intelligence AI &mdash; Your Best Years. Don&rsquo;t Let AI Pass You By.</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> 100% Solo-Operated</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> Zero Employees</span>
+    <span class="ticker-item"><i class="fa-solid fa-circle-dot"></i> Infinite Leverage</span>
+  </div>
+</div>
+
+<!-- ─── Stats Band ───────────────────────────────────────────────── -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal">
+        <div class="stat-number cyan" data-target="3">0</div>
+        <div class="stat-label">Newsletter Brands</div>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="stat-number purple" data-target="1">0</div>
+        <div class="stat-label">Person Operation</div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="stat-number green">&#8734;</div>
+        <div class="stat-label">Scale Potential</div>
+      </div>
+      <div class="reveal" style="transition-delay:0.3s">
+        <div class="stat-number gold" data-target="100">0</div>
+        <div class="stat-label">% AI-Powered</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Newsletters Section ─────────────────────────────────────── -->
+<section id="newsletters">
+  <div class="container">
+    <div class="newsletters-header reveal">
+      <div class="section-label" style="justify-content:center">Our Brands</div>
+      <h2 class="section-title">Three Brands. One Vision.</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center">
+        Distinct voices. Distinct audiences. All united by the belief that AI is the great equalizer of our generation.
+      </p>
+    </div>
+
+    <div class="newsletter-cards">
+
+      <!-- Brand 01 -->
+      <div class="newsletter-card card-toga reveal">
+        <div class="card-number">Brand 01</div>
+        <div class="card-icon-wrap">
+          <i class="fa-solid fa-robot"></i>
+          <span class="card-badge">Live</span>
+        </div>
+        <h3 class="card-name">The Old Guy AI</h3>
+        <p class="card-tagline">AI Tools for Solopreneurs</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">
+          Real-world AI tool reviews, automation workflows, and solopreneur strategies — written by someone grinding in the trenches, not a 25-year-old VC-backed hype machine.
+        </p>
+        <ul class="card-features">
+          <li><i class="fa-solid fa-check-circle"></i> Weekly AI tool deep-dives</li>
+          <li><i class="fa-solid fa-check-circle"></i> No-code automation blueprints</li>
+          <li><i class="fa-solid fa-check-circle"></i> Solopreneur income strategies</li>
+          <li><i class="fa-solid fa-check-circle"></i> Honest, hype-free reviews</li>
+        </ul>
+        <a href="#subscribe" class="card-cta">
+          <i class="fa-solid fa-arrow-right"></i>
+          Subscribe Free
+        </a>
+      </div>
+
+      <!-- Brand 02 -->
+      <div class="newsletter-card card-aife reveal" style="transition-delay:0.15s">
+        <div class="card-number">Brand 02</div>
+        <div class="card-icon-wrap">
+          <i class="fa-solid fa-people-group"></i>
+          <span class="card-badge">Live</span>
+        </div>
+        <h3 class="card-name">AI for Every1</h3>
+        <p class="card-tagline">AI Clarity for All Ages</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">
+          Breaking down the AI revolution in plain English. No jargon. No PhD required. Just clear, actionable guidance for anyone who wants to understand and use AI — regardless of background.
+        </p>
+        <ul class="card-features">
+          <li><i class="fa-solid fa-check-circle"></i> Plain-language AI explainers</li>
+          <li><i class="fa-solid fa-check-circle"></i> Step-by-step beginner guides</li>
+          <li><i class="fa-solid fa-check-circle"></i> Age-inclusive content</li>
+          <li><i class="fa-solid fa-check-circle"></i> Community-driven Q&amp;A</li>
+        </ul>
+        <a href="#subscribe" class="card-cta">
+          <i class="fa-solid fa-arrow-right"></i>
+          Subscribe Free
+        </a>
+      </div>
+
+      <!-- Brand 03 -->
+      <div class="newsletter-card card-siai reveal" style="transition-delay:0.3s">
+        <div class="card-number">Brand 03</div>
+        <div class="card-icon-wrap">
+          <i class="fa-solid fa-brain"></i>
+          <span class="card-badge">Live</span>
+        </div>
+        <h3 class="card-name">Senior Intelligence AI</h3>
+        <p class="card-tagline">Your Best Years. Don&rsquo;t Let AI Pass You By.</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">
+          Built for the experienced generation — 50+, retired, semi-retired, or simply wise enough to know the next wave is AI. Your experience is your leverage. AI is your multiplier.
+        </p>
+        <ul class="card-features">
+          <li><i class="fa-solid fa-check-circle"></i> AI for life &amp; retirement planning</li>
+          <li><i class="fa-solid fa-check-circle"></i> Health, finance &amp; wellness AI</li>
+          <li><i class="fa-solid fa-check-circle"></i> Second-career &amp; side-income AI</li>
+          <li><i class="fa-solid fa-check-circle"></i> Stories from your generation</li>
+        </ul>
+        <a href="#subscribe" class="card-cta">
+          <i class="fa-solid fa-arrow-right"></i>
+          Subscribe Free
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Mission ──────────────────────────────────────────────────── -->
+<section id="mission">
+  <div class="container">
+    <div class="mission-grid">
+
+      <div class="mission-visual reveal">
+        <div class="mission-hex-grid">
+          <div class="mission-hex mh-1"><i class="fa-solid fa-microchip"></i>AI-First</div>
+          <div class="mission-hex mh-2"><i class="fa-solid fa-infinity"></i>Scalable</div>
+          <div class="mission-hex mh-3"><i class="fa-solid fa-leaf"></i>Lean</div>
+          <div class="mission-hex mh-4"><i class="fa-solid fa-star"></i>Authentic</div>
+          <div class="mission-hex mh-5"><i class="fa-solid fa-bolt"></i>Fast</div>
+          <div class="mission-hex mh-6"><i class="fa-solid fa-users-slash"></i>Solo</div>
+        </div>
+      </div>
+
+      <div class="mission-content reveal" style="transition-delay:0.2s">
+        <img src="images/woman_nobg.png" alt="Professional woman" class="feature-img feature-img-woman reveal" />
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-title">
+          The Solo-Powered<br />
+          <span style="background:linear-gradient(135deg,var(--neon-cyan),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+            Media Empire
+          </span>
+        </h2>
+        <p class="section-subtitle">
+          Overhill Valley Digital Ventures is proof that one person with the right AI tools can outpublish, outresearch, and outdeliver an entire traditional media team.
+        </p>
+        <ul class="mission-list">
+          <li>
+            <span class="m-icon"><i class="fa-solid fa-rocket"></i></span>
+            <span><strong>Radical leverage.</strong> Every brand is built to grow without headcount. AI writes, edits, publishes, and distributes — so we focus on what machines can't: real human perspective.</span>
+          </li>
+          <li>
+            <span class="m-icon"><i class="fa-solid fa-eye"></i></span>
+            <span><strong>Radical transparency.</strong> We say what tools we use, how we build, and why it works. No black boxes. No corporate-speak. Just results.</span>
+          </li>
+          <li>
+            <span class="m-icon"><i class="fa-solid fa-seedling"></i></span>
+            <span><strong>Radical inclusion.</strong> Every brand serves an audience mainstream tech media ignores. We exist because they deserve better.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── How It Works ─────────────────────────────────────────────── -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="hiw-header reveal">
+      <div class="section-label" style="justify-content:center">The Process</div>
+      <h2 class="section-title">Zero Employees. Maximum Output.</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center">
+        Human insight + AI execution = audience value delivered at scale.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <span class="step-icon" style="color:var(--neon-cyan)"><i class="fa-solid fa-magnifying-glass-chart"></i></span>
+        <h3 class="step-title">Research</h3>
+        <p class="step-desc">AI scans thousands of sources. Human editorial judgment filters signal from noise and identifies what matters to each specific audience.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.1s">
+        <div class="step-num">02</div>
+        <span class="step-icon" style="color:var(--neon-purple)"><i class="fa-solid fa-pen-nib"></i></span>
+        <h3 class="step-title">Create</h3>
+        <p class="step-desc">AI-assisted drafting with a distinct human voice layered in. Every edition sounds like a real person — because it is, amplified by AI.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.2s">
+        <div class="step-num">03</div>
+        <span class="step-icon" style="color:var(--neon-green)"><i class="fa-solid fa-paper-plane"></i></span>
+        <h3 class="step-title">Deliver</h3>
+        <p class="step-desc">Automated pipelines distribute to inboxes, social channels, and web simultaneously — on schedule, every single time.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.3s">
+        <div class="step-num">04</div>
+        <span class="step-icon" style="color:var(--neon-gold)"><i class="fa-solid fa-chart-line"></i></span>
+        <h3 class="step-title">Grow</h3>
+        <p class="step-desc">AI analytics surface what's working. Audience feedback refines the flywheel. The operation scales without adding a single line to payroll.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Manifesto ────────────────────────────────────────────────── -->
+<div class="manifesto-section">
+  <div class="manifesto-bg"><span class="manifesto-bg-text">AI</span></div>
+  <div class="container">
+    <div class="manifesto-content reveal">
+      <blockquote class="manifesto-quote">
+        &ldquo;Where we are going,<br />
+        <em>we don&rsquo;t need employees.&rdquo;</em>
+      </blockquote>
+      <p class="manifesto-attr">Overhill Valley Digital Ventures</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Subscribe ────────────────────────────────────────────────── -->
+<section id="subscribe">
+  <div class="container">
+    <div class="subscribe-header reveal">
+      <div class="section-label" style="justify-content:center">Join the Movement</div>
+      <h2 class="section-title">Pick Your Brand. Subscribe Free.</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center">
+        No spam. No paywalls. Just sharp AI intelligence delivered to your inbox.
+      </p>
+    </div>
+
+    <div class="subscribe-cards">
+
+      <div class="sub-card sub-toga reveal">
+        <div class="sub-card-header">
+          <div class="sub-brand-icon"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <div class="sub-brand-name">The Old Guy AI</div>
+            <span class="sub-brand-tag">AI Tools for Solopreneurs</span>
+          </div>
+        </div>
+        <form class="sub-form" onsubmit="handleSubscribe(event,'toga')">
+          <input type="email" class="sub-input" placeholder="your@email.com" required />
+          <button type="submit" class="sub-btn"><i class="fa-solid fa-bolt"></i> Subscribe Free</button>
+          <p class="sub-note"><i class="fa-regular fa-shield-check"></i>&nbsp; Zero spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+
+      <div class="sub-card sub-aife reveal" style="transition-delay:0.12s">
+        <div class="sub-card-header">
+          <div class="sub-brand-icon"><i class="fa-solid fa-people-group"></i></div>
+          <div>
+            <div class="sub-brand-name">AI for Every1</div>
+            <span class="sub-brand-tag">AI Clarity for All Ages</span>
+          </div>
+        </div>
+        <form class="sub-form" onsubmit="handleSubscribe(event,'aife')">
+          <input type="email" class="sub-input" placeholder="your@email.com" required />
+          <button type="submit" class="sub-btn"><i class="fa-solid fa-bolt"></i> Subscribe Free</button>
+          <p class="sub-note"><i class="fa-regular fa-shield-check"></i>&nbsp; Zero spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+
+      <div class="sub-card sub-siai reveal" style="transition-delay:0.24s">
+        <div class="sub-card-header">
+          <div class="sub-brand-icon"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div class="sub-brand-name">Senior Intelligence AI</div>
+            <span class="sub-brand-tag">Your Best Years. Don't Let AI Pass You By.</span>
+          </div>
+        </div>
+        <form class="sub-form" onsubmit="handleSubscribe(event,'siai')">
+          <input type="email" class="sub-input" placeholder="your@email.com" required />
+          <button type="submit" class="sub-btn"><i class="fa-solid fa-bolt"></i> Subscribe Free</button>
+          <p class="sub-note"><i class="fa-regular fa-shield-check"></i>&nbsp; Zero spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── About ────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="founder-card reveal">
+        <div class="founder-avatar">
+          <i class="fa-solid fa-user-astronaut" style="color:var(--neon-cyan)"></i>
+        </div>
+        <div class="founder-name">George</div>
+        <div class="founder-title">Founder &amp; Lead Developer<br />Overhill Valley Digital Ventures</div>
+        <div class="founder-socials">
+          <a href="#" class="social-link" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-link" aria-label="Substack"><i class="fa-solid fa-newspaper"></i></a>
+        </div>
+      </div>
+
+      <div class="about-content reveal" style="transition-delay:0.2s">
+        <div class="section-label">The Story</div>
+        <h2 class="section-title">
+          One Developer.<br />
+          <span style="background:linear-gradient(135deg,var(--neon-gold),var(--neon-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+            Three Brands.
+          </span>
+        </h2>
+        <img src="Man_nobg.png" alt="Professional man" class="feature-img feature-img-man reveal" />
+        <p>
+          <strong>Overhill Valley Digital Ventures</strong> started as a question: what happens when you give one experienced person the full arsenal of modern AI tools and tell them to build a media company from scratch?
+        </p>
+        <p>
+          The answer is this. Three newsletters, built from the ground up, running on AI pipelines — publishing consistently, growing organically, and proving every day that the future of media is solo, lean, and brutally effective.
+        </p>
+        <p>
+          <strong>The Old Guy AI</strong> exists because solopreneurs deserve sharp, honest AI coverage. <strong>AI for Every1</strong> exists because clarity is a public good. <strong>Senior Intelligence AI</strong> exists because the generation that built the modern world deserves to lead the next one too.
+        </p>
+        <div class="values-grid">
+          <div class="value-item">
+            <span class="value-icon" style="color:var(--neon-cyan)"><i class="fa-solid fa-bolt-lightning"></i></span>
+            <div class="value-title">Leverage over Labor</div>
+            <p class="value-desc">AI is the only employee we'll ever need. Tools, not teams.</p>
+          </div>
+          <div class="value-item">
+            <span class="value-icon" style="color:var(--neon-purple)"><i class="fa-solid fa-heart"></i></span>
+            <div class="value-title">Audience Over Algorithms</div>
+            <p class="value-desc">Every word is written for readers, not search engines.</p>
+          </div>
+          <div class="value-item">
+            <span class="value-icon" style="color:var(--neon-green)"><i class="fa-solid fa-filter"></i></span>
+            <div class="value-title">Signal Over Noise</div>
+            <p class="value-desc">We curate ruthlessly. Your time is the scarcest resource.</p>
+          </div>
+          <div class="value-item">
+            <span class="value-icon" style="color:var(--neon-gold)"><i class="fa-solid fa-infinity"></i></span>
+            <div class="value-title">Owned Forever</div>
+            <p class="value-desc">No VC money. No boss. No exit. This is the endgame.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ───────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-logo-name">Overhill Valley Digital Ventures</div>
+        <p class="footer-tagline">
+          A solo-operated AI media company publishing three newsletter brands for the people the tech world forgot to include.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Our Brands</div>
+        <ul class="footer-links">
+          <li><a href="#newsletters"><i class="fa-solid fa-robot"></i> The Old Guy AI</a></li>
+          <li><a href="#newsletters"><i class="fa-solid fa-people-group"></i> AI for Every1</a></li>
+          <li><a href="#newsletters"><i class="fa-solid fa-brain"></i> Senior Intelligence AI</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#mission"><i class="fa-solid fa-chevron-right"></i> Mission</a></li>
+          <li><a href="#how-it-works"><i class="fa-solid fa-chevron-right"></i> Process</a></li>
+          <li><a href="#about"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Subscribe</div>
+        <ul class="footer-links">
+          <li><a href="#subscribe"><i class="fa-solid fa-chevron-right"></i> The Old Guy AI</a></li>
+          <li><a href="#subscribe"><i class="fa-solid fa-chevron-right"></i> AI for Every1</a></li>
+          <li><a href="#subscribe"><i class="fa-solid fa-chevron-right"></i> Senior Intelligence AI</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; 2026 <a href="#">Overhill Valley Digital Ventures</a>. All rights reserved.
+      </p>
+      <p class="footer-motto">&ldquo;Where we are going we don&rsquo;t need employees.&rdquo;</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── JavaScript ───────────────────────────────────────────────── -->
+<script>
+  /* Starfield */
+  (function () {
+    const c = document.getElementById('particles');
+    const colors = ['#00f5ff','#bf00ff','#39ff14','#ffd700','#ffffff'];
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const sz = Math.random() * 2.5 + 0.5;
+      const col = colors[Math.floor(Math.random() * colors.length)];
+      s.style.cssText = `
+        width:${sz}px;height:${sz}px;background:${col};
+        top:${Math.random()*100}%;left:${Math.random()*100}%;
+        --dur:${(Math.random()*4+2).toFixed(1)}s;
+        --delay:-${(Math.random()*6).toFixed(1)}s;
+        box-shadow:0 0 ${sz*3}px ${col};
+      `;
+      c.appendChild(s);
+    }
+  })();
+
+  /* Hamburger */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-menu a').forEach(a =>
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'))
+  );
+
+  /* Navbar scroll */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.background = window.scrollY > 60
+      ? 'rgba(5,5,16,0.97)'
+      : 'rgba(5,5,16,0.85)';
+  }, { passive: true });
+
+  /* Scroll reveal */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  /* Counter animation */
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'));
+    if (isNaN(target)) return;
+    let start = null;
+    const dur = 1400;
+    const tick = (ts) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(eased * target) + (target === 100 ? '%' : '');
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const co = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); co.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => co.observe(el));
+
+  /* Subscribe handler */
+  function handleSubscribe(e, brand) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.sub-btn');
+    const origHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> You\'re In!';
+    btn.style.cssText += ';background:rgba(57,255,20,0.2);border-color:rgba(57,255,20,0.5);color:#39ff14';
+    e.target.querySelector('input').value = '';
+    setTimeout(() => { btn.innerHTML = origHTML; btn.style.cssText = ''; }, 3200);
+  }
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
