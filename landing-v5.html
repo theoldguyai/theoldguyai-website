@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Bility — Hard to Find. Essential to Live.</title>
+  <meta name="description" content="THE destination for hard-to-find adaptive & disability products. AI-powered sourcing. 868+ 5-star reviews. Focused 100% on disability." />
+  <style>
+    /* ============================================================
+       CSS VARIABLES — V5: SUNRISE ORANGE / WARM ENERGY
+       ============================================================ */
+    :root {
+      --neon:    #fb923c;
+      --neon2:   #fbbf24;
+      --dark:    #0d0700;
+      --card:    #1a0f00;
+      --border:  rgba(251,146,60,0.2);
+      --text:    #fff7ed;
+      --muted:   #c4956a;
+      --grid-line: rgba(251,146,60,0.04);
+      --glow-sm: 0 0 12px rgba(251,146,60,0.5);
+      --glow-md: 0 0 28px rgba(251,146,60,0.6);
+      --glow-lg: 0 0 55px rgba(251,146,60,0.7);
+      --radius:  14px;
+      --font:    'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       CIRCUIT GRID BACKGROUND
+       ============================================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* ============================================================
+       KEYFRAME ANIMATIONS
+       ============================================================ */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50%       { transform: translateY(-18px) rotate(1deg); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+    @keyframes sunrise-pulse {
+      0%   { opacity: 0.18; transform: scale(1); }
+      50%  { opacity: 0.38; transform: scale(1.12); }
+      100% { opacity: 0.18; transform: scale(1); }
+    }
+    @keyframes ai-ring {
+      0%   { transform: translate(-50%,-50%) rotate(0deg)   scale(1);    opacity: 0.7; }
+      50%  { transform: translate(-50%,-50%) rotate(180deg) scale(1.08); opacity: 0.4; }
+      100% { transform: translate(-50%,-50%) rotate(360deg) scale(1);    opacity: 0.7; }
+    }
+    @keyframes data-node-float {
+      0%, 100% { transform: translateY(0)   scale(1);    opacity: 0.8; }
+      33%       { transform: translateY(-12px) scale(1.1); opacity: 1; }
+      66%       { transform: translateY(6px)  scale(0.95); opacity: 0.6; }
+    }
+    @keyframes stream-fall {
+      0%   { transform: translateY(-100%); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(100vh);  opacity: 0; }
+    }
+    @keyframes glow-badge {
+      0%, 100% { box-shadow: 0 0 10px rgba(251,146,60,0.4); }
+      50%       { box-shadow: 0 0 22px rgba(251,146,60,0.9), 0 0 6px rgba(251,191,36,0.6); }
+    }
+    @keyframes card-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    @keyframes stat-count-in {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hero-text-in {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes orange-glow-img {
+      0%, 100% { filter: drop-shadow(0 0 18px rgba(251,146,60,0.7)) drop-shadow(0 0 40px rgba(251,191,36,0.3)); }
+      50%       { filter: drop-shadow(0 0 32px rgba(251,146,60,1))   drop-shadow(0 0 70px rgba(251,191,36,0.5)); }
+    }
+    @keyframes potw-pulse {
+      0%, 100% { border-color: rgba(251,146,60,0.35); }
+      50%       { border-color: rgba(251,146,60,0.9); box-shadow: 0 0 30px rgba(251,146,60,0.35); }
+    }
+
+    /* ============================================================
+       LAYOUT WRAPPERS
+       ============================================================ */
+    .page-wrap { position: relative; z-index: 1; }
+    .container  { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* ============================================================
+       TOP NAV BAR
+       ============================================================ */
+    .topbar {
+      background: rgba(13,7,0,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand-logo {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    .brand-logo span { -webkit-text-fill-color: var(--text); }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--neon); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #0d0700;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 8px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { transform: scale(1.05); box-shadow: var(--glow-md); }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0 60px;
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Animated sunrise radial gradient — 8s pulse cycle */
+    .hero-sunrise {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-sunrise::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -20%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 80%;
+      background: radial-gradient(ellipse at 50% 100%,
+        rgba(251,146,60,0.28) 0%,
+        rgba(251,191,36,0.12) 35%,
+        transparent 70%
+      );
+      animation: sunrise-pulse 8s ease-in-out infinite;
+      border-radius: 50%;
+    }
+    .hero-sunrise::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: -10%;
+      width: 55%;
+      height: 55%;
+      background: radial-gradient(ellipse,
+        rgba(251,191,36,0.12) 0%,
+        transparent 65%
+      );
+      animation: sunrise-pulse 8s ease-in-out infinite reverse;
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-text { animation: hero-text-in 0.8s ease both; }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(251,146,60,0.12);
+      border: 1px solid rgba(251,146,60,0.4);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--neon);
+      margin-bottom: 22px;
+      animation: glow-badge 3s ease-in-out infinite;
+    }
+    .brand-badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--neon);
+      animation: pulse-dot 1.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .hero-headline {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -3px;
+      background: linear-gradient(135deg, var(--neon) 0%, var(--neon2) 55%, #fff7ed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .hero-subline {
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 28px;
+      max-width: 420px;
+      line-height: 1.55;
+    }
+    .hero-subline strong { color: var(--text); font-weight: 700; }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #0d0700;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 14px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(251,146,60,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--glow-lg); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--neon);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 28px;
+      border-radius: 50px;
+      border: 2px solid rgba(251,146,60,0.5);
+      text-decoration: none;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--neon);
+      background: rgba(251,146,60,0.08);
+      box-shadow: var(--glow-sm);
+    }
+
+    /* Hero image */
+    .hero-image-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      width: 85%;
+      height: 85%;
+      background: radial-gradient(ellipse, rgba(251,146,60,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: sunrise-pulse 5s ease-in-out infinite;
+    }
+    .hero-img {
+      max-width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 24px rgba(251,146,60,0.75));
+      animation: float 5s ease-in-out infinite, orange-glow-img 4s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================================
+       STATS BAR
+       ============================================================ */
+    .stats-bar {
+      background: rgba(26,15,0,0.9);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+    .stats-inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      text-align: center;
+      animation: stat-count-in 0.6s ease both;
+      padding: 8px 16px;
+    }
+    .stat-num {
+      display: block;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+    .stat-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       SECTION WRAPPER
+       ============================================================ */
+    .section { padding: 80px 0; }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--neon);
+      margin-bottom: 10px;
+      border-left: 3px solid var(--neon);
+      padding-left: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .section-title .highlight {
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-body {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ============================================================
+       SHOP CARDS
+       ============================================================ */
+    .shop-section { padding: 70px 0; }
+    .shop-section-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .shop-section-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 44px;
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .shop-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.28s, border-color 0.28s, box-shadow 0.28s;
+      cursor: pointer;
+    }
+    .shop-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        transparent 0%,
+        rgba(251,146,60,0.06) 50%,
+        transparent 100%
+      );
+      background-size: 200% 200%;
+      animation: card-shimmer 4s linear infinite;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .shop-card:hover::before { opacity: 1; }
+    .shop-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--neon);
+      box-shadow: 0 0 24px rgba(251,146,60,0.35), 0 0 50px rgba(251,146,60,0.15);
+    }
+    .shop-card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(251,146,60,0.5));
+    }
+    .shop-card-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .shop-card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .shop-card-badge {
+      display: inline-block;
+      background: rgba(251,146,60,0.15);
+      border: 1px solid rgba(251,146,60,0.4);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--neon);
+      letter-spacing: 0.5px;
+    }
+    .shop-card.coming-soon { opacity: 0.65; }
+    .shop-card.coming-soon:hover { transform: translateY(-3px); }
+
+    /* ============================================================
+       FEATURE SECTIONS (2-col grid)
+       ============================================================ */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .feature-grid.reversed .feature-image { order: 2; }
+    .feature-grid.reversed .feature-text  { order: 1; }
+
+    .feature-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .feature-image::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(ellipse, rgba(251,146,60,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .feature-img {
+      width: 100%;
+      max-width: 460px;
+      border-radius: 18px;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 30px rgba(251,146,60,0.2);
+      transition: box-shadow 0.3s;
+    }
+    .feature-img:hover {
+      box-shadow: 0 0 50px rgba(251,146,60,0.45);
+    }
+
+    .feature-text { position: relative; }
+    .feature-bullets {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feature-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .bullet-icon {
+      color: var(--neon);
+      font-size: 1.1rem;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .feature-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      color: var(--neon);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(251,146,60,0.35);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .feature-cta-link:hover { color: var(--neon2); border-color: var(--neon2); }
+
+    /* ============================================================
+       PRODUCT OF THE WEEK CALLOUT
+       ============================================================ */
+    .potw-wrap {
+      padding: 0 0 70px;
+    }
+    .potw-card {
+      background: var(--card);
+      border: 1px solid rgba(251,146,60,0.35);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      animation: potw-pulse 4s ease-in-out infinite;
+    }
+    .potw-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon), var(--neon2), var(--neon));
+      background-size: 200%;
+      animation: card-shimmer 3s linear infinite;
+    }
+    .potw-badge-col {
+      text-align: center;
+    }
+    .potw-badge-icon {
+      font-size: 3rem;
+      display: block;
+      filter: drop-shadow(0 0 12px rgba(251,146,60,0.7));
+      margin-bottom: 6px;
+    }
+    .potw-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--neon);
+      display: block;
+      white-space: nowrap;
+    }
+    .potw-title {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .potw-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 540px;
+    }
+    .potw-price-col { text-align: center; }
+    .potw-price {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .potw-price-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 14px;
+    }
+    .potw-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #0d0700;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .potw-btn:hover { transform: scale(1.05); box-shadow: var(--glow-md); }
+
+    /* ============================================================
+       DIVIDER
+       ============================================================ */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ============================================================
+       NEWSLETTER
+       ============================================================ */
+    .newsletter-section { padding: 80px 0; }
+    .newsletter-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+    }
+    .newsletter-sidebar {
+      background: linear-gradient(160deg, rgba(251,146,60,0.18) 0%, rgba(251,191,36,0.08) 100%);
+      border-right: 1px solid var(--border);
+      padding: 40px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .newsletter-issue-tag {
+      display: inline-block;
+      background: rgba(251,146,60,0.2);
+      border: 1px solid rgba(251,146,60,0.5);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--neon2);
+    }
+    .newsletter-sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .newsletter-sidebar-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .newsletter-topics {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .newsletter-topics li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .topic-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--neon);
+      flex-shrink: 0;
+    }
+
+    .newsletter-content { padding: 40px 36px; }
+    .newsletter-fire-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(251,191,36,0.12);
+      border: 1px solid rgba(251,191,36,0.4);
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--neon2);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .newsletter-headline {
+      font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.35;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .newsletter-headline .hl { color: var(--neon); }
+    .newsletter-body {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .newsletter-previews {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .preview-item {
+      background: rgba(251,146,60,0.06);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .preview-item-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--neon);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .preview-item-text {
+      font-size: 0.82rem;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .newsletter-subscribe-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .email-input {
+      flex: 1;
+      min-width: 200px;
+      background: rgba(255,247,237,0.05);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 12px 20px;
+      color: var(--text);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .email-input::placeholder { color: var(--muted); }
+    .email-input:focus {
+      border-color: var(--neon);
+      box-shadow: 0 0 14px rgba(251,146,60,0.2);
+    }
+    .subscribe-btn {
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #0d0700;
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 12px 26px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .subscribe-btn:hover { transform: scale(1.05); box-shadow: var(--glow-md); }
+    .subscribe-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       FOOTER HERO — Man_nobg.png
+       ============================================================ */
+    .footer-hero {
+      background: rgba(10,5,0,0.97);
+      border-top: 1px solid var(--border);
+      padding: 80px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .footer-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 80%, rgba(251,146,60,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 30%, rgba(251,191,36,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .footer-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 60px;
+      align-items: flex-end;
+    }
+
+    .footer-text-col { padding-bottom: 60px; }
+    .footer-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--neon);
+      border-left: 3px solid var(--neon);
+      padding-left: 10px;
+      margin-bottom: 18px;
+    }
+    .footer-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+    .footer-heading .hl {
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 30px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--neon); }
+
+    /* Man with AI ring animations */
+    .footer-man-col {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      min-height: 380px;
+    }
+    .footer-man-img {
+      position: relative;
+      z-index: 5;
+      max-height: 400px;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 0 20px rgba(251,146,60,0.75))
+        drop-shadow(0 0 50px rgba(251,191,36,0.35));
+    }
+
+    /* AI ring halos */
+    .ai-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border-style: solid;
+      pointer-events: none;
+    }
+    .ai-ring-1 {
+      width: 280px; height: 280px;
+      border-width: 1px;
+      border-color: rgba(251,146,60,0.5);
+      animation: ai-ring 8s linear infinite;
+    }
+    .ai-ring-2 {
+      width: 360px; height: 360px;
+      border-width: 1px;
+      border-color: rgba(251,191,36,0.3);
+      animation: ai-ring 12s linear infinite reverse;
+    }
+    .ai-ring-3 {
+      width: 450px; height: 450px;
+      border-width: 1px;
+      border-color: rgba(251,146,60,0.15);
+      animation: ai-ring 18s linear infinite;
+    }
+
+    /* Floating data nodes */
+    .data-node {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 6;
+    }
+    .data-node-1 {
+      width: 10px; height: 10px;
+      background: var(--neon);
+      box-shadow: 0 0 12px var(--neon);
+      top: 28%; left: 12%;
+      animation: data-node-float 3.2s ease-in-out infinite;
+    }
+    .data-node-2 {
+      width: 7px; height: 7px;
+      background: var(--neon2);
+      box-shadow: 0 0 10px var(--neon2);
+      top: 60%; right: 10%;
+      animation: data-node-float 4.1s ease-in-out infinite 1s;
+    }
+    .data-node-3 {
+      width: 5px; height: 5px;
+      background: var(--neon);
+      box-shadow: 0 0 8px var(--neon);
+      top: 18%; right: 20%;
+      animation: data-node-float 5s ease-in-out infinite 0.5s;
+    }
+    .data-node-4 {
+      width: 8px; height: 8px;
+      background: var(--neon2);
+      box-shadow: 0 0 10px var(--neon2);
+      bottom: 25%; left: 8%;
+      animation: data-node-float 3.7s ease-in-out infinite 2s;
+    }
+
+    /* Data streams */
+    .data-stream {
+      position: absolute;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--neon), transparent);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+      animation: stream-fall 6s linear infinite;
+    }
+    .data-stream-1 { left: 10%; height: 120px; animation-delay: 0s; }
+    .data-stream-2 { left: 25%; height: 90px;  animation-delay: 2.1s; }
+    .data-stream-3 { left: 55%; height: 140px; animation-delay: 1.3s; background: linear-gradient(180deg, transparent, var(--neon2), transparent); }
+    .data-stream-4 { left: 78%; height: 100px; animation-delay: 3.5s; }
+    .data-stream-5 { left: 90%; height: 80px;  animation-delay: 0.8s; }
+
+    /* Footer bottom bar */
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      margin-top: 0;
+    }
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-copy a { color: var(--neon); text-decoration: none; }
+    .footer-copy a:hover { text-decoration: underline; }
+    .footer-trust {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .trust-chip {
+      background: rgba(251,146,60,0.1);
+      border: 1px solid rgba(251,146,60,0.25);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+       MOBILE RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-text { order: 2; }
+      .hero-image-wrap { order: 1; }
+      .hero-btns { justify-content: center; }
+      .hero-subline { margin: 0 auto 28px; }
+      .brand-badge { margin: 0 auto 22px; }
+
+      .shop-grid { grid-template-columns: 1fr 1fr; }
+
+      .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+      .feature-grid.reversed .feature-image { order: 0; }
+      .feature-grid.reversed .feature-text  { order: 0; }
+
+      .potw-card { grid-template-columns: 1fr; text-align: center; }
+      .potw-desc { margin: 0 auto; }
+
+      .newsletter-card { grid-template-columns: 1fr; }
+      .newsletter-sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-man-col { min-height: 280px; }
+
+      .footer-bottom-inner { flex-direction: column; text-align: center; }
+      .stats-inner { gap: 8px; }
+      .stat-divider { display: none; }
+
+      .newsletter-previews { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .shop-grid { grid-template-columns: 1fr; }
+      .hero { padding: 50px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- ============================================================
+       TOP NAV
+       ============================================================ -->
+  <nav class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="brand-logo" href="#">AI-Bility<span>™</span></a>
+        <ul class="nav-links">
+          <li><a href="https://www.ebay.com/usr/theoldguyai" target="_blank">eBay Store</a></li>
+          <li><a href="https://theoldguyai.myshopify.com" target="_blank">Shopify</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#mission">Our Mission</a></li>
+        </ul>
+        <a class="nav-cta" href="https://www.ebay.com/usr/theoldguyai" target="_blank">Shop Now →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero-sunrise"></div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Text -->
+        <div class="hero-text">
+          <div class="brand-badge">
+            <span class="dot"></span>
+            Breaking Barriers with AI
+          </div>
+
+          <h1 class="hero-headline">AI-Bility</h1>
+          <p class="hero-subline">
+            <strong>Hard to find. Essential to live.</strong><br>
+            We source adaptive &amp; disability products powered by AI so you don't have to hunt.
+          </p>
+
+          <div class="hero-btns">
+            <a class="btn-primary" href="https://www.ebay.com/usr/theoldguyai" target="_blank">
+              🛒 Shop eBay Store
+            </a>
+            <a class="btn-secondary" href="https://theoldguyai.myshopify.com" target="_blank">
+              🔥 Shopify Store
+            </a>
+          </div>
+        </div>
+
+        <!-- Image: wheelchair.png -->
+        <div class="hero-image-wrap">
+          <img
+            class="hero-img"
+            src="New Landing Page/wheelchair.png"
+            alt="Futuristic cyberpunk electric wheelchair with cyan LED wheels"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATS BAR
+       ============================================================ -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <span class="stat-num">1 in 4</span>
+          <span class="stat-label">Americans with Disability</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">61M</span>
+          <span class="stat-label">US Adults Affected</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">868+</span>
+          <span class="stat-label">eBay 5-Star Reviews</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Disability-Focused</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">AI</span>
+          <span class="stat-label">Powered Sourcing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SHOP CARDS
+       ============================================================ -->
+  <section class="shop-section">
+    <div class="container">
+      <h2 class="shop-section-title">Find Us Where You Shop</h2>
+      <p class="shop-section-sub">Multiple platforms. One mission. Adaptive products that change lives.</p>
+      <div class="shop-grid">
+
+        <a class="shop-card" href="https://www.ebay.com/usr/theoldguyai" target="_blank">
+          <span class="shop-card-icon">🛍️</span>
+          <div class="shop-card-name">eBay Store</div>
+          <p class="shop-card-desc">Our flagship marketplace with 868+ positive reviews and a 100% satisfaction score.</p>
+          <span class="shop-card-badge">⭐ 100% Score</span>
+        </a>
+
+        <a class="shop-card" href="https://theoldguyai.myshopify.com" target="_blank">
+          <span class="shop-card-icon">🏪</span>
+          <div class="shop-card-name">Shopify Store</div>
+          <p class="shop-card-desc">Direct checkout, curated collections, and exclusive bundles for adaptive living.</p>
+          <span class="shop-card-badge">🔥 Shop Direct</span>
+        </a>
+
+        <div class="shop-card coming-soon">
+          <span class="shop-card-icon">📱</span>
+          <div class="shop-card-name">TikTok Shop</div>
+          <p class="shop-card-desc">Watch, learn, and buy. Real people, real products, real impact. Coming very soon.</p>
+          <span class="shop-card-badge">🚀 Coming Soon</span>
+        </div>
+
+        <a class="shop-card" href="https://www.ebay.com/usr/theoldguyai" target="_blank">
+          <span class="shop-card-icon">🤖</span>
+          <div class="shop-card-name">AI Finder</div>
+          <p class="shop-card-desc">Can't find what you need? Describe it — our AI hunts down the hard-to-find gear.</p>
+          <span class="shop-card-badge">✨ AI-Powered</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       FEATURE 1 — Iron Arm (Mission)
+       ============================================================ -->
+  <section class="section" id="mission">
+    <div class="container">
+      <div class="feature-grid">
+
+        <div class="feature-image">
+          <img
+            class="feature-img"
+            src="New Landing Page/Iron arm.png"
+            alt="Boy getting Iron Man prosthetic arm fitted by doctors"
+          />
+        </div>
+
+        <div class="feature-text">
+          <span class="section-tag">Our Mission</span>
+          <h2 class="section-title">Every Superhero <span class="highlight">Deserves Their Gear</span></h2>
+          <p class="section-body">
+            Whether it's a prosthetic arm that makes a child feel invincible, a mobility aid that restores independence,
+            or a communication device that gives back a voice — every person with a disability deserves access to the
+            best adaptive technology available.
+          </p>
+          <ul class="feature-bullets">
+            <li>
+              <span class="bullet-icon">🦾</span>
+              AI-powered product research cuts search time from hours to seconds
+            </li>
+            <li>
+              <span class="bullet-icon">🔍</span>
+              We specialize in hard-to-find items other sellers overlook
+            </li>
+            <li>
+              <span class="bullet-icon">💛</span>
+              Every purchase directly funds our disability-first sourcing mission
+            </li>
+            <li>
+              <span class="bullet-icon">✅</span>
+              Backed by 868+ five-star reviews from real customers
+            </li>
+          </ul>
+          <a class="feature-cta-link" href="https://www.ebay.com/usr/theoldguyai" target="_blank">
+            Explore Our Story →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCT OF THE WEEK — Between Feature Sections
+       ============================================================ -->
+  <div class="potw-wrap">
+    <div class="container">
+      <div class="potw-card">
+        <div class="potw-badge-col">
+          <span class="potw-badge-icon">🏆</span>
+          <span class="potw-label">Product of<br>the Week</span>
+        </div>
+        <div>
+          <div class="potw-title">Shower Transfer Bench</div>
+          <p class="potw-desc">
+            Safe, sturdy, and essential — our featured Shower Transfer Bench makes bathing safer for individuals with
+            limited mobility, seniors, and post-surgery recovery. Non-slip legs, adjustable height, 300 lb capacity.
+            <strong style="color:var(--neon)">One of our top-selling adaptive bath products.</strong>
+          </p>
+        </div>
+        <div class="potw-price-col">
+          <span class="potw-price">Under $65</span>
+          <span class="potw-price-sub">Free Shipping Available</span>
+          <a class="potw-btn" href="https://www.ebay.com/usr/theoldguyai" target="_blank">View on eBay →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FEATURE 2 — Classroom (Learning, Reversed)
+       ============================================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="feature-grid reversed">
+
+        <div class="feature-text">
+          <span class="section-tag">Adaptive Education</span>
+          <h2 class="section-title"><span class="highlight">Learning Has</span> No Limits</h2>
+          <p class="section-body">
+            Every student deserves a classroom where they can thrive. AI-Bility sources adaptive tools, assistive
+            technology, and sensory aids designed to help learners of all abilities succeed — from AAC devices
+            to sensory regulation tools.
+          </p>
+          <ul class="feature-bullets">
+            <li>
+              <span class="bullet-icon">📚</span>
+              AAC &amp; communication devices for non-verbal learners
+            </li>
+            <li>
+              <span class="bullet-icon">🎧</span>
+              Sensory tools for focus, regulation, and comfort in the classroom
+            </li>
+            <li>
+              <span class="bullet-icon">💡</span>
+              Low-vision aids, large-print resources, and screen readers
+            </li>
+            <li>
+              <span class="bullet-icon">🤝</span>
+              Partnering with teachers, therapists, and families
+            </li>
+          </ul>
+          <a class="feature-cta-link" href="https://www.ebay.com/usr/theoldguyai" target="_blank">
+            Shop Education Products →
+          </a>
+        </div>
+
+        <div class="feature-image">
+          <img
+            class="feature-img"
+            src="New Landing Page/classroom.png"
+            alt="Educational classroom scene with adaptive learning tools"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       NEWSLETTER
+       ============================================================ -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:36px;">
+        <span class="section-tag">Free Newsletter</span>
+        <h2 class="section-title" style="max-width:600px; margin:0 auto;">
+          Stay Ahead with <span class="highlight">AI Tools for Disability</span>
+        </h2>
+      </div>
+
+      <div class="newsletter-card">
+
+        <!-- Sidebar -->
+        <div class="newsletter-sidebar">
+          <span class="newsletter-issue-tag">📰 Issue #1</span>
+          <div class="newsletter-sidebar-title">
+            AI Tools That Actually Help People with Disabilities
+          </div>
+          <div class="newsletter-sidebar-meta">
+            May 2026 · Issue #1<br>
+            Published by AI-Bility / OVDV
+          </div>
+          <ul class="newsletter-topics">
+            <li><span class="topic-dot"></span> 🤖 AI Tools</li>
+            <li><span class="topic-dot"></span> ♿ Adaptive Products</li>
+            <li><span class="topic-dot"></span> 🦼 Mobility</li>
+            <li><span class="topic-dot"></span> 👁️ Low Vision</li>
+            <li><span class="topic-dot"></span> 🧡 Caregiver Corner</li>
+          </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="newsletter-content">
+          <div class="newsletter-fire-tag">🔥 This Week's Issue</div>
+          <h3 class="newsletter-headline">
+            The <span class="hl">Voice That Speaks When You Can't</span>,<br>
+            The Eyes That See When <span class="hl">Vision Fades</span>
+          </h3>
+          <p class="newsletter-body">
+            This week we dive into two game-changing AI breakthroughs: voice synthesis tools that give a natural,
+            personalized voice to people with ALS, stroke, or speech impairments — and AI vision systems that
+            describe the world in real time for those living with low vision or blindness. Plus: our top 5 adaptive
+            product picks under $50, caregiver burnout resources, and a mobility gear spotlight.
+          </p>
+
+          <div class="newsletter-previews">
+            <div class="preview-item">
+              <span class="preview-item-tag">🤖 AI Tools</span>
+              <div class="preview-item-text">Voice Synthesis that sounds 100% like YOU — even after ALS diagnosis</div>
+            </div>
+            <div class="preview-item">
+              <span class="preview-item-tag">👁️ Low Vision</span>
+              <div class="preview-item-text">AI camera apps that narrate your surroundings in real time</div>
+            </div>
+            <div class="preview-item">
+              <span class="preview-item-tag">🦼 Mobility</span>
+              <div class="preview-item-text">Top 5 mobility aids under $65 — including our shower bench pick</div>
+            </div>
+            <div class="preview-item">
+              <span class="preview-item-tag">🧡 Caregiver Corner</span>
+              <div class="preview-item-text">AI scheduling tools that reduce caregiver burnout by 40%</div>
+            </div>
+          </div>
+
+          <div class="newsletter-subscribe-row">
+            <input class="email-input" type="email" placeholder="your@email.com" />
+            <button class="subscribe-btn">Get Free Newsletter →</button>
+          </div>
+          <p class="subscribe-note">Free. No spam. Unsubscribe anytime. Disability community only.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER HERO — Man_nobg.png at the BOTTOM
+       ============================================================ -->
+  <footer class="footer-hero">
+
+    <!-- Data stream lines in background -->
+    <div class="data-stream data-stream-1"></div>
+    <div class="data-stream data-stream-2"></div>
+    <div class="data-stream data-stream-3"></div>
+    <div class="data-stream data-stream-4"></div>
+    <div class="data-stream data-stream-5"></div>
+
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Left: Text -->
+        <div class="footer-text-col">
+          <div class="footer-eyebrow">Overhill Valley Digital Ventures</div>
+          <h2 class="footer-heading">
+            A Mission That Matters.<br>
+            <span class="hl">Products That Deliver.</span>
+          </h2>
+          <p class="footer-body">
+            AI-Bility is THE destination for hard-to-find adaptive and disability products.
+            Powered by artificial intelligence, driven by empathy, and built by a team that believes
+            every person — regardless of ability — deserves the tools to live fully, independently,
+            and with dignity.
+          </p>
+          <div class="footer-links">
+            <a class="footer-link" href="https://www.ebay.com/usr/theoldguyai" target="_blank">
+              🛍️ eBay Store
+            </a>
+            <a class="footer-link" href="https://theoldguyai.myshopify.com" target="_blank">
+              🏪 Shopify
+            </a>
+            <a class="footer-link" href="#newsletter">
+              📧 Newsletter
+            </a>
+            <a class="footer-link" href="#mission">
+              💛 Our Mission
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Man with AI glow + rings -->
+        <div class="footer-man-col">
+          <!-- AI ring animations -->
+          <div class="ai-ring ai-ring-1"></div>
+          <div class="ai-ring ai-ring-2"></div>
+          <div class="ai-ring ai-ring-3"></div>
+
+          <!-- Floating data nodes -->
+          <div class="data-node data-node-1"></div>
+          <div class="data-node data-node-2"></div>
+          <div class="data-node data-node-3"></div>
+          <div class="data-node data-node-4"></div>
+
+          <img
+            class="footer-man-img"
+            src="New Landing Page/Man_nobg.png"
+            alt="AI-Bility founder — friendly older man at desk with AI circuit energy"
+          />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div class="footer-copy">
+            © 2026 <a href="#">AI-Bility™</a> / <a href="#">Overhill Valley Digital Ventures (OVDV)</a>.
+            All rights reserved. |
+            <a href="https://www.ebay.com/usr/theoldguyai" target="_blank">eBay</a> ·
+            <a href="https://theoldguyai.myshopify.com" target="_blank">Shopify</a>
+          </div>
+          <div class="footer-trust">
+            <span class="trust-chip">⭐ 868+ Reviews</span>
+            <span class="trust-chip">✅ 100% Positive</span>
+            <span class="trust-chip">🤖 AI Powered</span>
+            <span class="trust-chip">♿ Disability First</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+</div><!-- /page-wrap -->
+</body>
+</html>

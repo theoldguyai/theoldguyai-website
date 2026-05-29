@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Bility | AI Powered Ability for Everyone Who Needs It</title>
+  <meta name="description" content="AI-Bility — AI Powered Ability for Everyone Who Needs It. THE destination for hard-to-find adaptive & disability products. 868+ 5-star reviews." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       RESET & ROOT VARIABLES — V8 DEEP RED / CRIMSON POWER
+    ═══════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --neon:           #ef4444;                   /* vivid red */
+      --neon2:          #f97316;                   /* orange-red */
+      --neon-glow:      rgba(239,68,68,0.35);
+      --neon2-glow:     rgba(249,115,22,0.30);
+      --dark:           #0c0202;                   /* near-black deep red */
+      --dark-mid:       #150404;
+      --card:           #1a0505;                   /* dark crimson-black */
+      --card-alt:       #200606;
+      --border:         rgba(239,68,68,0.20);
+      --border-bright:  rgba(239,68,68,0.50);
+      --text:           #fff1f1;                   /* warm near-white */
+      --muted:          #fca5a5;                   /* soft red-pink muted */
+      --font-head:      'Orbitron', monospace;
+      --font-body:      'Rajdhani', sans-serif;
+      --font-mono:      'Share Tech Mono', monospace;
+      --radius:         12px;
+      --radius-lg:      18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--dark);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CIRCUIT GRID BACKGROUND
+    ═══════════════════════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(239,68,68,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(239,68,68,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* radial ambient glows */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(239,68,68,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(249,115,22,0.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       KEYFRAMES
+    ═══════════════════════════════════════════════════════════ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(35px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-45px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(45px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(239,68,68,0.7); }
+      50%       { opacity: .8; transform: scale(1.2); box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+    }
+    @keyframes powerBarFill {
+      from { width: 0%; }
+    }
+    @keyframes powerPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.65; }
+    }
+    @keyframes ringPulse {
+      0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(2.6); opacity: 0; }
+    }
+    @keyframes floatNode {
+      0%, 100% { transform: translateY(0px) rotate(0deg);   opacity: 0.7; }
+      33%       { transform: translateY(-18px) rotate(4deg); opacity: 1; }
+      66%       { transform: translateY(-8px) rotate(-3deg); opacity: 0.85; }
+    }
+    @keyframes streamFall {
+      0%   { transform: translateY(-100%); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    @keyframes shimmerSlide {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes borderGlow {
+      0%, 100% { border-color: rgba(239,68,68,0.25); box-shadow: 0 0 0 rgba(239,68,68,0); }
+      50%       { border-color: rgba(239,68,68,0.60); box-shadow: 0 0 20px rgba(239,68,68,0.15); }
+    }
+    @keyframes heroGlow {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(239,68,68,0.5)) drop-shadow(0 0 60px rgba(249,115,22,0.2)); }
+      50%       { filter: drop-shadow(0 0 50px rgba(239,68,68,0.7)) drop-shadow(0 0 90px rgba(249,115,22,0.35)); }
+    }
+    @keyframes scanLine {
+      0%   { top: 0%; }
+      100% { top: 100%; }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       UTILITY
+    ═══════════════════════════════════════════════════════════ */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    .section-pad { padding: 100px 0; }
+    .section-pad-sm { padding: 70px 0; }
+
+    .neon-text  { color: var(--neon); }
+    .neon2-text { color: var(--neon2); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-family: var(--font-head);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #fff;
+      box-shadow: 0 0 20px rgba(239,68,68,0.45), 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px rgba(239,68,68,0.65), 0 8px 25px rgba(0,0,0,0.5);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--neon);
+      border: 2px solid var(--neon);
+      box-shadow: 0 0 10px rgba(239,68,68,0.2);
+    }
+    .btn-outline:hover {
+      background: rgba(239,68,68,0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(239,68,68,0.4);
+    }
+
+    /* section label */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--neon);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 22px; height: 2px;
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+    }
+
+    /* divider */
+    .neon-divider {
+      width: 80px; height: 3px;
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+      border-radius: 2px;
+      margin: 18px 0 24px;
+      box-shadow: 0 0 12px rgba(239,68,68,0.5);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12,2,2,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .05em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo .ai-accent {
+      color: var(--neon);
+      text-shadow: 0 0 16px rgba(239,68,68,0.7);
+    }
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.35);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--neon);
+      letter-spacing: .1em;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--neon);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--neon); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      box-shadow: 0 0 14px rgba(239,68,68,0.35);
+    }
+    .nav-cta:hover { box-shadow: 0 0 24px rgba(239,68,68,0.55) !important; }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding: 80px 24px 80px;
+      max-width: 1240px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* hero left */
+    .hero-left { animation: fadeInLeft .9s ease both; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--neon);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      padding: 6px 16px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 999px;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--neon);
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .hero-title .brand-line {
+      font-size: clamp(3rem, 6.5vw, 5.2rem);
+      display: block;
+      background: linear-gradient(135deg, #fff 30%, var(--neon) 65%, var(--neon2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 20px rgba(239,68,68,0.3));
+    }
+    .hero-title .sub-line {
+      font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+      display: block;
+      color: var(--text);
+      -webkit-text-fill-color: var(--text);
+      font-weight: 600;
+      letter-spacing: .03em;
+      margin-top: 8px;
+      line-height: 1.3;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-head);
+      font-size: clamp(.95rem, 1.6vw, 1.15rem);
+      color: var(--neon);
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin: 22px 0;
+      text-shadow: 0 0 18px rgba(239,68,68,0.6);
+    }
+
+    /* POWER BARS */
+    .power-bars {
+      margin: 28px 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .power-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .power-bar-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      width: 90px;
+      flex-shrink: 0;
+    }
+    .power-bar-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(239,68,68,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    .power-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      animation: powerBarFill 1.4s cubic-bezier(.25,.46,.45,.94) both;
+    }
+    .power-bar-fill.bar1 {
+      width: 92%;
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+      animation-delay: .3s;
+      box-shadow: 0 0 8px rgba(239,68,68,0.6);
+    }
+    .power-bar-fill.bar2 {
+      width: 78%;
+      background: linear-gradient(90deg, var(--neon2), #fb923c);
+      animation-delay: .55s;
+      box-shadow: 0 0 8px rgba(249,115,22,0.6);
+    }
+    .power-bar-fill.bar3 {
+      width: 85%;
+      background: linear-gradient(90deg, var(--neon), #dc2626);
+      animation-delay: .8s;
+      box-shadow: 0 0 8px rgba(239,68,68,0.5);
+    }
+    .power-bar-pct {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--neon);
+      width: 32px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* hero right — image */
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInRight 1s ease .2s both;
+    }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+    }
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 24px;
+      background: radial-gradient(ellipse at center, rgba(239,68,68,0.18) 0%, transparent 70%);
+      z-index: 0;
+    }
+    /* scan line effect */
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(239,68,68,0.7), transparent);
+      animation: scanLine 3.5s linear infinite;
+      z-index: 3;
+      border-radius: 2px;
+    }
+    .hero-img {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+      position: relative;
+      z-index: 2;
+      animation: heroGlow 4s ease-in-out infinite;
+      border: 1px solid rgba(239,68,68,0.3);
+    }
+
+    /* corner accents */
+    .corner { position: absolute; width: 22px; height: 22px; z-index: 4; }
+    .corner-tl { top: 4px; left: 4px; border-top: 2px solid var(--neon); border-left: 2px solid var(--neon); }
+    .corner-tr { top: 4px; right: 4px; border-top: 2px solid var(--neon2); border-right: 2px solid var(--neon2); }
+    .corner-bl { bottom: 4px; left: 4px; border-bottom: 2px solid var(--neon); border-left: 2px solid var(--neon); }
+    .corner-br { bottom: 4px; right: 4px; border-bottom: 2px solid var(--neon2); border-right: 2px solid var(--neon2); }
+
+    /* floating badge on hero image */
+    .hero-float-badge {
+      position: absolute;
+      bottom: -18px;
+      left: -18px;
+      background: var(--card);
+      border: 1px solid rgba(239,68,68,0.4);
+      border-radius: 14px;
+      padding: 14px 20px;
+      z-index: 5;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(239,68,68,0.15);
+    }
+    .hero-float-badge .badge-val {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--neon);
+      display: block;
+      line-height: 1;
+    }
+    .hero-float-badge .badge-label {
+      font-family: var(--font-body);
+      font-size: .8rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       STATS BAR
+    ═══════════════════════════════════════════════════════════ */
+    .stats-bar {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .stats-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(249,115,22,0.03) 100%);
+      pointer-events: none;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      max-width: 1240px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stat-item { animation: fadeInUp .7s ease both; }
+    .stat-item:nth-child(1) { animation-delay: .1s; }
+    .stat-item:nth-child(2) { animation-delay: .2s; }
+    .stat-item:nth-child(3) { animation-delay: .3s; }
+    .stat-item:nth-child(4) { animation-delay: .4s; }
+    .stat-item:nth-child(5) { animation-delay: .5s; }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 900;
+      color: var(--neon);
+      display: block;
+      text-shadow: 0 0 20px rgba(239,68,68,0.5);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: .88rem;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: .04em;
+    }
+    .stat-divider {
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(239,68,68,0.3), transparent);
+      align-self: stretch;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SHOP SECTION
+    ═══════════════════════════════════════════════════════════ */
+    .shop-section { background: var(--dark-mid); }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+      animation: fadeInUp .7s ease both;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.15;
+    }
+    .section-title span { color: var(--neon); }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 14px auto 0;
+      line-height: 1.7;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .shop-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      animation: fadeInUp .7s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+    .shop-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .shop-card:hover::before { opacity: 1; }
+    .shop-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(239,68,68,0.55);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 30px rgba(239,68,68,0.2);
+    }
+    .shop-card:nth-child(1) { animation-delay: .1s; }
+    .shop-card:nth-child(2) { animation-delay: .2s; }
+    .shop-card:nth-child(3) { animation-delay: .3s; }
+    .shop-card:nth-child(4) { animation-delay: .4s; }
+    .shop-icon {
+      font-size: 2.6rem;
+      margin-bottom: 16px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(239,68,68,0.4));
+    }
+    .shop-card-title {
+      font-family: var(--font-head);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: .04em;
+    }
+    .shop-card-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+    .shop-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--neon);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: gap .2s;
+    }
+    .shop-card:hover .shop-card-link { gap: 10px; }
+
+    /* eBay badge */
+    .ebay-tag {
+      display: inline-block;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--neon);
+      margin-bottom: 12px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FEATURE SECTIONS
+    ═══════════════════════════════════════════════════════════ */
+    .feature-section { overflow: hidden; }
+    .feature-section:nth-child(odd) { background: var(--dark); }
+    .feature-section:nth-child(even) { background: var(--dark-mid); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .feature-grid.reverse { direction: rtl; }
+    .feature-grid.reverse > * { direction: ltr; }
+
+    .feature-img-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+    .feature-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(239,68,68,0.07) 0%, transparent 50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .feature-img-wrap::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(239,68,68,0.5), transparent);
+      animation: scanLine 4s linear infinite;
+      z-index: 2;
+    }
+    .feature-img {
+      width: 100%;
+      display: block;
+      transition: transform .5s ease;
+      border-radius: var(--radius-lg);
+    }
+    .feature-img-wrap:hover .feature-img { transform: scale(1.03); }
+
+    /* glow border on hover */
+    .feature-img-wrap:hover {
+      border-color: rgba(239,68,68,0.5);
+      box-shadow: 0 0 30px rgba(239,68,68,0.15);
+    }
+
+    .feature-content {}
+    .feature-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .feature-title span { color: var(--neon); }
+    .feature-body {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .feature-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .feature-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .97rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .feature-bullets li::before {
+      content: '▶';
+      color: var(--neon);
+      font-size: .65rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+      text-shadow: 0 0 8px rgba(239,68,68,0.6);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NEWSLETTER SECTION
+    ═══════════════════════════════════════════════════════════ */
+    .newsletter-section {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .newsletter-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* sidebar */
+    .nl-sidebar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .nl-sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon), var(--neon2));
+    }
+    .nl-issue-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--neon);
+      margin-bottom: 18px;
+    }
+    .nl-sidebar-title {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .nl-sidebar-meta {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .nl-sidebar-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    /* form */
+    .nl-form { display: flex; flex-direction: column; gap: 12px; }
+    .nl-input {
+      width: 100%;
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: .95rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .nl-input::placeholder { color: rgba(252,165,165,0.45); }
+    .nl-input:focus {
+      border-color: rgba(239,68,68,0.5);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+    }
+    .nl-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 13px;
+      font-family: var(--font-head);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: box-shadow .2s, transform .2s;
+      box-shadow: 0 0 18px rgba(239,68,68,0.4);
+    }
+    .nl-btn:hover {
+      box-shadow: 0 0 30px rgba(239,68,68,0.6);
+      transform: translateY(-2px);
+    }
+    .nl-privacy {
+      font-size: .72rem;
+      color: rgba(252,165,165,0.5);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* content side */
+    .nl-content {}
+    .nl-headline {
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .nl-headline span { color: var(--neon); }
+    .nl-body {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .nl-topics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .nl-topic {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .nl-topic:hover {
+      border-color: rgba(239,68,68,0.5);
+      box-shadow: 0 0 16px rgba(239,68,68,0.12);
+    }
+    .nl-topic-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--neon);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .nl-topic-title {
+      font-family: var(--font-body);
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════ */
+    footer {
+      background: #070101;
+      border-top: 1px solid rgba(239,68,68,0.15);
+      position: relative;
+      overflow: hidden;
+      padding: 70px 24px 40px;
+    }
+
+    /* stream fall chars */
+    .stream-col {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 20px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .stream-col span {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: rgba(239,68,68,0.18);
+      animation: streamFall linear infinite;
+      white-space: nowrap;
+    }
+
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    /* footer brand col */
+    .footer-brand {}
+    .footer-logo {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .footer-logo .ai-accent {
+      color: var(--neon);
+      text-shadow: 0 0 16px rgba(239,68,68,0.6);
+    }
+    .footer-tagline {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 240px;
+    }
+    .footer-social-links {
+      display: flex;
+      gap: 10px;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .social-btn:hover {
+      background: rgba(239,68,68,0.18);
+      color: var(--neon);
+      border-color: rgba(239,68,68,0.45);
+    }
+
+    /* footer nav cols */
+    .footer-col-title {
+      font-family: var(--font-head);
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--neon);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .92rem;
+      transition: color .2s, padding-left .2s;
+    }
+    .footer-links a:hover { color: var(--neon); padding-left: 6px; }
+
+    /* Man with AI rings — RIGHT SIDE */
+    .footer-man-wrap {
+      position: relative;
+      width: 200px;
+      height: 280px;
+      flex-shrink: 0;
+    }
+    .footer-man {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 180px;
+      z-index: 3;
+      filter:
+        drop-shadow(0 0 20px rgba(239,68,68,0.6))
+        drop-shadow(0 0 50px rgba(249,115,22,0.3))
+        drop-shadow(0 0 90px rgba(239,68,68,0.2));
+    }
+
+    /* AI rings */
+    .ai-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid;
+      pointer-events: none;
+      animation: ringPulse 3s ease-out infinite;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .ai-ring-1 {
+      width: 80px; height: 80px;
+      border-color: rgba(239,68,68,0.7);
+      animation-delay: 0s;
+    }
+    .ai-ring-2 {
+      width: 130px; height: 130px;
+      border-color: rgba(249,115,22,0.5);
+      animation-delay: .7s;
+    }
+    .ai-ring-3 {
+      width: 180px; height: 180px;
+      border-color: rgba(239,68,68,0.35);
+      animation-delay: 1.4s;
+    }
+    .ai-ring-4 {
+      width: 240px; height: 240px;
+      border-color: rgba(249,115,22,0.2);
+      animation-delay: 2.1s;
+    }
+
+    /* floating data nodes */
+    .data-node {
+      position: absolute;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.35);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      color: var(--neon);
+      white-space: nowrap;
+      animation: floatNode linear infinite;
+      z-index: 4;
+    }
+    .data-node-1 { top: 10px;  left: -40px; animation-duration: 5.5s; animation-delay: 0s; }
+    .data-node-2 { top: 50px;  left: 5px;   animation-duration: 6.8s; animation-delay: 1.2s; }
+    .data-node-3 { top: 100px; left: -50px; animation-duration: 4.9s; animation-delay: 2.1s; }
+    .data-node-4 { top: 150px; left: 10px;  animation-duration: 7.2s; animation-delay: .8s; }
+
+    /* footer bottom bar */
+    .footer-bottom {
+      border-top: 1px solid rgba(239,68,68,0.1);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom-left {
+      font-size: .85rem;
+      color: rgba(252,165,165,0.45);
+    }
+    .footer-bottom-left strong { color: var(--muted); }
+    .footer-bottom-right {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: rgba(252,165,165,0.3);
+      letter-spacing: .06em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .shop-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-man-wrap { display: none; }
+    }
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 50px 24px 60px;
+        gap: 40px;
+      }
+      .hero-right { order: -1; }
+      .hero-float-badge { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .stat-divider { display: none; }
+      .shop-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; gap: 36px; }
+      .feature-grid.reverse { direction: ltr; }
+      .newsletter-layout { grid-template-columns: 1fr; }
+      .nl-topics { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span><span class="ai-accent">AI</span>-Bility</span>
+        <span class="nav-badge">
+          <span class="badge-dot"></span>
+          LIVE
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#features">Solutions</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="nav-cta">eBay Store ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section style="position:relative; z-index:1;">
+    <div class="hero">
+
+      <!-- Left: headline + CTAs -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="dot"></span>
+          THE Destination for Hard-to-Find Adaptive &amp; Disability Products
+        </div>
+
+        <h1 class="hero-title">
+          <span class="brand-line">AI-Bility</span>
+          <span class="sub-line">AI Powered Ability for Everyone Who Needs It</span>
+        </h1>
+
+        <p class="hero-tagline">⚡ Independence, Redefined.</p>
+
+        <!-- POWER BARS — charging sequence animation -->
+        <div class="power-bars">
+          <div class="power-bar-wrap">
+            <span class="power-bar-label">CAPABILITY</span>
+            <div class="power-bar-track">
+              <div class="power-bar-fill bar1"></div>
+            </div>
+            <span class="power-bar-pct">92%</span>
+          </div>
+          <div class="power-bar-wrap">
+            <span class="power-bar-label">INNOVATION</span>
+            <div class="power-bar-track">
+              <div class="power-bar-fill bar2"></div>
+            </div>
+            <span class="power-bar-pct">78%</span>
+          </div>
+          <div class="power-bar-wrap">
+            <span class="power-bar-label">IMPACT</span>
+            <div class="power-bar-track">
+              <div class="power-bar-fill bar3"></div>
+            </div>
+            <span class="power-bar-pct">85%</span>
+          </div>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="btn btn-primary">
+            ⚡ Shop eBay Store
+          </a>
+          <a href="https://theoldguyai.myshopify.com" target="_blank" class="btn btn-outline">
+            🛍️ Shopify Store
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Iron Man arm hero image -->
+      <div class="hero-right">
+        <div class="hero-img-wrap">
+          <img src="New Landing Page/Iron arm.png" alt="Young boy being fitted with an Iron Man prosthetic arm — AI-Bility" class="hero-img" />
+          <span class="corner corner-tl"></span>
+          <span class="corner corner-tr"></span>
+          <span class="corner corner-bl"></span>
+          <span class="corner corner-br"></span>
+
+          <div class="hero-float-badge">
+            <span class="badge-val">868+</span>
+            <span class="badge-label">5-Star Reviews</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ STATS BAR ═══════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num">61M+</span>
+        <span class="stat-label">Americans Living with Disabilities</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">868+</span>
+        <span class="stat-label">Verified 5-Star Reviews</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Positive Feedback Score</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">1,000s</span>
+        <span class="stat-label">Hard-to-Find Products</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">AI</span>
+        <span class="stat-label">Powered Product Discovery</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ SHOP SECTION ═══════════════════════════════ -->
+  <section class="shop-section section-pad" id="shop">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Shop AI-Bility</div>
+        <h2 class="section-title">Your <span>Independence</span> Toolkit Awaits</h2>
+        <p class="section-desc">From smart mobility aids to AI-assisted daily living tools — we source the products that make real differences in real lives.</p>
+      </div>
+
+      <div class="shop-grid">
+        <!-- Card 1: eBay -->
+        <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="shop-card">
+          <span class="ebay-tag">868+ Reviews · 100% Positive</span>
+          <span class="shop-icon">🛒</span>
+          <div class="shop-card-title">eBay Flagship Store</div>
+          <p class="shop-card-desc">Our primary marketplace. Thousands of adaptive and disability products with buyer protection and fast shipping.</p>
+          <span class="shop-card-link">Browse Store →</span>
+        </a>
+
+        <!-- Card 2: Shopify -->
+        <a href="https://theoldguyai.myshopify.com" target="_blank" class="shop-card">
+          <span class="shop-icon">🏪</span>
+          <div class="shop-card-title">Shopify Direct Store</div>
+          <p class="shop-card-desc">Shop direct at our Shopify storefront. Curated collections, exclusive bundles, and direct checkout.</p>
+          <span class="shop-card-link">Visit Store →</span>
+        </a>
+
+        <!-- Card 3: TikTok -->
+        <div class="shop-card" style="cursor:default;">
+          <span class="shop-icon">📱</span>
+          <div class="shop-card-title">TikTok Shop</div>
+          <p class="shop-card-desc">Live shopping, product demos, and community reviews — coming soon to TikTok Shop. Follow us to be first!</p>
+          <span class="shop-card-link" style="color:var(--neon2);">Coming Soon ◉</span>
+        </div>
+
+        <!-- Card 4: AI Discovery -->
+        <div class="shop-card" style="cursor:default;">
+          <span class="shop-icon">🤖</span>
+          <div class="shop-card-title">AI Product Finder</div>
+          <p class="shop-card-desc">Our AI engine continuously scans and sources hard-to-find adaptive products so you don't have to search alone.</p>
+          <span class="shop-card-link" style="color:var(--neon2);">AI-Powered →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FEATURE 1: Robot.png ═══════════════════════════════ -->
+  <section class="feature-section section-pad" id="features">
+    <div class="container">
+      <div class="feature-grid">
+
+        <!-- Image LEFT -->
+        <div class="feature-img-wrap" style="animation: fadeInLeft .8s ease both;">
+          <img src="New Landing Page/Robot.png" alt="Humanoid AI medical robot gently holding a patient's hand" class="feature-img" />
+        </div>
+
+        <!-- Content RIGHT -->
+        <div class="feature-content" style="animation: fadeInRight .8s ease .15s both;">
+          <div class="section-label">AI + Healthcare</div>
+          <h2 class="feature-title">The Future of Care<br /><span>Is Already Here</span></h2>
+          <div class="neon-divider"></div>
+          <p class="feature-body">
+            Artificial intelligence is transforming what care looks and feels like for the disability community. The image above captures something profound — a humanoid AI robot gently holding a patient's hand. Not cold. Not clinical. <strong style="color:var(--text);">Compassionate.</strong>
+          </p>
+          <p class="feature-body">
+            That gentle connection is a symbol of where AI-powered care is heading: responsive, intelligent, and deeply human-centered. At AI-Bility, we believe technology should extend human warmth — not replace it.
+          </p>
+          <ul class="feature-bullets">
+            <li>AI-assisted diagnostics that detect needs earlier than ever before</li>
+            <li>Remote health monitoring for independent living at home</li>
+            <li>Robotic assistance for mobility, lifting, and daily tasks</li>
+            <li>Smart medication reminders and adaptive scheduling</li>
+          </ul>
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="btn btn-primary">Explore Care Technology</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FEATURE 2: wheelchair.png (REVERSED) ═══════════════════════════════ -->
+  <section class="feature-section section-pad">
+    <div class="container">
+      <div class="feature-grid reverse">
+
+        <!-- Image RIGHT (reversed layout) -->
+        <div class="feature-img-wrap" style="animation: fadeInRight .8s ease both;">
+          <img src="New Landing Page/wheelchair.png" alt="Futuristic electric smart wheelchair with cyan LED wheels" class="feature-img" />
+        </div>
+
+        <!-- Content LEFT -->
+        <div class="feature-content" style="animation: fadeInLeft .8s ease .15s both;">
+          <div class="section-label">Smart Mobility</div>
+          <h2 class="feature-title"><span>Technology That</span><br />Changes Everything</h2>
+          <div class="neon-divider"></div>
+          <p class="feature-body">
+            The next generation of mobility technology isn't just about getting from A to B — it's about sovereignty. AI-powered wheelchairs, smart scooters, and adaptive vehicles are rewriting the definition of independence for millions of people.
+          </p>
+          <p class="feature-body">
+            With real-time obstacle avoidance, adaptive terrain mapping, voice control integration, and predictive route planning, today's smart mobility devices put the individual firmly in command.
+          </p>
+          <ul class="feature-bullets">
+            <li>AI-powered smart wheelchairs with obstacle detection</li>
+            <li>Voice and gesture control interfaces for hands-free navigation</li>
+            <li>Long-range lithium battery systems for all-day independence</li>
+            <li>App-connected monitoring for caregivers and loved ones</li>
+          </ul>
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="btn btn-primary">Shop Mobility Solutions</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FEATURE 3: classroom.png ═══════════════════════════════ -->
+  <section class="feature-section section-pad">
+    <div class="container">
+      <div class="feature-grid">
+
+        <!-- Image LEFT -->
+        <div class="feature-img-wrap" style="animation: fadeInLeft .8s ease both;">
+          <img src="New Landing Page/classroom.png" alt="AI-powered adaptive classroom for learners of all abilities" class="feature-img" />
+        </div>
+
+        <!-- Content RIGHT -->
+        <div class="feature-content" style="animation: fadeInRight .8s ease .15s both;">
+          <div class="section-label">Adaptive Education</div>
+          <h2 class="feature-title">Learning Has<br /><span>No Limits</span></h2>
+          <div class="neon-divider"></div>
+          <p class="feature-body">
+            Every mind deserves the tools to thrive. AI is breaking down the barriers that once made mainstream education inaccessible — delivering personalized, adaptive learning experiences that meet students exactly where they are.
+          </p>
+          <p class="feature-body">
+            From speech-to-text technology and AI tutors to adaptive curricula and sensory-friendly learning environments, the classroom of the future is built for <strong style="color:var(--text);">everyone</strong>.
+          </p>
+          <ul class="feature-bullets">
+            <li>AI-powered adaptive learning platforms for all learning styles</li>
+            <li>Augmentative & alternative communication (AAC) devices</li>
+            <li>Screen readers, braille displays, and voice-command tools</li>
+            <li>Sensory-adaptive tools for focus, comfort, and engagement</li>
+          </ul>
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="btn btn-primary">Explore Learning Tools</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ NEWSLETTER ═══════════════════════════════ -->
+  <section class="newsletter-section section-pad" id="newsletter">
+    <div class="container">
+      <div class="newsletter-layout">
+
+        <!-- Sidebar -->
+        <div class="nl-sidebar">
+          <div class="nl-issue-badge">
+            <span class="badge-dot" style="width:6px;height:6px;border-radius:50%;background:var(--neon);animation:dotPulse 1.8s ease-in-out infinite;"></span>
+            May 2026 · Issue #1
+          </div>
+          <div class="nl-sidebar-title">The AI-Bility Insider Newsletter</div>
+          <div class="nl-sidebar-meta">PUBLISHED: MAY 2026 · ISSUE #001</div>
+          <p class="nl-sidebar-desc">
+            Your monthly briefing on adaptive technology, disability innovation, product finds, and the AI revolution changing lives.
+          </p>
+          <form class="nl-form" onsubmit="return false;">
+            <input type="text" class="nl-input" placeholder="Your first name" />
+            <input type="email" class="nl-input" placeholder="Your email address" />
+            <button type="submit" class="nl-btn">⚡ Subscribe Free</button>
+            <p class="nl-privacy">No spam. Unsubscribe anytime. Zero cost.</p>
+          </form>
+        </div>
+
+        <!-- Content -->
+        <div class="nl-content">
+          <div class="section-label">May 2026 · Issue #1</div>
+          <h2 class="nl-headline">This Week: <span>How AI is Becoming the Ultimate Caregiver</span></h2>
+          <p class="nl-body">
+            Artificial intelligence has crossed a threshold — from experimental tool to everyday care partner. In our debut issue, we examine the rapid deployment of AI companions, robotic nursing assistants, and smart home systems that are actively reducing caregiver burnout while dramatically improving quality of life for people with disabilities. Plus: our top picks from this month's adaptive product finds, a deep dive into AI-powered prosthetics, and community stories from real AI-Bility customers.
+          </p>
+          <div class="nl-topics">
+            <div class="nl-topic">
+              <span class="nl-topic-label">Feature Story</span>
+              <div class="nl-topic-title">AI Companions Reducing Caregiver Burnout by 40%</div>
+            </div>
+            <div class="nl-topic">
+              <span class="nl-topic-label">Product Spotlight</span>
+              <div class="nl-topic-title">Top 5 AI-Powered Prosthetics of 2026</div>
+            </div>
+            <div class="nl-topic">
+              <span class="nl-topic-label">Community</span>
+              <div class="nl-topic-title">Real Stories: How AI Changed My Morning Routine</div>
+            </div>
+            <div class="nl-topic">
+              <span class="nl-topic-label">Tech Watch</span>
+              <div class="nl-topic-title">Smart Home Integration for Independent Living</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer>
+
+    <!-- Stream fall background chars -->
+    <div class="stream-col" style="left:3%;">
+      <span style="animation-duration:8s; animation-delay:0s;">1 0 A I 1 0 1 0 1<br/>A I 0 1 A 1 0 1 0<br/>1 0 1 0 A I 1 0 1</span>
+    </div>
+    <div class="stream-col" style="left:15%;">
+      <span style="animation-duration:11s; animation-delay:2s;">0 1 I A 0 1 0 A I<br/>1 A I 0 1 0 I A 1<br/>A 0 1 A I 1 0 1 0</span>
+    </div>
+    <div class="stream-col" style="left:40%;">
+      <span style="animation-duration:9s; animation-delay:1s;">I A 1 0 1 A I 0 1<br/>0 1 A I 0 1 A 1 0<br/>1 I 0 A 1 0 I A 1</span>
+    </div>
+    <div class="stream-col" style="left:65%;">
+      <span style="animation-duration:12s; animation-delay:3s;">A I 0 1 0 A I 1 0<br/>1 0 I A 1 0 A I 0<br/>0 A 1 I 0 1 A 0 I</span>
+    </div>
+    <div class="stream-col" style="left:88%;">
+      <span style="animation-duration:7.5s; animation-delay:1.5s;">I 0 1 A 0 I 1 A 0<br/>A I 1 0 I A 1 0 1<br/>1 A 0 I A 0 1 I A</span>
+    </div>
+
+    <div class="footer-inner">
+      <div class="footer-main">
+
+        <!-- Brand col -->
+        <div class="footer-brand">
+          <div class="footer-logo"><span class="ai-accent">AI</span>-Bility</div>
+          <p class="footer-tagline">AI Powered Ability for Everyone Who Needs It. THE destination for hard-to-find adaptive & disability products.</p>
+          <div class="footer-social-links">
+            <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" class="social-btn">🛒 eBay</a>
+            <a href="https://theoldguyai.myshopify.com" target="_blank" class="social-btn">🏪 Shopify</a>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <div class="footer-col-title">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="https://www.ebay.com/usr/theoldguyai" target="_blank">eBay Store</a></li>
+            <li><a href="https://theoldguyai.myshopify.com" target="_blank">Shopify Store</a></li>
+            <li><a href="#shop">Shop Categories</a></li>
+            <li><a href="#features">Our Solutions</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div>
+          <div class="footer-col-title">Categories</div>
+          <ul class="footer-links">
+            <li><a href="#">Mobility Aids</a></li>
+            <li><a href="#">AI Care Technology</a></li>
+            <li><a href="#">Adaptive Learning</a></li>
+            <li><a href="#">Communication Devices</a></li>
+            <li><a href="#">Smart Home Systems</a></li>
+            <li><a href="#">Prosthetics & Orthotics</a></li>
+          </ul>
+        </div>
+
+        <!-- Man with AI rings -->
+        <div class="footer-man-wrap">
+          <!-- AI pulse rings centered on man -->
+          <div class="ai-ring ai-ring-1"></div>
+          <div class="ai-ring ai-ring-2"></div>
+          <div class="ai-ring ai-ring-3"></div>
+          <div class="ai-ring ai-ring-4"></div>
+
+          <!-- Floating data nodes -->
+          <div class="data-node data-node-1">AI-Powered ◉</div>
+          <div class="data-node data-node-2">SYS: ONLINE</div>
+          <div class="data-node data-node-3">CAP: 92%</div>
+          <div class="data-node data-node-4">SIGNAL: ▲▲▲</div>
+
+          <img src="New Landing Page/Man_nobg.png" alt="AI-Bility founder at his desk — powered by AI" class="footer-man" />
+        </div>
+
+      </div><!-- /footer-main -->
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          © 2026 <strong>AI-Bility</strong> · A Brand of <strong>Overhill Valley Digital Ventures (OVDV)</strong> · All Rights Reserved
+        </div>
+        <div class="footer-bottom-right">V8.0 · CRIMSON POWER · OVDV DIGITAL</div>
+      </div>
+
+    </div><!-- /footer-inner -->
+  </footer>
+
+</body>
+</html>

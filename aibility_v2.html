@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Bility Newsletter — AI Solutions for Medical Needs & Disabilities</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;800;900&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --bg: #020008;
+    --bg2: #080018;
+    --purple: #c060ff;
+    --purple-dim: #8030cc;
+    --pink: #ff1a8c;
+    --pink-dim: #cc0066;
+    --teal: #00CED1;
+    --teal-glow: rgba(0,206,209,0.4);
+    --white: #f0e8ff;
+    --muted: rgba(240, 232, 255, 0.55);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Exo 2', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor-ring {
+    position: fixed;
+    width: 28px; height: 28px;
+    border: 2px solid var(--teal);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: border-color 0.2s, transform 0.05s;
+  }
+  .cursor-dot {
+    position: fixed;
+    width: 5px; height: 5px;
+    background: var(--pink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+  }
+  .trail-p {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%);
+    animation: tFade 0.8s ease-out forwards;
+  }
+  @keyframes tFade {
+    0% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+  }
+
+  /* PARTICLES CANVAS */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+  /* GRID */
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,206,209,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,206,209,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    perspective: 800px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(2, 0, 8, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,206,209,0.15);
+  }
+  .nav-logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.3rem;
+    color: var(--teal);
+    letter-spacing: 3px;
+  }
+  .nav-logo em { color: var(--pink); font-style: normal; text-shadow: 0 0 12px rgba(255,26,140,0.8), 0 0 25px rgba(255,26,140,0.4); }
+  .nav-pill {
+    background: rgba(0,206,209,0.1);
+    border: 1px solid rgba(0,206,209,0.3);
+    color: var(--teal);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-pill:hover {
+    background: rgba(0,206,209,0.25);
+    box-shadow: 0 0 20px rgba(0,206,209,0.3);
+  }
+  .nav-mid { display: flex; gap: 2rem; }
+  .nav-mid a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+  .nav-mid a:hover { color: var(--teal); }
+
+  /* WRAPPER */
+  .wrapper { position: relative; z-index: 2; padding-top: 72px; }
+
+  /* SPLIT HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 72px);
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 5rem 3rem 5rem 4rem;
+    position: relative;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 10%; bottom: 10%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(192,96,255,0.5), rgba(0,206,209,0.5), transparent);
+  }
+  .terminal-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .terminal-label::before {
+    content: '>';
+    color: var(--pink);
+    font-size: 1rem;
+  }
+  .blink {
+    display: inline-block;
+    width: 8px; height: 16px;
+    background: var(--teal);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .hero-left h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .hero-left h1 .word-ai { color: var(--teal); text-shadow: 0 0 30px rgba(0,206,209,0.8), 0 0 60px rgba(0,206,209,0.4); }
+  .hero-left h1 .word-bility { color: var(--pink); text-shadow: 0 0 30px rgba(255,26,140,0.9), 0 0 60px rgba(255,26,140,0.5), 0 0 100px rgba(255,26,140,0.2); }
+  .hero-left h1 .word-sub {
+    display: block;
+    font-size: 0.3em;
+    font-weight: 300;
+    color: var(--teal);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: none;
+    margin-top: 0.5rem;
+  }
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .hero-desc strong { color: var(--purple); font-weight: 600; }
+  .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple-dim), var(--pink-dim));
+    color: #fff;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 0 25px rgba(192,96,255,0.4);
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover { box-shadow: 0 0 50px rgba(192,96,255,0.7); transform: translateY(-2px); }
+  .btn-ghost {
+    color: var(--teal);
+    border: 1px solid rgba(0,206,209,0.4);
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { background: rgba(0,206,209,0.1); box-shadow: 0 0 25px rgba(0,206,209,0.3); }
+  .hero-right {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+  }
+  .hero-robot-img {
+    width: 100%;
+    border-radius: 16px;
+    filter: saturate(1.2) brightness(0.9);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 60px rgba(0,206,209,0.2), 0 0 120px rgba(0,206,209,0.05);
+  }
+  .img-border {
+    position: absolute;
+    inset: -3px;
+    border-radius: 19px;
+    background: linear-gradient(135deg, var(--teal), var(--purple), var(--pink), var(--teal));
+    z-index: 1;
+    animation: borderSpin 4s linear infinite;
+    background-size: 200% 200%;
+  }
+  @keyframes borderSpin {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 200%; }
+  }
+  .img-wrap { position: relative; }
+  .hero-tag {
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,206,209,0.15);
+    border: 1px solid rgba(0,206,209,0.4);
+    color: var(--teal);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    z-index: 3;
+    box-shadow: 0 0 20px rgba(0,206,209,0.2);
+  }
+  .floating-badge {
+    position: absolute;
+    background: rgba(2, 0, 8, 0.9);
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    z-index: 5;
+    animation: floatBadge 3s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  .badge-tl {
+    top: 15%; left: -20%;
+    border-color: rgba(0,206,209,0.4);
+    color: var(--teal);
+    animation-delay: 0s;
+  }
+  .badge-br {
+    bottom: 20%; right: -18%;
+    border-color: rgba(192,96,255,0.4);
+    color: var(--purple);
+    animation-delay: 1.5s;
+  }
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* HORIZONTAL CATEGORY SCROLL */
+  .categories-section {
+    padding: 5rem 0;
+    overflow: hidden;
+  }
+  .section-header {
+    text-align: center;
+    padding: 0 4rem 3rem;
+  }
+  .eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: var(--white);
+  }
+  .section-title span { color: var(--teal); }
+
+  /* HORIZONTAL SCROLL STRIP */
+  .h-scroll-track {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 4rem 2rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,206,209,0.3) transparent;
+  }
+  .h-scroll-track::-webkit-scrollbar { height: 4px; }
+  .h-scroll-track::-webkit-scrollbar-track { background: transparent; }
+  .h-scroll-track::-webkit-scrollbar-thumb { background: rgba(0,206,209,0.3); border-radius: 2px; }
+
+  .h-card {
+    min-width: 320px;
+    max-width: 320px;
+    background: rgba(8, 0, 24, 0.7);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(192,96,255,0.2);
+    flex-shrink: 0;
+    transition: all 0.4s;
+    position: relative;
+  }
+  .h-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .h-card.purple-accent::after { background: linear-gradient(90deg, var(--purple), transparent); }
+  .h-card.pink-accent::after { background: linear-gradient(90deg, var(--pink), transparent); }
+  .h-card.teal-accent::after { background: linear-gradient(90deg, var(--teal), transparent); }
+  .h-card:hover { transform: translateY(-8px); border-color: rgba(0,206,209,0.4); }
+  .h-card.teal-accent { border-color: rgba(0,206,209,0.25); }
+  .h-card.teal-accent:hover { border-color: rgba(0,206,209,0.6); box-shadow: 0 20px 60px rgba(0,206,209,0.15); }
+
+  .h-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+  .h-card-body { padding: 1.5rem; }
+  .h-card-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+  .h-cat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+  .lbl-purple { background: rgba(192,96,255,0.12); color: var(--purple); }
+  .lbl-pink { background: rgba(255,26,140,0.12); color: var(--pink); }
+  .lbl-teal { background: rgba(0,206,209,0.12); color: var(--teal); }
+  .h-card-body h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .h-card.teal-accent h3 { color: var(--teal); }
+  .h-card-body p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* SIGNUP SECTION — CENTERED PANEL */
+  .signup-section {
+    padding: 6rem 2rem;
+    position: relative;
+  }
+  .signup-panel {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(8, 0, 24, 0.85);
+    border: 1px solid rgba(0,206,209,0.2);
+    border-radius: 24px;
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .signup-panel::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(192,96,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .signup-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,206,209,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .panel-corner {
+    position: absolute;
+    width: 20px; height: 20px;
+    border-color: var(--teal);
+    border-style: solid;
+    opacity: 0.6;
+  }
+  .corner-tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; border-radius: 2px 0 0 0; }
+  .corner-tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; border-radius: 0 2px 0 0; }
+  .corner-bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; border-radius: 0 0 0 2px; }
+  .corner-br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; border-radius: 0 0 2px 0; }
+  .panel-content { position: relative; z-index: 2; text-align: center; }
+  .panel-content h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+  }
+  .panel-content h2 .gr {
+    background: linear-gradient(90deg, var(--purple), var(--pink), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .panel-content p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .input-wrap { position: relative; }
+  .input-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+  .form-input {
+    width: 100%;
+    background: rgba(2,0,8,0.8);
+    border: 1px solid rgba(0,206,209,0.2);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    color: var(--white);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .form-input::placeholder { color: rgba(240,232,255,0.25); }
+  .form-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 15px rgba(0,206,209,0.2);
+  }
+  .topics-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .topic-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .topic-chip {
+    background: rgba(192,96,255,0.1);
+    border: 1px solid rgba(192,96,255,0.3);
+    color: var(--purple);
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+  }
+  .topic-chip.teal { background: rgba(0,206,209,0.1); border-color: rgba(0,206,209,0.3); color: var(--teal); }
+  .topic-chip.pink { background: rgba(255,26,140,0.1); border-color: rgba(255,26,140,0.3); color: var(--pink); }
+  .topic-chip.active { filter: brightness(1.4); box-shadow: 0 0 12px currentColor; }
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple-dim), var(--pink-dim));
+    color: #fff;
+    border: none;
+    padding: 1.1rem;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(192,96,255,0.3);
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { box-shadow: 0 0 50px rgba(192,96,255,0.6); transform: translateY(-2px); }
+  .form-note { text-align: center; font-size: 0.78rem; color: rgba(240,232,255,0.3); margin-top: 0.3rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(0,206,209,0.1);
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--teal);
+  }
+  .footer-logo span { color: var(--pink); text-shadow: 0 0 12px rgba(255,26,140,0.7), 0 0 25px rgba(255,26,140,0.3); }
+  footer p { color: rgba(240,232,255,0.3); font-size: 0.8rem; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: rgba(240,232,255,0.35); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--teal); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-mid { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem 2rem; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 1rem 1.5rem 3rem; }
+    .badge-tl, .badge-br { display: none; }
+    .h-scroll-track { padding: 1rem 1.5rem 1.5rem; }
+    .section-header { padding: 0 1.5rem 2rem; }
+    .signup-panel { padding: 2rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="grid-overlay"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<div class="wrapper">
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">AI<em>-Bility</em></div>
+    <div class="nav-mid">
+      <a href="#">Medical AI</a>
+      <a href="#">Disability Tech</a>
+      <a href="#">Robotics</a>
+      <a href="#">Oncology AI</a>
+    </div>
+    <a href="#subscribe" class="nav-pill">Subscribe Free</a>
+  </nav>
+
+  <!-- SPLIT HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="terminal-label">INITIALIZING AI-BILITY NEWSLETTER<span class="blink"></span></div>
+      <h1>
+        <span class="word-ai">AI</span><span class="word-bility">-Bility</span>
+        <span class="word-sub">Providing New Abilities Created by AI Technology</span>
+      </h1>
+      <p class="hero-desc">
+        Every week, we decode the <strong>latest AI breakthroughs</strong> helping people with medical needs and disabilities live fuller, more independent lives — from intelligent robotics to cancer-fighting algorithms.
+      </p>
+      <div class="hero-actions">
+        <a href="#subscribe" class="btn-primary">Get Free Access →</a>
+        <a href="#categories" class="btn-ghost">See Topics</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="floating-badge badge-tl">⚡ Neural Prosthetics</div>
+        <div class="img-wrap">
+          <div class="img-border"></div>
+          <img src="images/robot.png" alt="AI robot medical assistance" class="hero-robot-img">
+          <div class="hero-tag">Robot Assistance Technology</div>
+        </div>
+        <div class="floating-badge badge-br">🧬 Tumor AI Detection</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORIZONTAL CATEGORIES -->
+  <section class="categories-section" id="categories">
+    <div class="section-header">
+      <div class="eyebrow">— What We Cover —</div>
+      <h2 class="section-title">Four Pillars of <span>AI-Bility</span></h2>
+    </div>
+    <div class="h-scroll-track">
+
+      <!-- Medical AI Tools -->
+      <div class="h-card purple-accent">
+        <div class="h-card-body">
+          <span class="h-card-icon">🧬</span>
+          <span class="h-cat-label lbl-purple">Medical AI Tools</span>
+          <h3>Intelligent Diagnostics & Clinical AI</h3>
+          <p>AI-powered diagnostics, medication management systems, personalized treatment planning, and clinical decision support tools that transform patient care for people with complex medical needs. From early disease detection to AI-driven treatment protocols.</p>
+        </div>
+      </div>
+
+      <!-- Disability Tech -->
+      <div class="h-card pink-accent">
+        <div class="h-card-body">
+          <span class="h-card-icon">♿</span>
+          <span class="h-cat-label lbl-pink">Disability Tech</span>
+          <h3>Adaptive Technology & Inclusion</h3>
+          <p>Brain-computer interfaces, smart mobility aids, predictive AAC devices, AI-enhanced hearing, computer vision for visual impairment, and adaptive input systems. Cutting-edge AI breaking barriers and restoring independence for people with disabilities.</p>
+        </div>
+      </div>
+
+      <!-- Robot Assistance -->
+      <div class="h-card teal-accent">
+        <img src="images/robot.png" alt="AI robot assisting patient" class="h-card-img">
+        <div class="h-card-body">
+          <span class="h-cat-label lbl-teal">Robot Assistance</span>
+          <h3>AI Robots in Medical Care</h3>
+          <p>Intelligent robots providing physical support, rehabilitation therapy, surgical assistance, and daily-living help for people with medical needs. From neural-controlled prosthetic limbs to autonomous AI wheelchairs and robotic companions.</p>
+        </div>
+      </div>
+
+      <!-- AI Cancer Research -->
+      <div class="h-card pink-accent">
+        <img src="images/cancer.png" alt="AI cancer research" class="h-card-img">
+        <div class="h-card-body">
+          <span class="h-cat-label lbl-pink">AI Cancer Research</span>
+          <h3>Precision Oncology AI</h3>
+          <p>Machine learning models targeting cancer cells with molecular precision, AI-designed immunotherapies, drug discovery algorithms, and predictive treatment response models. Follow the AI revolution transforming cancer care and survival rates worldwide.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SIGNUP PANEL -->
+  <section class="signup-section" id="subscribe">
+    <div class="signup-panel">
+      <div class="panel-corner corner-tl"></div>
+      <div class="panel-corner corner-tr"></div>
+      <div class="panel-corner corner-bl"></div>
+      <div class="panel-corner corner-br"></div>
+      <div class="panel-content">
+        <div class="eyebrow" style="margin-bottom:0.8rem;">Free Weekly Newsletter</div>
+        <h2><span class="gr">Join the AI-Bility</span> Community</h2>
+        <p>Breakthroughs in AI for medical needs and disabilities — every Tuesday. Choose your topics and we'll deliver what matters to you.</p>
+      </div>
+      <form class="signup-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="input-wrap">
+            <label class="input-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Alex" required>
+          </div>
+          <div class="input-wrap">
+            <label class="input-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Chen">
+          </div>
+        </div>
+        <div class="input-wrap">
+          <label class="input-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <div class="topics-label">Select Your Topics</div>
+          <div class="topic-chips">
+            <div class="topic-chip active" onclick="this.classList.toggle('active')">🧬 Medical AI Tools</div>
+            <div class="topic-chip pink active" onclick="this.classList.toggle('active')">♿ Disability Tech</div>
+            <div class="topic-chip teal active" onclick="this.classList.toggle('active')">🤖 Robot Assistance</div>
+            <div class="topic-chip pink active" onclick="this.classList.toggle('active')">🎗️ AI Cancer Research</div>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">Access Free Newsletter →</button>
+        <p class="form-note">No spam · Free forever · Cancel anytime</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">AI<span>-Bility</span></div>
+    <p>© 2026 Overhill Valley Digital Ventures · All rights reserved</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Archive</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// PARTICLE CANVAS
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initParticles() {
+  particles = [];
+  const count = Math.floor((W * H) / 8000);
+  const colors = ['rgba(192,96,255,', 'rgba(255,26,140,', 'rgba(0,206,209,', 'rgba(240,232,255,'];
+  for (let i = 0; i < count + 80; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * 0.6 + 0.1,
+      twinkle: Math.random() * 0.01 + 0.003,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.phase += p.twinkle;
+    if (p.x < 0) p.x = W;
+    if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H;
+    if (p.y > H) p.y = 0;
+    const a = p.alpha * (0.5 + 0.5 * Math.sin(p.phase));
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + a + ')';
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+
+resize();
+initParticles();
+drawParticles();
+window.addEventListener('resize', () => { resize(); initParticles(); });
+
+// CURSOR
+const ring = document.getElementById('cursorRing');
+const dot = document.getElementById('cursorDot');
+const tColors = ['#c060ff', '#ff1a8c', '#00CED1', '#8030cc', '#ff69b4'];
+let rx = 0, ry = 0, dx = 0, dy = 0, tc = 0;
+
+document.addEventListener('mousemove', e => {
+  dx = e.clientX; dy = e.clientY;
+  dot.style.left = dx + 'px';
+  dot.style.top = dy + 'px';
+  spawnTrail(dx, dy);
+});
+
+function animRing() {
+  rx += (dx - rx) * 0.12;
+  ry += (dy - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+let tc2 = 0;
+function spawnTrail(x, y) {
+  tc2++;
+  if (tc2 % 4 !== 0) return;
+  const p = document.createElement('div');
+  p.classList.add('trail-p');
+  const s = Math.random() * 10 + 4;
+  p.style.width = s + 'px';
+  p.style.height = s + 'px';
+  const c = tColors[Math.floor(Math.random() * tColors.length)];
+  p.style.background = c;
+  p.style.boxShadow = `0 0 ${s * 2}px ${c}`;
+  p.style.left = (x + (Math.random()-0.5)*14) + 'px';
+  p.style.top = (y + (Math.random()-0.5)*14) + 'px';
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 800);
+}
+
+// TOPIC CHIPS
+document.querySelectorAll('.topic-chip').forEach(chip => {
+  chip.style.cursor = 'pointer';
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit-btn');
+  btn.textContent = '✓ Welcome to AI-Bility!';
+  btn.style.background = 'linear-gradient(135deg, #00CED1, #009fa3)';
+  btn.style.boxShadow = '0 0 40px rgba(0,206,209,0.5)';
+}
+</script>
+</body>
+</html>

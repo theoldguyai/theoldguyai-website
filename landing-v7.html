@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Bility — AI Powered Ability for Everyone Who Needs It</title>
+  <meta name="description" content="AI-Bility is THE destination for hard-to-find adaptive & disability products for people with disabilities, seniors, and caregivers. AI Powered Ability for Everyone Who Needs It." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       ROOT — V7 DARK CHROME / TITANIUM PALETTE
+    ═══════════════════════════════════════════════ */
+    :root {
+      --neon:    #e2e8f0;
+      --neon2:   #3b82f6;
+      --dark:    #050810;
+      --card:    #0d1321;
+      --border:  rgba(226,232,240,0.15);
+      --text:    #f8fafc;
+      --muted:   #94a3b8;
+      --circuit: rgba(226,232,240,0.03);
+      --glow-s:  rgba(226,232,240,0.18);
+      --glow-b:  rgba(59,130,246,0.25);
+      --font-ui: 'Inter', sans-serif;
+      --font-hd: 'Orbitron', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── CIRCUIT GRID BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--circuit) 1px, transparent 1px),
+        linear-gradient(90deg, var(--circuit) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── STARFIELD DOTS ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, rgba(226,232,240,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 27% 45%, rgba(59,130,246,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 43% 9%,  rgba(226,232,240,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 58% 72%, rgba(59,130,246,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 69% 33%, rgba(226,232,240,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 82% 55%, rgba(59,130,246,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 91% 14%, rgba(226,232,240,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 7%  88%, rgba(59,130,246,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 62%, rgba(226,232,240,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 76% 80%, rgba(59,130,246,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 50%, rgba(226,232,240,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 19% 75%, rgba(59,130,246,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    section, nav, footer, .stats-bar { position: relative; z-index: 1; }
+
+    /* ═══════════════════════════════════════════════
+       NAV — FIXED DARK CHROME
+    ═══════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 68px;
+      background: rgba(5,8,16,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+    }
+
+    .nav-logo {
+      font-family: var(--font-hd);
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      color: var(--neon);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.15em;
+    }
+
+    .nav-logo .ai-accent {
+      color: var(--neon2);
+      text-shadow: 0 0 12px rgba(59,130,246,0.8), 0 0 24px rgba(59,130,246,0.4);
+    }
+
+    .nav-logo .dash-accent {
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--neon); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--neon2), #1d4ed8);
+      color: #fff !important;
+      padding: 0.45rem 1.2rem !important;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      box-shadow: 0 0 16px rgba(59,130,246,0.4);
+      transition: box-shadow 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      box-shadow: 0 0 28px rgba(59,130,246,0.7) !important;
+      transform: translateY(-1px) !important;
+      color: #fff !important;
+    }
+
+    /* brand badge pulsing dot */
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon2);
+      box-shadow: 0 0 8px rgba(59,130,246,0.8);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1);   opacity: 1;   box-shadow: 0 0 8px rgba(59,130,246,0.8); }
+      50%       { transform: scale(1.4); opacity: 0.7; box-shadow: 0 0 18px rgba(59,130,246,1); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      padding: 100px 2.5rem 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* radial glow behind hero text */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: -5%;
+      width: 55%;
+      height: 70%;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--neon2);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon2);
+      animation: pulseDot 1.5s ease-in-out infinite;
+    }
+
+    .hero-brand {
+      font-family: var(--font-hd);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4em;
+    }
+
+    .hero-brand .ai-part {
+      color: var(--neon2);
+      text-shadow: 0 0 30px rgba(59,130,246,0.8), 0 0 60px rgba(59,130,246,0.4);
+    }
+
+    .hero-brand .dash-part { color: var(--muted); font-weight: 400; }
+
+    .hero-brand .bility-part {
+      color: var(--neon);
+      text-shadow: 0 0 20px rgba(226,232,240,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 1rem;
+      max-width: 520px;
+    }
+
+    /* HEARTBEAT LINE */
+    .heartbeat-wrap {
+      margin: 1.4rem 0 1.8rem;
+      width: 100%;
+      max-width: 480px;
+      height: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .heartbeat-wrap svg {
+      width: 200%;
+      height: 100%;
+      animation: hbScroll 2.8s linear infinite;
+    }
+
+    @keyframes hbScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .hb-line {
+      fill: none;
+      stroke: var(--neon2);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 6px rgba(59,130,246,0.9)) drop-shadow(0 0 14px rgba(59,130,246,0.5));
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--neon);
+      opacity: 0.75;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--neon2) 0%, #1d4ed8 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 24px rgba(59,130,246,0.45), 0 4px 16px rgba(0,0,0,0.4);
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(59,130,246,0.7), 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--neon);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(226,232,240,0.3);
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--neon);
+      background: rgba(226,232,240,0.06);
+      box-shadow: 0 0 20px rgba(226,232,240,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* HERO IMAGE */
+    .hero-image {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img-frame {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(59,130,246,0.25);
+      box-shadow:
+        0 0 0 1px rgba(226,232,240,0.08),
+        0 0 60px rgba(59,130,246,0.2),
+        0 30px 80px rgba(0,0,0,0.6);
+    }
+
+    .hero-img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+    }
+
+    /* top-right corner accent */
+    .hero-img-frame::before {
+      content: '';
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 40px; height: 40px;
+      border-top: 2px solid rgba(59,130,246,0.6);
+      border-right: 2px solid rgba(59,130,246,0.6);
+      border-radius: 0 6px 0 0;
+      z-index: 3;
+    }
+
+    /* bottom-left corner accent */
+    .hero-img-frame::after {
+      content: '';
+      position: absolute;
+      bottom: 12px; left: 12px;
+      width: 40px; height: 40px;
+      border-bottom: 2px solid rgba(226,232,240,0.4);
+      border-left: 2px solid rgba(226,232,240,0.4);
+      border-radius: 0 0 0 6px;
+      z-index: 3;
+    }
+
+    /* image glow overlay */
+    .img-glow {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(5,8,16,0.7) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .img-badge {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(5,8,16,0.85);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 100px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--neon2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ═══════════════════════════════════════════════
+       STATS BAR
+    ═══════════════════════════════════════════════ */
+    .stats-bar {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.8rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.05) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-hd);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 900;
+      color: var(--neon);
+      text-shadow: 0 0 16px rgba(226,232,240,0.35);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTIONS SHARED
+    ═══════════════════════════════════════════════ */
+    .section {
+      padding: 6rem 2.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon2);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: var(--neon2);
+      box-shadow: 0 0 8px rgba(59,130,246,0.7);
+    }
+
+    /* ═══════════════════════════════════════════════
+       SHOP SECTION
+    ═══════════════════════════════════════════════ */
+    .shop-section {
+      padding: 5rem 2.5rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(13,19,33,0.6) 50%, transparent 100%);
+    }
+
+    .shop-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .shop-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .shop-title {
+      font-family: var(--font-hd);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      color: var(--neon);
+      text-shadow: 0 0 24px rgba(226,232,240,0.2);
+      margin-bottom: 0.75rem;
+    }
+
+    .shop-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .shop-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .shop-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 16px;
+    }
+
+    .shop-card.ebay::before    { background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.15) 0%, transparent 70%); }
+    .shop-card.shopify::before { background: radial-gradient(ellipse at 50% 0%, rgba(226,232,240,0.1) 0%, transparent 70%); }
+    .shop-card.tiktok::before  { background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 70%); }
+    .shop-card.ai::before      { background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.2) 0%, transparent 70%); }
+
+    .shop-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(226,232,240,0.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.15);
+    }
+
+    .shop-card:hover::before { opacity: 1; }
+
+    .shop-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shop-card.ebay    .shop-icon { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+    .shop-card.shopify .shop-icon { background: rgba(226,232,240,0.08); border: 1px solid rgba(226,232,240,0.2); }
+    .shop-card.tiktok  .shop-icon { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25); }
+    .shop-card.ai      .shop-icon { background: rgba(59,130,246,0.2);  border: 1px solid rgba(59,130,246,0.4); }
+
+    .shop-card-name {
+      font-family: var(--font-hd);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--neon);
+      letter-spacing: 0.06em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shop-card-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shop-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge-live     { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.35); color: var(--neon2); }
+    .badge-coming   { background: rgba(226,232,240,0.07); border: 1px solid rgba(226,232,240,0.2); color: var(--muted); }
+    .badge-ai       { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.5); color: #93c5fd; }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulseDot 1.8s ease-in-out infinite;
+    }
+
+    .shop-rating {
+      font-size: 0.8rem;
+      color: var(--neon);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FEATURE SECTIONS
+    ═══════════════════════════════════════════════ */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .feature-grid.reversed { direction: rtl; }
+    .feature-grid.reversed > * { direction: ltr; }
+
+    .feature-img-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .feature-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      transition: transform 0.5s ease;
+    }
+
+    .feature-img-wrap:hover img { transform: scale(1.03); }
+
+    .feature-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(226,232,240,0.12);
+      border-radius: 20px;
+      pointer-events: none;
+      box-shadow: 0 0 40px rgba(59,130,246,0.12), 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .feature-content {}
+
+    .feature-headline {
+      font-family: var(--font-hd);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      color: var(--neon);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 30px rgba(226,232,240,0.15);
+    }
+
+    .feature-body {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.8rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .feature-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.2);
+      border: 1px solid rgba(59,130,246,0.5);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='3'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 10px;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: 2px;
+    }
+
+    /* section divider */
+    .divider {
+      height: 1px;
+      max-width: 1280px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent 0%, rgba(226,232,240,0.1) 30%, rgba(59,130,246,0.2) 50%, rgba(226,232,240,0.1) 70%, transparent 100%);
+    }
+
+    /* ═══════════════════════════════════════════════
+       NEWSLETTER SECTION
+    ═══════════════════════════════════════════════ */
+    .newsletter-section {
+      padding: 5rem 2.5rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(13,19,33,0.8) 50%, transparent 100%);
+    }
+
+    .newsletter-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 3rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.08);
+    }
+
+    .nl-sidebar {
+      background: linear-gradient(160deg, rgba(59,130,246,0.15) 0%, rgba(13,19,33,0.9) 100%);
+      border-right: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nl-issue-tag {
+      display: inline-block;
+      background: rgba(59,130,246,0.2);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 6px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--neon2);
+    }
+
+    .nl-mag-title {
+      font-family: var(--font-hd);
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--neon);
+      line-height: 1.3;
+      letter-spacing: 0.04em;
+    }
+
+    .nl-mag-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .nl-meta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .nl-meta span {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nl-meta strong {
+      color: var(--neon);
+    }
+
+    .nl-content {
+      padding: 2.5rem 2.5rem 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .nl-content h3 {
+      font-family: var(--font-hd);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 900;
+      color: var(--neon);
+      line-height: 1.2;
+    }
+
+    .nl-content p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    .nl-topics {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nl-topics li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    .nl-topics li span.nl-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon2);
+      flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(59,130,246,0.7);
+    }
+
+    .nl-form {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .nl-input {
+      flex: 1;
+      min-width: 200px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(226,232,240,0.15);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .nl-input::placeholder { color: var(--muted); }
+
+    .nl-input:focus {
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    .nl-btn {
+      background: linear-gradient(135deg, var(--neon2), #1d4ed8);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      box-shadow: 0 0 20px rgba(59,130,246,0.4);
+      transition: all 0.25s ease;
+      font-family: var(--font-ui);
+    }
+
+    .nl-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 36px rgba(59,130,246,0.65);
+    }
+
+    .nl-disclaimer {
+      font-size: 0.72rem;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      background: rgba(5,8,16,0.97);
+      border-top: 1px solid var(--border);
+      padding: 4rem 2.5rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--neon2) 50%, transparent 100%);
+      opacity: 0.4;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: end;
+    }
+
+    .footer-left {}
+
+    .footer-logo {
+      font-family: var(--font-hd);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--neon);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.1em;
+    }
+
+    .footer-logo .ai-part { color: var(--neon2); text-shadow: 0 0 16px rgba(59,130,246,0.7); }
+    .footer-logo .dash-part { color: var(--muted); font-weight: 300; }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--neon); }
+
+    .footer-bottom-text {
+      font-size: 0.75rem;
+      color: var(--muted);
+      opacity: 0.5;
+      line-height: 1.7;
+    }
+
+    /* ─── MAN SECTION (RIGHT) ─── */
+    .footer-man-wrap {
+      position: relative;
+      width: 260px;
+      height: 320px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* data stream fall */
+    .stream-col {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .stream-col::before {
+      content: attr(data-chars);
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      font-family: monospace;
+      font-size: 10px;
+      color: rgba(59,130,246,0.5);
+      writing-mode: vertical-rl;
+      animation: streamFall linear infinite;
+    }
+
+    @keyframes streamFall {
+      from { top: -100%; }
+      to   { top: 120%; }
+    }
+
+    /* AI ring animations */
+    .ai-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ringPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .ai-ring-1 {
+      width: 180px; height: 180px;
+      border-color: rgba(226,232,240,0.35);
+      animation-delay: 0s;
+      box-shadow: 0 0 10px rgba(226,232,240,0.1), inset 0 0 10px rgba(226,232,240,0.05);
+    }
+
+    .ai-ring-2 {
+      width: 220px; height: 220px;
+      border-color: rgba(59,130,246,0.3);
+      animation-delay: 0.6s;
+      box-shadow: 0 0 14px rgba(59,130,246,0.12), inset 0 0 14px rgba(59,130,246,0.06);
+    }
+
+    .ai-ring-3 {
+      width: 262px; height: 262px;
+      border-color: rgba(226,232,240,0.15);
+      animation-delay: 1.2s;
+      box-shadow: 0 0 20px rgba(226,232,240,0.06);
+    }
+
+    .ai-ring-4 {
+      width: 304px; height: 304px;
+      border-color: rgba(59,130,246,0.12);
+      animation-delay: 1.8s;
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.04); }
+    }
+
+    /* data node floats */
+    .data-node {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon2);
+      box-shadow: 0 0 10px rgba(59,130,246,0.9);
+      animation: nodeFloat 4s ease-in-out infinite;
+    }
+
+    .data-node:nth-child(1) { top: 20%; left: 12%;  animation-delay: 0s;    }
+    .data-node:nth-child(2) { top: 35%; right: 10%; animation-delay: 1s;    }
+    .data-node:nth-child(3) { top: 60%; left: 8%;   animation-delay: 2s;    }
+    .data-node:nth-child(4) { top: 75%; right: 12%; animation-delay: 0.5s;  }
+    .data-node:nth-child(5) { top: 15%; right: 25%; animation-delay: 1.5s;  }
+
+    @keyframes nodeFloat {
+      0%, 100% { transform: translate(0, 0)    scale(1);    opacity: 0.8; }
+      33%       { transform: translate(4px, -8px) scale(1.3); opacity: 1;   }
+      66%       { transform: translate(-4px, 6px) scale(0.9); opacity: 0.6; }
+    }
+
+    .footer-man-img {
+      position: relative;
+      z-index: 5;
+      width: 200px;
+      height: auto;
+      display: block;
+      filter:
+        drop-shadow(0 0 16px rgba(226,232,240,0.3))
+        drop-shadow(0 0 40px rgba(59,130,246,0.4))
+        drop-shadow(0 0 80px rgba(59,130,246,0.2));
+      animation: manFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes manFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       RADIAL PAGE GLOW (decorative)
+    ═══════════════════════════════════════════════ */
+    .page-glow-1 {
+      position: fixed;
+      top: 10vh;
+      right: -10vw;
+      width: 50vw;
+      height: 50vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-glow-2 {
+      position: fixed;
+      bottom: 10vh;
+      left: -15vw;
+      width: 55vw;
+      height: 55vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(226,232,240,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — 768px
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .brand-badge { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 90px 1.25rem 3rem;
+        gap: 2rem;
+      }
+      .hero-content { order: 1; }
+      .hero-image   { order: 2; }
+      .hero::before { display: none; }
+
+      .hero-brand { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+      .hero-ctas  { justify-content: flex-start; }
+
+      .stats-bar { padding: 1.25rem 1rem; gap: 1rem; }
+      .stat-divider { display: none; }
+
+      .section { padding: 3.5rem 1.25rem; }
+
+      .shop-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      .feature-grid, .feature-grid.reversed {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 2rem;
+      }
+
+      .newsletter-inner { grid-template-columns: 1fr; }
+      .nl-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem; }
+      .nl-content { padding: 2rem; }
+
+      .footer-inner { grid-template-columns: 1fr; align-items: center; }
+      .footer-man-wrap { width: 200px; height: 250px; margin: 0 auto; }
+      .ai-ring-3, .ai-ring-4 { display: none; }
+      .footer-man-img { width: 160px; }
+    }
+
+    @media (max-width: 480px) {
+      .shop-grid { grid-template-columns: 1fr; }
+      .hero-ctas  { flex-direction: column; }
+      .btn-primary, .btn-secondary { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page ambient glows -->
+  <div class="page-glow-1" aria-hidden="true"></div>
+  <div class="page-glow-2" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════
+       NAV
+  ══════════════════════════════ -->
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="AI-Bility Home">
+      <span class="ai-accent">AI</span><span class="dash-accent">-</span>Bility
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#features">Products</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="nav-cta">Shop eBay ↗</a></li>
+    </ul>
+
+    <div class="brand-badge">
+      <div class="pulse-dot" aria-hidden="true"></div>
+      AI Powered &bull; Disability-Focused
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════
+       HERO
+  ══════════════════════════════ -->
+  <section class="hero" id="home" aria-labelledby="hero-headline">
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" aria-label="Technology category">
+        <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+        Adaptive &bull; AI Powered &bull; Disability-Focused
+      </div>
+
+      <h1 class="hero-brand" id="hero-headline" aria-label="AI-Bility">
+        <span class="ai-part">AI</span><span class="dash-part">-</span><span class="bility-part">Bility</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        AI Powered Ability for Everyone Who&nbsp;Needs&nbsp;It
+      </p>
+
+      <!-- HEARTBEAT LINE -->
+      <div class="heartbeat-wrap" aria-hidden="true" role="presentation">
+        <svg viewBox="0 0 960 48" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Duplicated path for seamless scroll -->
+          <path class="hb-line" d="
+            M0,24 L60,24 L80,24 L90,4 L100,44 L110,10 L120,38 L130,24
+            L160,24 L180,24 L190,14 L200,34 L205,20 L210,28 L215,24
+            L260,24 L280,24 L290,8 L300,40 L308,16 L316,32 L320,24
+            L380,24 L400,24 L410,12 L420,36 L425,22 L430,26 L435,24
+            L480,24
+            M480,24 L540,24 L560,24 L570,4 L580,44 L590,10 L600,38 L610,24
+            L640,24 L660,24 L670,14 L680,34 L685,20 L690,28 L695,24
+            L740,24 L760,24 L770,8 L780,40 L788,16 L796,32 L800,24
+            L860,24 L880,24 L890,12 L900,36 L905,22 L910,26 L915,24
+            L960,24
+          "/>
+        </svg>
+      </div>
+
+      <p class="hero-tagline" aria-label="Tagline">Technology That Changes Everything</p>
+
+      <div class="hero-ctas">
+        <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="btn-primary" aria-label="Shop on eBay">
+          Shop eBay ↗
+        </a>
+        <a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener" class="btn-secondary" aria-label="Visit Shopify store">
+          Shopify Store ↗
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image" aria-hidden="true">
+      <div class="hero-img-frame">
+        <img
+          src="New Landing Page/Robot.png"
+          alt="Humanoid AI medical robot gently holding a patient's hand — the AI and care story"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="img-glow" aria-hidden="true"></div>
+        <div class="img-badge" aria-label="AI-Powered Care">
+          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--neon2);box-shadow:0 0 8px rgba(59,130,246,0.9);animation:pulseDot 1.5s ease-in-out infinite;"></span>
+          AI-Powered Care Technology
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════
+       STATS BAR
+  ══════════════════════════════ -->
+  <div class="stats-bar" role="region" aria-label="Key statistics">
+    <div class="stat-item">
+      <span class="stat-num">1 in 4</span>
+      <span class="stat-label">Americans</span>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat-item">
+      <span class="stat-num">61M</span>
+      <span class="stat-label">US Adults with Disabilities</span>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat-item">
+      <span class="stat-num">868+</span>
+      <span class="stat-label">eBay Reviews</span>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Disability-Focused</span>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="stat-item">
+      <span class="stat-num" style="color:var(--neon2);text-shadow:0 0 16px rgba(59,130,246,0.6);">AI</span>
+      <span class="stat-label">Powered Discovery</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SHOP SECTION
+  ══════════════════════════════ -->
+  <div class="shop-section" id="shop" role="region" aria-labelledby="shop-title">
+    <div class="shop-inner">
+      <div class="shop-header">
+        <div class="section-label" aria-hidden="true">Where to Shop</div>
+        <h2 class="shop-title" id="shop-title">Find Us Everywhere You Shop</h2>
+        <p class="shop-subtitle">
+          Multiple storefronts. One trusted source for adaptive &amp; disability products.
+        </p>
+      </div>
+
+      <div class="shop-grid">
+
+        <!-- eBay -->
+        <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener"
+           class="shop-card ebay" aria-label="Shop AI-Bility on eBay — 868+ reviews, 100% positive">
+          <div class="shop-icon" aria-hidden="true">🛒</div>
+          <div class="shop-card-name">eBay Store</div>
+          <div class="shop-card-desc">Trusted marketplace with 868+ verified reviews and 100% positive feedback.</div>
+          <div class="shop-rating" aria-label="868 plus reviews, 100 percent positive">⭐ 868+ Reviews · 100% Positive</div>
+          <div class="shop-badge badge-live" aria-label="Live store">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Live Now
+          </div>
+        </a>
+
+        <!-- Shopify -->
+        <a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener"
+           class="shop-card shopify" aria-label="Shop AI-Bility on Shopify — direct store">
+          <div class="shop-icon" aria-hidden="true">🏪</div>
+          <div class="shop-card-name">Shopify Store</div>
+          <div class="shop-card-desc">Shop direct from our official storefront — exclusive selections and bundles.</div>
+          <div class="shop-rating" aria-label="Official direct store">🔒 Official Direct Store</div>
+          <div class="shop-badge badge-live" aria-label="Live store">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Live Now
+          </div>
+        </a>
+
+        <!-- TikTok Shop -->
+        <div class="shop-card tiktok" aria-label="TikTok Shop — Coming Soon">
+          <div class="shop-icon" aria-hidden="true">📱</div>
+          <div class="shop-card-name">TikTok Shop</div>
+          <div class="shop-card-desc">Watch live demos, see products in action, and shop without leaving the app.</div>
+          <div class="shop-rating" aria-label="Launching soon">🚀 Launching Soon</div>
+          <div class="shop-badge badge-coming" aria-label="Coming soon">
+            Coming Soon
+          </div>
+        </div>
+
+        <!-- AI Finder -->
+        <div class="shop-card ai" aria-label="AI Product Finder — powered by artificial intelligence">
+          <div class="shop-icon" aria-hidden="true">🤖</div>
+          <div class="shop-card-name">AI Finder</div>
+          <div class="shop-card-desc">Describe what you need — our AI surfaces the exact adaptive product for you.</div>
+          <div class="shop-rating" aria-label="AI-powered search">✨ Smart Matching</div>
+          <div class="shop-badge badge-ai" aria-label="AI powered">
+            <span class="badge-dot" aria-hidden="true"></span>
+            AI Powered
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       FEATURE 1 — Iron Arm (image left)
+       "Independence, Redefined"
+  ══════════════════════════════ -->
+  <section class="section" id="features" aria-labelledby="feature1-headline">
+    <div class="feature-grid">
+
+      <div class="feature-img-wrap">
+        <img
+          src="New Landing Page/Iron arm.png"
+          alt="Young boy receiving an Iron Man-inspired prosthetic arm fitted by medical professionals"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="feature-content">
+        <div class="section-label" aria-hidden="true">Adaptive Technology</div>
+        <h2 class="feature-headline" id="feature1-headline">Independence,<br>Redefined</h2>
+        <p class="feature-body">
+          Modern adaptive technology isn't just functional — it's transformative. From prosthetics to
+          precision-engineered daily living aids, today's tools restore independence, rebuild confidence,
+          and give people back what matters most: the ability to live on their own terms.
+          AI-Bility hand-curates the products that make the biggest real-world difference.
+        </p>
+        <ul class="feature-list" aria-label="Product categories">
+          <li>Prosthetic aids &amp; limb support accessories</li>
+          <li>Daily living &amp; fine motor assistance tools</li>
+          <li>Grip aids, jar openers &amp; one-handed solutions</li>
+          <li>Adaptive dressing, bathing &amp; personal care</li>
+          <li>Vision &amp; hearing assist devices</li>
+          <li>Cognitive &amp; memory support technology</li>
+          <li>Home modification &amp; safety hardware</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════
+       FEATURE 2 — Wheelchair (image right / reversed)
+       "Technology That Changes Everything"
+  ══════════════════════════════ -->
+  <section class="section" aria-labelledby="feature2-headline">
+    <div class="feature-grid reversed">
+
+      <div class="feature-img-wrap">
+        <img
+          src="New Landing Page/wheelchair.png"
+          alt="Futuristic cyberpunk electric power wheelchair with glowing cyan LED accent wheels"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="feature-content">
+        <div class="section-label" aria-hidden="true">Mobility Solutions</div>
+        <h2 class="feature-headline" id="feature2-headline">Technology That<br>Changes Everything</h2>
+        <p class="feature-body">
+          AI is rewriting the rules of mobility. Smart power wheelchairs now navigate autonomously.
+          Exoskeletons help people walk again. Wearables predict falls before they happen.
+          AI-Bility tracks the frontier so you don't have to — surfacing the mobility solutions
+          that are actually available, affordable, and proven to work.
+        </p>
+        <ul class="feature-list" aria-label="Mobility product categories">
+          <li>Power wheelchairs &amp; smart mobility devices</li>
+          <li>Transfer aids, lifts &amp; pivot discs</li>
+          <li>Rollators, walkers &amp; smart canes</li>
+          <li>Stair lifts &amp; vertical platform lifts</li>
+          <li>Vehicle hand controls &amp; adaptive driving</li>
+          <li>GPS tracking &amp; fall-prevention wearables</li>
+          <li>AI navigation aids for low vision</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════
+       FEATURE 3 — Classroom (image left)
+       "Learning Has No Limits"
+  ══════════════════════════════ -->
+  <section class="section" aria-labelledby="feature3-headline">
+    <div class="feature-grid">
+
+      <div class="feature-img-wrap">
+        <img
+          src="New Landing Page/classroom.png"
+          alt="Adaptive educational classroom setting with inclusive learning tools"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="feature-content">
+        <div class="section-label" aria-hidden="true">Adaptive Education</div>
+        <h2 class="feature-headline" id="feature3-headline">Learning Has<br>No Limits</h2>
+        <p class="feature-body">
+          Every learner deserves the right tools. Whether it's a child with dyslexia discovering
+          text-to-speech, a student with ADHD using focus aids, or an adult re-entering education
+          after acquiring a disability — adaptive education technology unlocks potential
+          that traditional classrooms often miss.
+        </p>
+        <ul class="feature-list" aria-label="Educational adaptive product categories">
+          <li>Text-to-speech &amp; screen reading tools</li>
+          <li>Alternative keyboards &amp; writing aids</li>
+          <li>Sensory processing &amp; focus support tools</li>
+          <li>Communication boards &amp; AAC devices</li>
+          <li>Math &amp; reading manipulatives</li>
+          <li>AI tutoring &amp; personalized learning apps</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       NEWSLETTER
+  ══════════════════════════════ -->
+  <div class="newsletter-section" id="newsletter" role="region" aria-labelledby="nl-headline">
+    <div class="newsletter-inner">
+
+      <!-- Sidebar -->
+      <aside class="nl-sidebar" aria-label="Newsletter issue details">
+        <span class="nl-issue-tag" aria-label="Issue number 1">Issue #1</span>
+        <div class="nl-mag-title">AI Tools That Actually Help People with Disabilities</div>
+        <div class="nl-mag-subtitle">
+          Real products. Honest reviews. Curated by someone who
+          understands what independence truly means.
+        </div>
+        <div class="nl-meta">
+          <span><strong>May 2026</strong></span>
+          <span>Volume 1 &bull; Issue #1</span>
+          <span>Disability &bull; AI &bull; Independence</span>
+        </div>
+      </aside>
+
+      <!-- Content -->
+      <div class="nl-content">
+        <div class="section-label" aria-hidden="true">Free Newsletter</div>
+        <h3 id="nl-headline">The AI-Bility Insider</h3>
+        <p>
+          One focused issue per month. No fluff, no filler — just the AI tools, adaptive
+          products, and disability tech that actually change lives. Trusted by caregivers,
+          therapists, and people with disabilities across the&nbsp;US.
+        </p>
+        <ul class="nl-topics" aria-label="Newsletter topics in May 2026 issue">
+          <li><span class="nl-dot" aria-hidden="true"></span> Top 5 AI tools for people with mobility limitations</li>
+          <li><span class="nl-dot" aria-hidden="true"></span> Voice-to-text apps reviewed: what really works in 2026</li>
+          <li><span class="nl-dot" aria-hidden="true"></span> Smart home setups for independent living</li>
+          <li><span class="nl-dot" aria-hidden="true"></span> Product spotlight: adaptive kitchen tools under $30</li>
+          <li><span class="nl-dot" aria-hidden="true"></span> Caregiver corner: tools that reduce burnout</li>
+        </ul>
+        <div class="nl-form" role="form" aria-label="Newsletter signup form">
+          <input
+            type="email"
+            class="nl-input"
+            placeholder="Enter your email address"
+            aria-label="Email address for newsletter"
+            autocomplete="email"
+          />
+          <button type="button" class="nl-btn" aria-label="Subscribe to the AI-Bility newsletter">
+            Subscribe Free →
+          </button>
+        </div>
+        <p class="nl-disclaimer" aria-live="polite">
+          No spam, ever. Unsubscribe with one click. We respect your inbox as much as your independence.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       FOOTER
+  ══════════════════════════════ -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+
+      <div class="footer-left">
+        <div class="footer-logo" aria-label="AI-Bility">
+          <span class="ai-part">AI</span><span class="dash-part">-</span>Bility
+        </div>
+        <p class="footer-tagline">AI Powered Ability for Everyone Who&nbsp;Needs&nbsp;It</p>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener">eBay Store</a>
+          <a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener">Shopify</a>
+          <a href="#newsletter">Newsletter</a>
+          <a href="#shop">Shop</a>
+          <a href="#features">Products</a>
+        </nav>
+        <p class="footer-bottom-text">
+          &copy; 2026 AI-Bility &mdash; A brand of Overhill Valley Digital Ventures (OVDV). All rights reserved.<br>
+          THE destination for hard-to-find adaptive &amp; disability products for people with disabilities, seniors, and caregivers.<br>
+          <br>
+          <em>Disclaimer: AI-Bility is a retail curation service. We are not medical professionals. Product selections
+          do not constitute medical advice. Always consult your healthcare provider regarding adaptive equipment.</em>
+        </p>
+      </div>
+
+      <!-- MAN + RINGS -->
+      <div class="footer-man-wrap" aria-label="AI-Bility mascot with AI glow rings" role="img">
+
+        <!-- Data stream columns -->
+        <div class="stream-col" style="left:5%;animation-duration:3.2s;"
+             data-chars="10110010110101" aria-hidden="true"></div>
+        <div class="stream-col" style="left:18%;animation-duration:4.1s;"
+             data-chars="01001101001011" aria-hidden="true"></div>
+        <div class="stream-col" style="right:12%;animation-duration:3.7s;"
+             data-chars="11010010110010" aria-hidden="true"></div>
+        <div class="stream-col" style="right:4%;animation-duration:4.8s;"
+             data-chars="00101101100101" aria-hidden="true"></div>
+
+        <!-- Data nodes -->
+        <div class="data-node" aria-hidden="true"></div>
+        <div class="data-node" aria-hidden="true"></div>
+        <div class="data-node" aria-hidden="true"></div>
+        <div class="data-node" aria-hidden="true"></div>
+        <div class="data-node" aria-hidden="true"></div>
+
+        <!-- AI Rings -->
+        <div class="ai-ring ai-ring-1" aria-hidden="true"></div>
+        <div class="ai-ring ai-ring-2" aria-hidden="true"></div>
+        <div class="ai-ring ai-ring-3" aria-hidden="true"></div>
+        <div class="ai-ring ai-ring-4" aria-hidden="true"></div>
+
+        <!-- The Man -->
+        <img
+          src="New Landing Page/Man_nobg.png"
+          alt="George, AI-Bility founder — friendly man in his 60s with glasses and goatee"
+          class="footer-man-img"
+          loading="lazy"
+        />
+
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

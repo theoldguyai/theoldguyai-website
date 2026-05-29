@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Bility — AI Powered Ability for Everyone Who Needs It</title>
+  <meta name="description" content="AI-Bility by OVDV — THE destination for hard-to-find adaptive & disability products. AI Powered Ability for Everyone Who Needs It." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========== CSS ROOT VARIABLES ========== */
+    :root {
+      --hero-accent:    #a855f7;
+      --shop-accent:    #0891b2;
+      --mission-accent: #10b981;
+      --edu-accent:     #f59e0b;
+      --nl-accent:      #3b82f6;
+      --neon:           #a855f7;
+      --dark:           #030711;
+      --card:           #0f1629;
+      --text:           #f0f4ff;
+      --muted:          #94a3b8;
+
+      --hero-bg:    #05020d;
+      --stats-bg:   #05080f;
+      --shop-bg:    #020d10;
+      --mission-bg: #020f09;
+      --feature2-bg:#0d0700;
+      --edu-bg:     #020710;
+      --nl-bg:      #04080f;
+      --footer-bg:  #030711;
+
+      --font-main: 'Space Grotesk', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius: 14px;
+      --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ========== CIRCUIT GRID BACKGROUND ========== */
+    .circuit-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(168,85,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,85,247,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      animation: circuitShift 60s linear infinite;
+    }
+    @keyframes circuitShift {
+      0%   { background-position: 0 0, 0 0; }
+      100% { background-position: 48px 48px, 48px 48px; }
+    }
+
+    /* ========== SCROLLING COLOR GRADIENT OVERLAY ========== */
+    .gradient-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(168,85,247,0.06) 0%,
+        rgba(8,145,178,0.05) 25%,
+        rgba(16,185,129,0.05) 50%,
+        rgba(245,158,11,0.04) 70%,
+        rgba(59,130,246,0.05) 85%,
+        rgba(3,7,17,0) 100%
+      );
+    }
+
+    /* ========== SECTION BASE ========== */
+    section { position: relative; z-index: 1; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ========== NAVIGATION ========== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5,2,13,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(168,85,247,0.2);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-main);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo .ai-prefix {
+      color: var(--hero-accent);
+      text-shadow: 0 0 18px rgba(168,85,247,0.7);
+    }
+    .nav-logo .brand-gradient {
+      background: linear-gradient(90deg, #a855f7, #0891b2, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #c4b5fd;
+      letter-spacing: 0.02em;
+    }
+    .nav-badge .pulse-dot {
+      width: 8px; height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulseDot 1.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulseDot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); opacity:1; }
+      50%      { box-shadow: 0 0 0 6px rgba(16,185,129,0);  opacity:0.8; }
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--hero-accent), #7c3aed);
+      color: #fff !important;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      transition: opacity var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ========== HERO SECTION ========== */
+    .hero-section {
+      background: var(--hero-bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Hero subtle glow blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .hero-blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(168,85,247,0.18), transparent 70%);
+      top: -150px; left: -150px;
+    }
+    .hero-blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(8,145,178,0.12), transparent 70%);
+      bottom: -100px; right: 20%;
+    }
+    .hero-blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%);
+      top: 50%; right: 5%;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 24px; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.35);
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d8b4fe;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .eyebrow-dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; animation: pulseDot 1.8s ease-in-out infinite; }
+
+    .hero-headline {
+      font-family: var(--font-main);
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .hero-headline .headline-gradient {
+      background: linear-gradient(135deg, #e879f9 0%, #a855f7 30%, #7c3aed 55%, #3b82f6 80%, #0891b2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-headline .headline-white { color: var(--text); }
+
+    /* Animated gradient underline */
+    .headline-underline {
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #a855f7, #0891b2, #10b981, #a855f7);
+      background-size: 300% 100%;
+      animation: gradientShift 3s linear infinite;
+      margin-top: 8px;
+      width: 80%;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      font-weight: 600;
+      color: #c4b5fd;
+      line-height: 1.4;
+    }
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 24px rgba(168,85,247,0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 36px rgba(168,85,247,0.55);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #c4b5fd;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1.5px solid rgba(168,85,247,0.5);
+      transition: border-color var(--transition), color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover {
+      border-color: var(--hero-accent);
+      color: #fff;
+      background: rgba(168,85,247,0.1);
+    }
+
+    /* Feature pills */
+    .feature-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #c4b5fd;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .pill:hover { background: rgba(168,85,247,0.2); border-color: rgba(168,85,247,0.5); }
+
+    /* Hero image */
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      border-radius: 20px;
+      filter: drop-shadow(0 0 50px rgba(168,85,247,0.45)) drop-shadow(0 0 100px rgba(168,85,247,0.2));
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+    @keyframes heroFloat {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    .hero-img-glow {
+      position: absolute;
+      inset: -20px;
+      border-radius: 24px;
+      background: radial-gradient(ellipse at center, rgba(168,85,247,0.15), transparent 70%);
+      z-index: -1;
+    }
+    .hero-img-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      animation: ringPulse 4s ease-in-out infinite;
+    }
+    .ring-hero-1 { width: 110%; height: 110%; top: -5%; left: -5%; border-color: rgba(168,85,247,0.2); animation-delay: 0s; }
+    .ring-hero-2 { width: 125%; height: 125%; top: -12.5%; left: -12.5%; border-color: rgba(168,85,247,0.12); animation-delay: 0.8s; }
+    @keyframes ringPulse {
+      0%,100% { opacity: 0.5; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.02); }
+    }
+
+    /* ========== STATS BAR ========== */
+    .stats-bar {
+      background: var(--stats-bg);
+      border-top: 1px solid rgba(168,85,247,0.15);
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+      padding: 28px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .stats-inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .stat-item {
+      text-align: center;
+      min-width: 120px;
+    }
+    .stat-num {
+      font-family: var(--font-main);
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(168,85,247,0.3), transparent);
+    }
+
+    /* ========== SECTION HEADERS ========== */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-main);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ========== SHOP SECTION ========== */
+    .shop-section {
+      background: var(--shop-bg);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .shop-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(8,145,178,0.5), transparent);
+    }
+    .shop-header { text-align: center; margin-bottom: 56px; }
+    .shop-header .section-label { color: var(--shop-accent); }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .shop-card {
+      background: rgba(8,145,178,0.05);
+      border: 1px solid rgba(8,145,178,0.2);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: pointer;
+    }
+    .shop-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8,145,178,0.08), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .shop-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(8,145,178,0.5);
+      box-shadow: 0 12px 50px rgba(8,145,178,0.25);
+    }
+    .shop-card:hover::before { opacity: 1; }
+    .shop-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .shop-card-title {
+      font-family: var(--font-main);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .shop-card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .shop-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(8,145,178,0.15);
+      border: 1px solid rgba(8,145,178,0.3);
+      color: #67e8f9;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .shop-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--shop-accent);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 16px;
+      transition: gap var(--transition), color var(--transition);
+    }
+    .shop-card:hover .shop-card-link { gap: 10px; color: #67e8f9; }
+    .shop-card-accent-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--shop-accent), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .shop-card:hover .shop-card-accent-bar { opacity: 1; }
+
+    /* ========== FEATURE SECTIONS ========== */
+    .feature-section {
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .feature-grid.reversed { direction: rtl; }
+    .feature-grid.reversed > * { direction: ltr; }
+
+    .feature-img-wrap {
+      position: relative;
+    }
+    .feature-img-wrap img {
+      width: 100%;
+      border-radius: 18px;
+    }
+    .feature-content { display: flex; flex-direction: column; gap: 22px; }
+    .feature-bullets { display: flex; flex-direction: column; gap: 12px; }
+    .feature-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .bullet-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      width: fit-content;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-cta:hover { transform: translateY(-2px); }
+
+    /* --- Feature 1: Mission / Emerald --- */
+    .mission-section { background: var(--mission-bg); }
+    .mission-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16,185,129,0.4), transparent);
+    }
+    .mission-section .section-label { color: var(--mission-accent); }
+    .mission-section .section-title span { color: var(--mission-accent); }
+    .mission-section .bullet-icon {
+      background: rgba(16,185,129,0.15);
+      color: var(--mission-accent);
+    }
+    .mission-section .feature-cta {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(16,185,129,0.35);
+    }
+    .mission-section .feature-cta:hover { box-shadow: 0 8px 32px rgba(16,185,129,0.5); }
+    .mission-img-wrap img {
+      filter: drop-shadow(0 0 40px rgba(16,185,129,0.3));
+    }
+    .mission-img-glow {
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(16,185,129,0.1), transparent 70%);
+      z-index: -1; border-radius: 50%;
+    }
+
+    /* --- Feature 2: Mobility / Amber --- */
+    .mobility-section { background: var(--feature2-bg); }
+    .mobility-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.4), transparent);
+    }
+    .mobility-section .section-label { color: var(--edu-accent); }
+    .mobility-section .section-title span { color: var(--edu-accent); }
+    .mobility-section .bullet-icon {
+      background: rgba(245,158,11,0.15);
+      color: var(--edu-accent);
+    }
+    .mobility-section .feature-cta {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.35);
+    }
+    .mobility-section .feature-cta:hover { box-shadow: 0 8px 32px rgba(245,158,11,0.5); }
+    .mobility-img-wrap img {
+      filter: drop-shadow(0 0 40px rgba(245,158,11,0.3));
+    }
+    .mobility-img-glow {
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(245,158,11,0.1), transparent 70%);
+      z-index: -1; border-radius: 50%;
+    }
+
+    /* --- Feature 3: Education / Blue --- */
+    .edu-section { background: var(--edu-bg); }
+    .edu-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent);
+    }
+    .edu-section .section-label { color: var(--nl-accent); }
+    .edu-section .section-title span { color: var(--nl-accent); }
+    .edu-section .bullet-icon {
+      background: rgba(59,130,246,0.15);
+      color: var(--nl-accent);
+    }
+    .edu-section .feature-cta {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+    }
+    .edu-section .feature-cta:hover { box-shadow: 0 8px 32px rgba(59,130,246,0.5); }
+    .edu-img-wrap img {
+      filter: drop-shadow(0 0 40px rgba(59,130,246,0.3));
+    }
+    .edu-img-glow {
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,0.1), transparent 70%);
+      z-index: -1; border-radius: 50%;
+    }
+
+    /* ========== NEWSLETTER SECTION ========== */
+    .newsletter-section {
+      background: var(--nl-bg);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent);
+    }
+    .nl-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .nl-sidebar {
+      background: rgba(59,130,246,0.07);
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .nl-issue-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.35);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #93c5fd;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .nl-sidebar-title {
+      font-family: var(--font-main);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .nl-sidebar-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .nl-topics { display: flex; flex-wrap: wrap; gap: 8px; }
+    .nl-topic {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      color: #93c5fd;
+      font-weight: 500;
+    }
+    .nl-main { display: flex; flex-direction: column; gap: 28px; }
+    .nl-main .section-label { color: var(--nl-accent); }
+    .nl-headline {
+      font-family: var(--font-main);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .nl-headline .hl-accent {
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nl-form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nl-input {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 9px;
+      padding: 13px 18px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .nl-input::placeholder { color: var(--muted); }
+    .nl-input:focus {
+      border-color: var(--nl-accent);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    }
+    .nl-submit {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      font-family: var(--font-body);
+    }
+    .nl-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59,130,246,0.4);
+    }
+    .nl-features {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .nl-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .nl-feature-item span { color: var(--nl-accent); font-size: 1rem; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--footer-bg);
+      border-top: 1px solid rgba(168,85,247,0.2);
+      position: relative;
+      overflow: hidden;
+      padding: 70px 0 0;
+    }
+
+    /* Stream-fall data nodes */
+    .data-nodes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .data-node {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      animation: dataFloat var(--dur, 8s) linear infinite;
+      opacity: 0.5;
+    }
+    @keyframes dataFloat {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.6; transform: translateY(80vh) scale(1); }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+    }
+
+    /* Stream-fall lines */
+    .stream-fall {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .stream-line {
+      position: absolute;
+      top: -100%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(168,85,247,0.3), transparent);
+      animation: streamDown var(--sd, 6s) linear infinite;
+      opacity: 0.4;
+    }
+    @keyframes streamDown {
+      0%   { top: -100%; opacity: 0; }
+      10%  { opacity: 0.5; }
+      90%  { opacity: 0.3; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo {
+      font-family: var(--font-main);
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+    .footer-logo .fl-ai { color: var(--hero-accent); text-shadow: 0 0 16px rgba(168,85,247,0.6); }
+    .footer-logo .fl-gradient {
+      background: linear-gradient(90deg, #a855f7, #0891b2, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+    .footer-tagline .ft-gradient {
+      background: linear-gradient(90deg, #a855f7, #0891b2, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+    .footer-socials { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+    .social-link {
+      width: 38px; height: 38px;
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .social-link:hover {
+      background: rgba(168,85,247,0.2);
+      border-color: rgba(168,85,247,0.5);
+      transform: translateY(-2px);
+    }
+    .footer-col h4 {
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--text); }
+
+    /* Man image with multi-color rings */
+    .footer-man-wrap {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 380px;
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .footer-man-rings {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px; height: 260px;
+    }
+    .ai-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .ai-ring-1 {
+      width: 180px; height: 180px;
+      border-color: rgba(168,85,247,0.5);
+      animation: aiRing1 3s ease-in-out infinite;
+    }
+    .ai-ring-2 {
+      width: 220px; height: 220px;
+      border-color: rgba(8,145,178,0.4);
+      animation: aiRing2 3s ease-in-out infinite 0.6s;
+    }
+    .ai-ring-3 {
+      width: 260px; height: 260px;
+      border-color: rgba(16,185,129,0.3);
+      animation: aiRing3 3s ease-in-out infinite 1.2s;
+    }
+    @keyframes aiRing1 {
+      0%,100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.4); opacity:0.7; transform: translate(-50%,-50%) scale(1); }
+      50%      { box-shadow: 0 0 24px 6px rgba(168,85,247,0.2); opacity:1; transform: translate(-50%,-50%) scale(1.04); }
+    }
+    @keyframes aiRing2 {
+      0%,100% { box-shadow: 0 0 0 0 rgba(8,145,178,0.3); opacity:0.6; transform: translate(-50%,-50%) scale(1); }
+      50%      { box-shadow: 0 0 24px 6px rgba(8,145,178,0.2); opacity:1; transform: translate(-50%,-50%) scale(1.04); }
+    }
+    @keyframes aiRing3 {
+      0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.2); opacity:0.5; transform: translate(-50%,-50%) scale(1); }
+      50%      { box-shadow: 0 0 24px 6px rgba(16,185,129,0.15); opacity:1; transform: translate(-50%,-50%) scale(1.04); }
+    }
+    .footer-man-img {
+      position: relative;
+      z-index: 4;
+      width: 260px;
+      filter: drop-shadow(0 0 30px rgba(168,85,247,0.4));
+    }
+
+    /* Footer bottom */
+    .footer-bottom {
+      margin-top: 60px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(168,85,247,0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      gap: 12px;
+      position: relative;
+      z-index: 5;
+    }
+    .footer-bottom p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .footer-gradient-line {
+      height: 3px;
+      background: linear-gradient(90deg, #a855f7, #0891b2, #10b981, #a855f7);
+      background-size: 300% 100%;
+      animation: gradientShift 4s linear infinite;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-right { order: -1; max-width: 360px; margin: 0 auto; }
+      .hero-img-wrap { max-width: 340px; }
+      .feature-grid,
+      .feature-grid.reversed { grid-template-columns: 1fr; direction: ltr; }
+      .feature-grid.reversed > * { direction: ltr; }
+      .nl-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-man-wrap { width: 220px; }
+      .footer-man-img { width: 180px; }
+      .ai-ring-1 { width: 130px; height: 130px; }
+      .ai-ring-2 { width: 160px; height: 160px; }
+      .ai-ring-3 { width: 190px; height: 190px; }
+      .footer-man-rings { width: 190px; height: 190px; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .stat-divider { display: none; }
+      .stats-inner { gap: 16px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-man-wrap { display: none; }
+      .hero-ctas { flex-direction: column; }
+      .hero-section { padding: 80px 0 60px; }
+    }
+
+    /* ========== UTILITY ========== */
+    .text-purple  { color: var(--hero-accent); }
+    .text-teal    { color: var(--shop-accent); }
+    .text-emerald { color: var(--mission-accent); }
+    .text-amber   { color: var(--edu-accent); }
+    .text-blue    { color: var(--nl-accent); }
+    .mt-auto { margin-top: auto; }
+  </style>
+</head>
+<body>
+
+<!-- Fixed circuit grid & gradient overlay -->
+<div class="circuit-bg"></div>
+<div class="gradient-overlay"></div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="ai-prefix">AI</span>
+      <span class="brand-gradient">-Bility</span>
+    </div>
+    <div class="nav-badge">
+      <span class="pulse-dot"></span>
+      Now Serving the Disability Community
+    </div>
+    <div class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#mission">Mission</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="nav-cta">Shop eBay →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO SECTION ========== -->
+<section class="hero-section">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <!-- LEFT: Copy -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          AI Powered · Disability-First · 868+ Reviews
+        </div>
+
+        <div>
+          <h1 class="hero-headline">
+            <span class="headline-gradient">AI-Bility</span><br/>
+            <span class="headline-white">AI Powered Ability<br/>for Everyone<br/>Who Needs It</span>
+          </h1>
+          <div class="headline-underline"></div>
+        </div>
+
+        <p class="hero-subtitle">
+          Technology That Changes Everything — curated by AI, built for independence.
+        </p>
+        <p class="hero-tagline">
+          THE destination for hard-to-find adaptive &amp; disability products.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="btn-primary">
+            🛒 Shop on eBay
+          </a>
+          <a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener" class="btn-outline">
+            ✦ Shopify Store
+          </a>
+        </div>
+
+        <div class="feature-pills">
+          <div class="pill">🤖 AI-Curated</div>
+          <div class="pill">♿ Disability-First</div>
+          <div class="pill">⭐ 868+ Reviews</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Robot Hero Image -->
+      <div class="hero-right">
+        <div class="hero-img-wrap">
+          <div class="hero-img-glow"></div>
+          <div class="hero-img-ring ring-hero-1"></div>
+          <div class="hero-img-ring ring-hero-2"></div>
+          <img
+            src="New Landing Page/Robot.png"
+            alt="AI medical robot holding patient's hand — the future of compassionate care"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS BAR ========== -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">868+</div>
+        <div class="stat-label">eBay Reviews</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Positive Feedback</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">5,000+</div>
+        <div class="stat-label">Products Sourced</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">AI</div>
+        <div class="stat-label">Powered Curation</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Store Open</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SHOP SECTION ========== -->
+<section class="shop-section" id="shop">
+  <div class="container">
+    <div class="shop-header">
+      <div class="section-label">🛒 Where to Find Us</div>
+      <h2 class="section-title">Shop AI-Bility Products</h2>
+      <p class="section-desc" style="margin: 12px auto 0; text-align: center;">
+        From eBay to Shopify — find the adaptive technology that restores independence and transforms lives.
+      </p>
+    </div>
+    <div class="shop-grid">
+
+      <!-- Card 1: eBay -->
+      <div class="shop-card" onclick="window.open('https://www.ebay.com/usr/theoldguyai','_blank')">
+        <span class="shop-card-icon">🛍️</span>
+        <div class="shop-card-title">eBay Store</div>
+        <div class="shop-card-desc">Our flagship marketplace — 868+ reviews, 100% positive feedback. The trusted choice for adaptive products.</div>
+        <div class="shop-card-badge">⭐ 100% Positive · 868+ Reviews</div>
+        <div class="shop-card-link">Shop eBay <span>→</span></div>
+        <div class="shop-card-accent-bar"></div>
+      </div>
+
+      <!-- Card 2: Shopify -->
+      <div class="shop-card" onclick="window.open('https://theoldguyai.myshopify.com','_blank')">
+        <span class="shop-card-icon">🏪</span>
+        <div class="shop-card-title">Shopify Direct</div>
+        <div class="shop-card-desc">Shop direct for exclusive deals, faster checkout, and our growing catalog of AI-curated adaptive products.</div>
+        <div class="shop-card-badge">✦ Direct Store · Best Prices</div>
+        <div class="shop-card-link">Visit Shopify <span>→</span></div>
+        <div class="shop-card-accent-bar"></div>
+      </div>
+
+      <!-- Card 3: TikTok Shop -->
+      <div class="shop-card">
+        <span class="shop-card-icon">📱</span>
+        <div class="shop-card-title">TikTok Shop</div>
+        <div class="shop-card-desc">Watch, discover, buy — our TikTok Shop is launching soon with live demos and exclusive disability product drops.</div>
+        <div class="shop-card-badge" style="background:rgba(255,105,180,0.1);border-color:rgba(255,105,180,0.3);color:#f9a8d4;">🚀 Coming Soon</div>
+        <div class="shop-card-link" style="color:#f472b6;">Get Notified <span>→</span></div>
+        <div class="shop-card-accent-bar" style="background:linear-gradient(90deg,transparent,#f472b6,transparent);"></div>
+      </div>
+
+      <!-- Card 4: OVDV Parent -->
+      <div class="shop-card">
+        <span class="shop-card-icon">🧠</span>
+        <div class="shop-card-title">About OVDV</div>
+        <div class="shop-card-desc">Overhill Valley Digital Ventures — the AI-powered parent company behind AI-Bility's mission-driven product curation.</div>
+        <div class="shop-card-badge" style="background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.3);color:#c4b5fd;">🏢 Parent Company</div>
+        <div class="shop-card-link" style="color:#a855f7;">Learn More <span>→</span></div>
+        <div class="shop-card-accent-bar" style="background:linear-gradient(90deg,transparent,#a855f7,transparent);"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURE 1: MISSION / EMERALD ========== -->
+<section class="feature-section mission-section" id="mission">
+  <div class="container">
+    <div class="feature-grid">
+      <!-- LEFT: Image -->
+      <div class="feature-img-wrap">
+        <div class="mission-img-glow"></div>
+        <img
+          src="New Landing Page/Iron arm.png"
+          alt="Boy with Iron Man prosthetic arm — adaptive technology in action"
+          loading="lazy"
+        />
+      </div>
+      <!-- RIGHT: Content -->
+      <div class="feature-content">
+        <div class="section-label">♿ Independence, Redefined</div>
+        <h2 class="section-title">
+          <span>Independence,</span> Redefined
+        </h2>
+        <p class="section-desc">
+          From prosthetic enhancements to adaptive daily living tools — AI-Bility curates the products that give people back what matters most: the ability to live life on their own terms.
+        </p>
+        <div class="feature-bullets">
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">AI-Curated Selection</strong> — Every product is intelligently sourced for accessibility, durability, and real-world impact.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Hard-to-Find Products</strong> — We dig deep so you don't have to — specialty adaptive items that most stores don't stock.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Community-Trusted</strong> — 868+ five-star reviews from real people in the disability community.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Mission-Driven</strong> — We don't just sell products. We champion independence for every person who needs it.</span>
+          </div>
+        </div>
+        <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="feature-cta">
+          Explore Adaptive Products →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURE 2: MOBILITY / AMBER (REVERSED) ========== -->
+<section class="feature-section mobility-section">
+  <div class="container">
+    <div class="feature-grid reversed">
+      <!-- LEFT (visually right due to reversed): Content -->
+      <div class="feature-content">
+        <div class="section-label">🚀 Next-Gen Mobility</div>
+        <h2 class="section-title">
+          Technology That<br/><span>Changes Everything</span>
+        </h2>
+        <p class="section-desc">
+          From cyberpunk-inspired electric wheelchairs to smart mobility aids — the future of movement is here, and AI-Bility puts it at your fingertips.
+        </p>
+        <div class="feature-bullets">
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Smart Mobility Tech</strong> — Power chairs, scooters, and assistive devices powered by the latest innovations.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">AI-Powered Matching</strong> — Our AI finds the perfect mobility solution for your specific needs and lifestyle.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Cutting-Edge Designs</strong> — Products that don't just function — they inspire, empower, and look incredible.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Verified Quality</strong> — Every item vetted for reliability by our AI curation system and real user reviews.</span>
+          </div>
+        </div>
+        <a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener" class="feature-cta">
+          View Mobility Products →
+        </a>
+      </div>
+      <!-- RIGHT: Image -->
+      <div class="feature-img-wrap">
+        <div class="mobility-img-glow"></div>
+        <img
+          src="New Landing Page/wheelchair.png"
+          alt="Futuristic cyberpunk electric wheelchair — next-generation mobility"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURE 3: EDUCATION / BLUE ========== -->
+<section class="feature-section edu-section">
+  <div class="container">
+    <div class="feature-grid">
+      <!-- LEFT: Image -->
+      <div class="feature-img-wrap">
+        <div class="edu-img-glow"></div>
+        <img
+          src="New Landing Page/classroom.png"
+          alt="Accessible classroom — AI-powered inclusive education for everyone"
+          loading="lazy"
+        />
+      </div>
+      <!-- RIGHT: Content -->
+      <div class="feature-content">
+        <div class="section-label">🎓 The Future of Care Is Here</div>
+        <h2 class="section-title">
+          The Future of Care<br/><span>Is Here</span>
+        </h2>
+        <p class="section-desc">
+          AI is transforming how people with disabilities learn, communicate, and thrive. AI-Bility is at the forefront — bringing tomorrow's assistive technology to your door today.
+        </p>
+        <div class="feature-bullets">
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">AI That Sees &amp; Speaks</strong> — Visual assistance, speech synthesis, and real-time AI tools that break down barriers.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Inclusive Education</strong> — Assistive learning tools, AAC devices, and classroom technology for every learner.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">Healthcare Innovation</strong> — Monitoring devices, therapy aids, and caregiver tools powered by modern AI.</span>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-icon">✦</div>
+            <span><strong style="color:var(--text)">For Every Ability Level</strong> — Whether mild limitation or complex needs, we have products that fit every situation.</span>
+          </div>
+        </div>
+        <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="feature-cta">
+          Discover AI Care Tools →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NEWSLETTER SECTION ========== -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="nl-grid">
+      <!-- LEFT: Sidebar -->
+      <div class="nl-sidebar">
+        <div class="nl-issue-badge">📰 May 2026 · Issue #1</div>
+        <div class="nl-sidebar-title">AI Tools That Actually Help People with Disabilities</div>
+        <div class="nl-sidebar-meta">The AI-Bility Newsletter · Disability Niche · Monthly Deep-Dive</div>
+        <div class="nl-topics">
+          <span class="nl-topic">🤖 AI Vision Aids</span>
+          <span class="nl-topic">🗣️ Voice Synthesis</span>
+          <span class="nl-topic">♿ Smart Mobility</span>
+          <span class="nl-topic">🧠 Cognitive Aids</span>
+          <span class="nl-topic">💊 Health Tech</span>
+          <span class="nl-topic">🎓 EdTech Access</span>
+          <span class="nl-topic">🏠 Smart Home</span>
+          <span class="nl-topic">👁️ Low Vision</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Newsletter main -->
+      <div class="nl-main">
+        <div class="section-label">🌐 AI-Bility Newsletter · Issue #1</div>
+        <h2 class="nl-headline">
+          This Week: <span class="hl-accent">AI That Speaks,<br/>Sees, and Cares for You</span>
+        </h2>
+        <p class="section-desc">
+          Join thousands of caregivers, people with disabilities, and adaptive tech enthusiasts getting the best AI-powered disability tools delivered monthly. Real products. Real impact. Real independence.
+        </p>
+        <form class="nl-form" onsubmit="return false;">
+          <input
+            type="email"
+            class="nl-input"
+            placeholder="your@email.com — join the movement"
+            autocomplete="email"
+          />
+          <button type="submit" class="nl-submit">Subscribe Free →</button>
+        </form>
+        <div class="nl-features">
+          <div class="nl-feature-item"><span>✓</span> Free Forever</div>
+          <div class="nl-feature-item"><span>✓</span> No Spam</div>
+          <div class="nl-feature-item"><span>✓</span> Monthly Drops</div>
+          <div class="nl-feature-item"><span>✓</span> Disability-First</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <!-- Data nodes floating up -->
+  <div class="data-nodes" id="dataNodes"></div>
+  <!-- Stream-fall lines -->
+  <div class="stream-fall" id="streamFall"></div>
+
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="footer-grid">
+
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="fl-ai">AI</span>
+          <span class="fl-gradient">-Bility</span>
+        </div>
+        <p class="footer-tagline">
+          <span class="ft-gradient">AI Powered Ability for Everyone Who Needs It.</span><br/><br/>
+          THE destination for hard-to-find adaptive &amp; disability products. Powered by OVDV's AI curation engine.
+        </p>
+        <div class="footer-socials">
+          <a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener" class="social-link" title="eBay">🛍️</a>
+          <a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener" class="social-link" title="Shopify">🏪</a>
+          <a href="#" class="social-link" title="TikTok">📱</a>
+        </div>
+      </div>
+
+      <!-- Shop links -->
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="https://www.ebay.com/usr/theoldguyai" target="_blank" rel="noopener">eBay Store</a></li>
+          <li><a href="https://theoldguyai.myshopify.com" target="_blank" rel="noopener">Shopify Direct</a></li>
+          <li><a href="#">TikTok Shop (Soon)</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Best Sellers</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">Mobility &amp; Wheelchairs</a></li>
+          <li><a href="#">Prosthetics &amp; Orthotics</a></li>
+          <li><a href="#">Vision &amp; Hearing Aids</a></li>
+          <li><a href="#">Daily Living Aids</a></li>
+          <li><a href="#">Communication Devices</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About OVDV</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#">Our Mission</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="footer-bottom">
+      <p>© 2026 AI-Bility · Overhill Valley Digital Ventures (OVDV) · All Rights Reserved</p>
+      <p style="color:#6b7280;">Built with AI. Powered by Purpose.</p>
+    </div>
+  </div>
+
+  <!-- Man_nobg image with multi-color ai rings -->
+  <div class="footer-man-wrap">
+    <div class="footer-man-rings">
+      <div class="ai-ring ai-ring-1"></div>
+      <div class="ai-ring ai-ring-2"></div>
+      <div class="ai-ring ai-ring-3"></div>
+    </div>
+    <img
+      src="New Landing Page/Man_nobg.png"
+      alt="George — AI-Bility founder, OVDV"
+      class="footer-man-img"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Gradient line at very bottom -->
+  <div class="footer-gradient-line"></div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+  // --- Generate data nodes ---
+  (function() {
+    const container = document.getElementById('dataNodes');
+    const colors = [
+      'rgba(168,85,247,0.7)',
+      'rgba(8,145,178,0.7)',
+      'rgba(16,185,129,0.7)',
+      'rgba(245,158,11,0.7)',
+      'rgba(59,130,246,0.7)'
+    ];
+    for (let i = 0; i < 18; i++) {
+      const node = document.createElement('div');
+      node.className = 'data-node';
+      node.style.left = Math.random() * 100 + '%';
+      node.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const dur = 8 + Math.random() * 10;
+      node.style.setProperty('--dur', dur + 's');
+      node.style.animationDelay = (Math.random() * dur) + 's';
+      container.appendChild(node);
+    }
+  })();
+
+  // --- Generate stream-fall lines ---
+  (function() {
+    const container = document.getElementById('streamFall');
+    const colors = [
+      'rgba(168,85,247,0.35)',
+      'rgba(8,145,178,0.3)',
+      'rgba(16,185,129,0.25)',
+      'rgba(59,130,246,0.3)'
+    ];
+    for (let i = 0; i < 12; i++) {
+      const line = document.createElement('div');
+      line.className = 'stream-line';
+      line.style.left = Math.random() * 100 + '%';
+      const h = 60 + Math.random() * 200;
+      line.style.height = h + 'px';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      line.style.background = `linear-gradient(to bottom, transparent, ${color}, transparent)`;
+      const sd = 5 + Math.random() * 8;
+      line.style.setProperty('--sd', sd + 's');
+      line.style.animationDelay = (Math.random() * sd) + 's';
+      container.appendChild(line);
+    }
+  })();
+
+  // --- Smooth reveal on scroll ---
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.shop-card, .feature-content, .feature-img-wrap, .nl-sidebar, .nl-main').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+
+  // --- Circuit grid color shift based on scroll position ---
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    const progress = scrolled / total;
+    const hue = Math.floor(progress * 280);
+    document.querySelector('.circuit-bg').style.backgroundImage = `
+      linear-gradient(rgba(${hexToRgb(progressColor(progress))},0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(${hexToRgb(progressColor(progress))},0.05) 1px, transparent 1px)
+    `;
+  }, { passive: true });
+
+  function progressColor(p) {
+    if (p < 0.2)  return '168,85,247';
+    if (p < 0.4)  return '8,145,178';
+    if (p < 0.6)  return '16,185,129';
+    if (p < 0.75) return '245,158,11';
+    if (p < 0.9)  return '59,130,246';
+    return '168,85,247';
+  }
+  function hexToRgb(rgb) { return rgb; }
+</script>
+
+</body>
+</html>

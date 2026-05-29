@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Bility — Empowering Every Ability</title>
+<style>
+  :root {
+    --warm1: #7c3aed;
+    --warm2: #db2777;
+    --warm3: #f59e0b;
+    --teal: #0d9488;
+    --bg: #faf9ff;
+    --dark: #1e1b4b;
+    --mid: #4338ca;
+    --light: #6366f1;
+    --text: #374151;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --white: #ffffff;
+  }
+  * { margin:0;padding:0;box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border);
+    padding:14px 6vw; display:flex; justify-content:space-between; align-items:center;
+  }
+  .logo { font-size:1.7rem; font-weight:900; text-decoration:none; background:linear-gradient(135deg,var(--warm1),var(--warm2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .nav-links { display:flex; gap:24px; align-items:center; }
+  .nav-links a { color:var(--text); text-decoration:none; font-size:0.9rem; font-weight:500; }
+  .nav-links a:hover { color:var(--warm1); }
+  .nav-cta { background:linear-gradient(135deg,var(--warm1),var(--warm2)); color:white!important; padding:9px 22px; border-radius:50px; font-weight:700!important; }
+
+  /* HERO */
+  .hero {
+    padding:90px 6vw 0; display:grid; grid-template-columns:55% 45%;
+    align-items:center; gap:20px; overflow:hidden; position:relative;
+    background:linear-gradient(160deg, #faf9ff 0%, #f5f3ff 40%, #fdf2f8 100%);
+    min-height:680px;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 80% 20%,rgba(124,58,237,0.08),transparent 50%),
+               radial-gradient(circle at 20% 80%,rgba(219,39,119,0.06),transparent 50%);
+    pointer-events:none;
+  }
+  .hero-text { position:relative; z-index:2; padding-bottom:80px; }
+  .mission-tag {
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(219,39,119,0.1));
+    border:1px solid rgba(124,58,237,0.2); border-radius:50px;
+    padding:8px 20px; font-size:0.82rem; font-weight:700;
+    color:var(--warm1); margin-bottom:24px; letter-spacing:0.5px;
+  }
+  .mission-tag .heart { font-size:1rem; }
+  .hero h1 { font-size:clamp(2.5rem,4.5vw,4rem); font-weight:900; line-height:1.1; margin-bottom:20px; color:var(--dark); }
+  .hero h1 .gradient { background:linear-gradient(135deg,var(--warm1),var(--warm2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-sub { font-size:1.08rem; color:var(--muted); line-height:1.8; max-width:500px; margin-bottom:32px; }
+  .hero-sub strong { color:var(--warm1); font-weight:600; }
+  .cta-stack { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px; }
+  .btn-gradient { background:linear-gradient(135deg,var(--warm1),var(--warm2)); color:#fff; padding:14px 32px; border-radius:50px; font-weight:700; font-size:1rem; text-decoration:none; box-shadow:0 8px 24px rgba(124,58,237,0.3); transition:all .2s; }
+  .btn-gradient:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(124,58,237,0.4); }
+  .btn-warm-outline { border:2px solid rgba(124,58,237,0.3); color:var(--warm1); padding:13px 28px; border-radius:50px; font-weight:600; font-size:0.98rem; text-decoration:none; transition:all .2s; }
+  .btn-warm-outline:hover { background:rgba(124,58,237,0.06); border-color:var(--warm1); }
+  .trust-row { display:flex; gap:24px; flex-wrap:wrap; }
+  .trust-item { display:flex; align-items:center; gap:6px; font-size:0.84rem; color:var(--muted); }
+  .trust-icon { font-size:1rem; }
+  .hero-img-wrap { position:relative; z-index:2; display:flex; justify-content:flex-end; align-items:flex-end; }
+  .hero-img-wrap img { width:100%; max-width:520px; display:block; }
+  .hero-pill {
+    position:absolute; background:#fff; border-radius:50px;
+    padding:10px 20px; font-size:0.82rem; font-weight:700;
+    box-shadow:0 4px 20px rgba(0,0,0,0.1); display:flex; align-items:center; gap:8px;
+  }
+  .hero-pill.top { top:40px; right:40px; color:var(--warm1); border:1px solid rgba(124,58,237,0.2); }
+  .hero-pill.bot { bottom:100px; left:0px; color:var(--teal); border:1px solid rgba(13,148,136,0.2); }
+
+  /* WAVE DIVIDER */
+  .wave { line-height:0; background:var(--bg); }
+  .wave svg { display:block; }
+
+  /* COMMUNITY STRIP */
+  .community {
+    background:linear-gradient(135deg,var(--warm1),var(--warm2));
+    padding:28px 6vw; display:flex; justify-content:space-around;
+    flex-wrap:wrap; gap:16px;
+  }
+  .comm-item { text-align:center; color:#fff; }
+  .comm-n { font-size:2rem; font-weight:900; }
+  .comm-l { font-size:0.78rem; opacity:0.85; text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
+
+  /* SHOPS */
+  .shops { padding:80px 6vw; }
+  .sec-tag { font-size:0.78rem; font-weight:800; letter-spacing:3px; text-transform:uppercase; color:var(--warm1); margin-bottom:10px; }
+  .sec-h { font-size:clamp(1.8rem,3vw,2.7rem); font-weight:900; color:var(--dark); margin-bottom:12px; }
+  .sec-p { color:var(--muted); font-size:1.05rem; line-height:1.7; max-width:540px; margin-bottom:48px; }
+  .shop-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+  .sc {
+    background:var(--white); border-radius:20px; padding:32px 24px;
+    text-decoration:none; color:inherit; transition:all .25s;
+    box-shadow:0 4px 16px rgba(0,0,0,0.06); border:1.5px solid transparent;
+    position:relative; overflow:hidden;
+  }
+  .sc::before { content:''; position:absolute; top:0;left:0;right:0;height:4px; background:linear-gradient(90deg,var(--warm1),var(--warm2)); transform:scaleX(0); transform-origin:left; transition:transform .25s; }
+  .sc:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(124,58,237,0.15); }
+  .sc:hover::before { transform:scaleX(1); }
+  .sc-ico { font-size:2.6rem; margin-bottom:14px; }
+  .sc-n { font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:6px; }
+  .sc-d { font-size:0.88rem; color:var(--muted); line-height:1.6; }
+  .sc-badge { display:inline-block; margin-top:12px; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:6px; }
+  .live { background:#d1fae5; color:#065f46; }
+  .coming { background:#fef3c7; color:#92400e; }
+  .ai-badge { background:#ede9fe; color:#5b21b6; }
+
+  /* FEATURE ROW */
+  .feat-row { padding:80px 6vw; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+  .feat-row:nth-child(even) { background:var(--white); }
+  .feat-row img { width:100%; border-radius:24px; box-shadow:0 20px 60px rgba(124,58,237,0.12); }
+  .feat-row .swap { order:-1; }
+  .feat-eyebrow { font-size:0.8rem; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; background:linear-gradient(135deg,var(--warm1),var(--warm2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:12px; }
+  .feat-h { font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:900; color:var(--dark); margin-bottom:14px; line-height:1.25; }
+  .feat-p { color:var(--muted); line-height:1.8; font-size:1rem; margin-bottom:20px; }
+  .feat-points { list-style:none; }
+  .feat-points li { display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:0.95rem; color:var(--text); }
+  .feat-points li .dot { width:8px;height:8px;background:linear-gradient(135deg,var(--warm1),var(--warm2));border-radius:50%;flex-shrink:0;margin-top:6px; }
+
+  /* NEWSLETTER */
+  .nl-sec { padding:80px 6vw; }
+  .nl-box {
+    border-radius:28px; overflow:hidden;
+    background:var(--white); box-shadow:0 20px 60px rgba(124,58,237,0.1);
+    border:1.5px solid rgba(124,58,237,0.1);
+  }
+  .nl-top {
+    background:linear-gradient(135deg,var(--warm1),var(--warm2));
+    padding:40px 48px; display:flex; gap:32px; justify-content:space-between; align-items:center; flex-wrap:wrap;
+  }
+  .nl-top-text h2 { font-size:1.7rem; font-weight:900; color:#fff; margin-bottom:8px; }
+  .nl-top-text p { color:rgba(255,255,255,0.82); font-size:0.95rem; }
+  .nl-stamp { background:rgba(255,255,255,0.2); color:#fff; border:1px solid rgba(255,255,255,0.35); border-radius:16px; padding:10px 20px; text-align:center; flex-shrink:0; }
+  .nl-stamp .issue { font-size:1.5rem; font-weight:900; line-height:1; }
+  .nl-stamp .issue-l { font-size:0.72rem; opacity:0.8; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+  .nl-bottom { padding:40px 48px; }
+  .story-h { font-size:1.2rem; font-weight:800; color:var(--dark); margin-bottom:14px; }
+  .story-t { color:var(--muted); line-height:1.8; font-size:0.97rem; margin-bottom:24px; }
+  .pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+  .pill { background:#f5f3ff; color:var(--warm1); font-size:0.79rem; font-weight:600; padding:4px 14px; border-radius:20px; border:1px solid rgba(124,58,237,0.15); }
+  .sub-row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .sub-input { border:1.5px solid var(--border); padding:12px 18px; border-radius:50px; font-size:0.95rem; outline:none; width:280px; transition:border .2s; }
+  .sub-input:focus { border-color:var(--warm1); }
+  .sub-input::placeholder { color:#9ca3af; }
+  .sub-btn { background:linear-gradient(135deg,var(--warm1),var(--warm2)); color:#fff; padding:12px 28px; border-radius:50px; font-weight:700; font-size:0.95rem; border:none; cursor:pointer; box-shadow:0 4px 14px rgba(124,58,237,0.3); }
+
+  /* FOOTER HERO */
+  .footer-hero {
+    margin-top:0;
+    background:linear-gradient(160deg,#1e1b4b 0%,#312e81 40%,#1e1b4b 100%);
+    padding:60px 6vw; display:flex; justify-content:space-between;
+    align-items:flex-end; overflow:hidden; position:relative;
+  }
+  .footer-hero::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 80% at 65% 100%,rgba(245,158,11,0.1),transparent 60%),
+               radial-gradient(ellipse 40% 50% at 80% 50%,rgba(219,39,119,0.1),transparent 50%);
+    pointer-events:none;
+  }
+  /* Particle dots */
+  .particles { position:absolute; inset:0; overflow:hidden; }
+  .particle {
+    position:absolute; border-radius:50%;
+    animation:float-part 6s infinite ease-in-out;
+  }
+  .particle:nth-child(1){width:4px;height:4px;background:var(--warm3);left:10%;top:30%;animation-delay:0s;}
+  .particle:nth-child(2){width:6px;height:6px;background:var(--warm2);left:25%;top:60%;animation-delay:1s;opacity:0.6;}
+  .particle:nth-child(3){width:3px;height:3px;background:#fff;left:40%;top:20%;animation-delay:2s;opacity:0.4;}
+  .particle:nth-child(4){width:5px;height:5px;background:var(--warm3);left:60%;top:40%;animation-delay:0.5s;opacity:0.5;}
+  .particle:nth-child(5){width:4px;height:4px;background:var(--warm1);left:80%;top:25%;animation-delay:1.5s;opacity:0.7;}
+  @keyframes float-part{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+  .footer-content { position:relative; z-index:2; max-width:520px; }
+  .footer-content h2 { font-size:clamp(1.7rem,2.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:14px; line-height:1.2; }
+  .footer-content p { color:rgba(255,255,255,0.65); line-height:1.75; font-size:1rem; margin-bottom:28px; }
+  .footer-nav { display:flex; flex-wrap:wrap; gap:18px; margin-bottom:16px; }
+  .footer-nav a { color:rgba(255,255,255,0.45); text-decoration:none; font-size:0.85rem; }
+  .footer-nav a:hover { color:var(--warm3); }
+  .footer-copy { color:rgba(255,255,255,0.25); font-size:0.78rem; }
+  .footer-man { position:relative; z-index:2; width:330px; flex-shrink:0; align-self:flex-end; }
+  .footer-man img {
+    width:100%; display:block;
+    filter:
+      drop-shadow(0 0 25px rgba(245,158,11,0.4))
+      drop-shadow(0 0 60px rgba(219,39,119,0.2))
+      drop-shadow(0 -10px 30px rgba(124,58,237,0.3));
+  }
+  /* Digital circuit lines emanating from figure */
+  .circuit-lines { position:absolute; right:0; bottom:0; width:380px; height:500px; pointer-events:none; }
+  .circuit-lines svg { position:absolute; inset:0; width:100%; height:100%; opacity:0.15; }
+
+  @media(max-width:768px){
+    .hero,.feat-row{grid-template-columns:1fr;}
+    .hero-pill{display:none;}
+    .footer-hero{flex-direction:column;gap:30px;}
+    .footer-man{width:240px;align-self:center;}
+    .nl-top{flex-direction:column;}
+    .nl-bottom{padding:28px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">AI-Bility</a>
+  <div class="nav-links">
+    <a href="#shop">Shop</a>
+    <a href="#mission">Mission</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="mission-tag"><span class="heart">💜</span> For the Disability Community · By People Who Care</div>
+    <h1>Your <span class="gradient">Independence</span> Is Our Mission</h1>
+    <p class="hero-sub">AI-Bility is <strong>THE destination for hard-to-find adaptive products</strong> — mobility aids, adaptive clothing, medical supplies, and AI tools that help people with disabilities live fully.</p>
+    <div class="cta-stack">
+      <a href="#shop" class="btn-gradient">Shop Adaptive Products</a>
+      <a href="#newsletter" class="btn-warm-outline">Get Free Newsletter</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-icon">⭐</span> 868 Positive Reviews</div>
+      <div class="trust-item"><span class="trust-icon">✓</span> 100% Disability Focused</div>
+      <div class="trust-item"><span class="trust-icon">🤖</span> AI-Powered</div>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <div class="hero-pill top">🦽 Adaptive Tech</div>
+    <img src="New Landing Page/wheelchair.png" alt="Advanced adaptive wheelchair — AI-Bility empowers independence">
+    <div class="hero-pill bot">🤖 AI-Powered Discovery</div>
+  </div>
+</section>
+
+<!-- COMMUNITY STATS -->
+<div class="community">
+  <div class="comm-item"><div class="comm-n">61M</div><div class="comm-l">Americans with Disabilities</div></div>
+  <div class="comm-item"><div class="comm-n">868+</div><div class="comm-l">Verified Positive Reviews</div></div>
+  <div class="comm-item"><div class="comm-n">100%</div><div class="comm-l">Mission-Focused Catalog</div></div>
+  <div class="comm-item"><div class="comm-n">3+</div><div class="comm-l">Platforms & Growing</div></div>
+</div>
+
+<!-- SHOPS -->
+<section class="shops" id="shop">
+  <p class="sec-tag">Shop Everywhere</p>
+  <h2 class="sec-h">Find Us Where You Already Shop</h2>
+  <p class="sec-p">We're live on multiple platforms so you can shop comfortably on the platform you trust most. Same products, same mission, everywhere.</p>
+  <div class="shop-cards">
+    <a href="https://www.ebay.com/str/theoldguyai" target="_blank" class="sc">
+      <div class="sc-ico">🛒</div>
+      <div class="sc-n">eBay Store</div>
+      <div class="sc-d">Our flagship store with 868 verified reviews and 100% positive feedback. Trusted, reliable, fast.</div>
+      <div class="sc-badge live">✓ Live Now</div>
+    </a>
+    <a href="https://theoldguyai.myshopify.com" target="_blank" class="sc">
+      <div class="sc-ico">🏪</div>
+      <div class="sc-n">Shopify Store</div>
+      <div class="sc-d">Direct shopping with advanced filtering — find products by your specific condition or need.</div>
+      <div class="sc-badge live">✓ Live Now</div>
+    </a>
+    <a href="#" class="sc">
+      <div class="sc-ico">🎵</div>
+      <div class="sc-n">TikTok Shop</div>
+      <div class="sc-d">Discover adaptive products through real community stories and video demos.</div>
+      <div class="sc-badge coming">⏳ Coming Soon</div>
+    </a>
+    <a href="#newsletter" class="sc">
+      <div class="sc-ico">🤖</div>
+      <div class="sc-n">AI Product Finder</div>
+      <div class="sc-d">Not sure what you need? Describe your challenge and our AI finds the right adaptive product.</div>
+      <div class="sc-badge ai-badge">✨ New</div>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURE — Iron Arm -->
+<section class="feat-row" id="mission">
+  <img src="New Landing Page/Iron arm.png" alt="Child receiving Iron Man prosthetic arm — adaptive technology inspires">
+  <div>
+    <p class="feat-eyebrow">Our Story</p>
+    <h2 class="feat-h">Every Person Deserves Access to Technology That Sets Them Free</h2>
+    <p class="feat-p">The disability community shouldn't have to search 12 different sites to find one adaptive product. AI-Bility changes that — with AI-curated catalogs, community-sourced reviews, and a mission that never wavers.</p>
+    <ul class="feat-points">
+      <li><span class="dot"></span>Mobility aids built for real independence</li>
+      <li><span class="dot"></span>Adaptive clothing that's actually stylish</li>
+      <li><span class="dot"></span>Medical supplies at fair, transparent prices</li>
+      <li><span class="dot"></span>AI tools reviewed specifically for disability use cases</li>
+      <li><span class="dot"></span>Caregiver resources from the community, for the community</li>
+    </ul>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-sec" id="newsletter">
+  <p class="sec-tag">Free Weekly Newsletter</p>
+  <h2 class="sec-h">Providing AI-Bility to the Disabled</h2>
+  <p class="sec-p">Real information for real people. Written with warmth, not jargon. Never condescending, always useful.</p>
+  <div class="nl-box">
+    <div class="nl-top">
+      <div class="nl-top-text">
+        <h2>AI Tools That Actually Help People with Disabilities</h2>
+        <p>Our inaugural issue — May 2026. AI tools disability communities are actually using right now.</p>
+      </div>
+      <div class="nl-stamp">
+        <div class="issue">Issue #1</div>
+        <div class="issue-l">May 2026</div>
+      </div>
+    </div>
+    <div class="nl-bottom">
+      <div class="story-h">🔥 This Week: AI That Speaks for You, Navigates for You, and Remembers for You</div>
+      <div class="story-t">
+        Whether you're managing a progressive condition, supporting a loved one, or recovering from surgery — AI is quietly changing what's possible. This issue covers three tools disability communities are actually using right now: a voice-to-text app that handles speech impairments, a navigation AI built for low-vision users, and a free reminder system that doesn't require smartphone dexterity.
+        <br><br>
+        Plus: Our Product Spotlight on the top-rated shower transfer bench under $65, and a reader tip on sourcing adaptive clothing locally.
+      </div>
+      <div class="pills">
+        <span class="pill">💡 AI Tools</span>
+        <span class="pill">♿ Adaptive Products</span>
+        <span class="pill">🦽 Mobility</span>
+        <span class="pill">👁️ Low Vision</span>
+        <span class="pill">❤️ Caregiver Corner</span>
+      </div>
+      <div class="sub-row">
+        <input class="sub-input" type="email" placeholder="your@email.com">
+        <button class="sub-btn">Subscribe Free →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER HERO -->
+<footer class="footer-hero">
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+  </div>
+  <div class="footer-content">
+    <h2>Ability is Not a Limitation. It's a Direction.</h2>
+    <p>Overhill Valley Digital Ventures is building the most trusted adaptive products marketplace on the internet — powered by AI, driven by community, and always on your side.</p>
+    <div class="footer-nav">
+      <a href="#shop">eBay Store</a>
+      <a href="#shop">Shopify</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 AI-Bility / Overhill Valley Digital Ventures. All rights reserved.</p>
+  </div>
+  <div class="footer-man">
+    <div class="circuit-lines">
+      <svg viewBox="0 0 380 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M190 500 L190 350 L100 350 L100 250 L50 250" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <path d="M190 350 L280 350 L280 200 L330 200" stroke="#db2777" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <path d="M190 300 L190 200 L140 200 L140 100" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <circle cx="190" cy="350" r="4" fill="#f59e0b"/>
+        <circle cx="100" cy="250" r="4" fill="#db2777"/>
+        <circle cx="280" cy="200" r="4" fill="#7c3aed"/>
+        <circle cx="140" cy="100" r="3" fill="#f59e0b" opacity="0.6"/>
+      </svg>
+    </div>
+    <img src="New Landing Page/Man_nobg.png" alt="AI-Bility — Where technology meets human potential">
+  </div>
+</footer>
+
+</body>
+</html>
