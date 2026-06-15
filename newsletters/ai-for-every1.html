@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AI for Every1 — Down to Earth Information for People of All Ages</title>
+<meta name="description" content="Down to Earth Information for People of All Ages. AI explained clearly for real people — no jargon, no PhD required, just honest answers."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  :root {
+    --primary: #ff006e;
+    --accent:  #00f5ff;
+    --bg:      #0f0508;
+    --bg2:     #180a10;
+    --text:    #fff0f5;
+    --muted:   #aa7a88;
+    --card-bg: rgba(255,0,110,0.04);
+    --card-border: rgba(255,0,110,0.18);
+    --glow: 0 0 24px rgba(255,0,110,0.4);
+    --glow-cyan: 0 0 24px rgba(0,245,255,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; cursor: none; overflow-x: hidden; }
+
+  /* ── BACKGROUND GRID ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,0,110,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(15,5,8,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,0,110,0.12);
+  }
+  .nav-logo { font-family: 'Orbitron', monospace; font-size: 1rem; color: var(--primary); letter-spacing: 2px; text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--primary); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 80px;
+    position: relative; overflow: hidden; z-index: 1;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,0,110,0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 20% 80%, rgba(0,245,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,0,110,0.08); border: 1px solid rgba(255,0,110,0.35);
+    border-radius: 100px; padding: 6px 18px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--primary); margin-bottom: 32px; position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 900; line-height: 1.1; margin-bottom: 12px; color: #fff;
+    position: relative; z-index: 1;
+  }
+  .hero h1 span { color: var(--primary); text-shadow: var(--glow); }
+  .hero h1 .one { color: var(--accent); text-shadow: var(--glow-cyan); }
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--accent); font-weight: 600; letter-spacing: 1px;
+    margin-bottom: 20px; text-shadow: 0 0 20px rgba(0,245,255,0.4);
+    position: relative; z-index: 1;
+  }
+  .hero-desc {
+    max-width: 600px; font-size: 1.05rem; color: var(--muted);
+    line-height: 1.75; margin-bottom: 48px; position: relative; z-index: 1;
+  }
+
+  /* ── AGE BADGES ── */
+  .age-badges {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 40px; position: relative; z-index: 1;
+  }
+  .age-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,0,110,0.07); border: 1px solid rgba(255,0,110,0.25);
+    border-radius: 100px; padding: 6px 14px;
+    font-size: 0.78rem; font-weight: 600; color: var(--primary);
+  }
+  .age-badge.cyan {
+    background: rgba(0,245,255,0.07); border-color: rgba(0,245,255,0.25);
+    color: var(--accent);
+  }
+
+  /* ── SUBSCRIBE ── */
+  .sub-form {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    max-width: 500px; width: 100%; position: relative; z-index: 1;
+  }
+  .sub-form input {
+    flex: 1; min-width: 220px;
+    background: rgba(255,0,110,0.06); border: 1px solid rgba(255,0,110,0.3);
+    border-radius: 8px; padding: 14px 20px; color: var(--text); font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .sub-form input:focus { border-color: var(--primary); }
+  .sub-form input::placeholder { color: var(--muted); }
+  .sub-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #0f0508; border: none; border-radius: 8px; padding: 14px 28px;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 1px;
+    cursor: none; transition: all 0.2s;
+    box-shadow: 0 0 24px rgba(255,0,110,0.4); white-space: nowrap;
+  }
+  .sub-btn:hover { box-shadow: 0 0 40px rgba(255,0,110,0.7); transform: translateY(-2px); }
+  .sub-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; position: relative; z-index: 1; }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
+    padding: 40px 24px;
+    border-top: 1px solid rgba(255,0,110,0.08);
+    border-bottom: 1px solid rgba(255,0,110,0.08);
+    margin: 0 auto; max-width: 900px; position: relative; z-index: 1;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900; color: var(--primary); display: block; }
+  .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+  .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; }
+  h2 { font-family: 'Orbitron', monospace; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 16px; }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 640px; margin-bottom: 48px; }
+  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent), transparent); margin-bottom: 40px; }
+
+  /* ── SAMPLE ISSUES ── */
+  .issues-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .issue-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 28px;
+    transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden;
+  }
+  .issue-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+  .issue-card:hover { border-color: rgba(255,0,110,0.45); transform: translateY(-4px); }
+  .issue-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .issue-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+  .issue-preview { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+
+  /* Age group tags */
+  .age-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .age-tag {
+    background: rgba(0,245,255,0.07); border: 1px solid rgba(0,245,255,0.2);
+    border-radius: 100px; padding: 3px 10px; font-size: 0.7rem; color: var(--accent);
+  }
+
+  /* Reader Q&A box */
+  .reader-qa {
+    background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.2);
+    border-radius: 10px; padding: 14px 16px; margin-top: 14px;
+  }
+  .qa-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .reader-qa p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; font-style: italic; }
+
+  .issue-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .topic-tag { background: rgba(255,0,110,0.08); border: 1px solid rgba(255,0,110,0.2); border-radius: 100px; padding: 3px 10px; font-size: 0.72rem; color: var(--primary); }
+
+  /* ── FEATURES ── */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .feature { display: flex; gap: 14px; align-items: flex-start; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; }
+  .feature-icon { color: var(--primary); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+  .feature-icon.cyan { color: var(--accent); }
+  .feature-text h4 { font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .feature-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── OTHER NEWSLETTERS ── */
+  .other-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .other-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 24px; text-decoration: none; transition: all 0.2s; display: block; }
+  .other-card.cyan { border-color: rgba(0,245,255,0.2); }
+  .other-card.cyan:hover { border-color: rgba(0,245,255,0.5); transform: translateY(-3px); }
+  .other-card.green { border-color: rgba(57,255,20,0.2); }
+  .other-card.green:hover { border-color: rgba(57,255,20,0.5); transform: translateY(-3px); }
+  .other-card.purple { border-color: rgba(191,0,255,0.2); }
+  .other-card.purple:hover { border-color: rgba(191,0,255,0.5); transform: translateY(-3px); }
+  .other-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .other-card.cyan .other-label { color: #00f5ff; }
+  .other-card.green .other-label { color: #39ff14; }
+  .other-card.purple .other-label { color: #bf00ff; }
+  .other-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .other-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .other-arrow { font-size: 0.8rem; margin-top: 12px; }
+  .other-card.cyan .other-arrow { color: #00f5ff; }
+  .other-card.green .other-arrow { color: #39ff14; }
+  .other-card.purple .other-arrow { color: #bf00ff; }
+
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid rgba(255,0,110,0.08); color: var(--muted); font-size: 0.82rem; position: relative; z-index: 1; }
+  footer a { color: var(--primary); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 14px; }
+    .stats { gap: 28px; }
+    .age-badges { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://theoldguyai.com" class="nav-logo">OVDV</a>
+  <div class="nav-links">
+    <a href="https://theoldguyai.com" style="color:#ff006e"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="old-guy-ai.html" style="color:#00f5ff"><i class="fa-solid fa-robot"></i> Old Guy AI</a>
+    <a href="ai-bility.html" style="color:#39ff14"><i class="fa-solid fa-universal-access"></i> AI-Bility</a>
+    <a href="ai-faith-and-you.html" style="color:#bf00ff"><i class="fa-solid fa-cross"></i> Faith</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="fa-solid fa-people-group"></i> Free Weekly Newsletter</div>
+  <h1>AI for <span>Every</span><span class="one">1</span></h1>
+  <p class="hero-tagline">Down to Earth Information for People of All Ages.</p>
+  <p class="hero-desc">AI is here right now and you have questions. No matter your age, your background, or how tech-savvy you are — the answers are here. We deep-search the internet so you don't have to, and spell it all out in plain, simple language anyone can follow.</p>
+  <div class="age-badges">
+    <span class="age-badge"><i class="fa-solid fa-child"></i> Kids & Teens</span>
+    <span class="age-badge cyan"><i class="fa-solid fa-person"></i> Adults</span>
+    <span class="age-badge"><i class="fa-solid fa-person-cane"></i> Seniors</span>
+    <span class="age-badge cyan"><i class="fa-solid fa-people-group"></i> Everyone</span>
+  </div>
+  <form class="sub-form" onsubmit="handleSub(event)">
+    <input type="email" placeholder="Your email address" required/>
+    <button type="submit" class="sub-btn"><i class="fa-solid fa-bolt"></i> Subscribe Free</button>
+  </form>
+  <p class="sub-note">No spam. Unsubscribe anytime. Plain English, always.</p>
+</section>
+
+<!-- STATS -->
+<div style="background:var(--bg2); padding: 0 24px; position:relative; z-index:1;">
+  <div class="stats">
+    <div class="stat"><span class="stat-num">Weekly</span><span class="stat-label">Every Monday</span></div>
+    <div class="stat"><span class="stat-num">All</span><span class="stat-label">Ages Welcome</span></div>
+    <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Always</span></div>
+    <div class="stat"><span class="stat-num">Zero</span><span class="stat-label">Jargon</span></div>
+  </div>
+</div>
+
+<!-- SAMPLE ISSUES -->
+<section>
+  <p class="section-label">Sample Issues</p>
+  <h2>What lands in your inbox</h2>
+  <p class="section-sub">Real questions from real people of all ages — answered clearly, completely, and without making you feel like you should already know this stuff. Because you shouldn't have to.</p>
+  <div class="divider"></div>
+  <div class="issues-grid">
+
+    <div class="issue-card">
+      <p class="issue-num">Issue #001</p>
+      <h3 class="issue-title">What Exactly Is AI — And Why Is Everyone Suddenly Talking About It?</h3>
+      <p class="issue-preview">If you've been nodding along when people mention AI but aren't really sure what it is, this issue is for you. We explain what AI actually is, what it can and can't do, and why it's become impossible to ignore — in plain English that anyone from 8 to 80 can follow.</p>
+      <div class="age-row">
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Perfect for beginners</span>
+        <span class="age-tag"><i class="fa-solid fa-check"></i> All ages</span>
+      </div>
+      <div class="reader-qa">
+        <p class="qa-label"><i class="fa-solid fa-comment-dots"></i> Reader Question</p>
+        <p>"My grandkids keep talking about AI like it's going to take over the world. Should I be worried?" — Margaret, 74, Ohio</p>
+      </div>
+      <div class="issue-topics">
+        <span class="topic-tag">AI Basics</span><span class="topic-tag">Beginners</span><span class="topic-tag">All Ages</span>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <p class="issue-num">Issue #002</p>
+      <h3 class="issue-title">Is AI Going to Take My Job? Here's the Honest Answer — For Every Kind of Worker</h3>
+      <p class="issue-preview">Factory workers, teachers, nurses, truck drivers, accountants, cashiers — everyone is asking the same question. This week we go through the research honestly, by job category, and tell you what AI is actually likely to change, what it won't, and what you can do right now to stay ahead of it.</p>
+      <div class="age-row">
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Working adults</span>
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Students</span>
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Parents</span>
+      </div>
+      <div class="reader-qa">
+        <p class="qa-label"><i class="fa-solid fa-comment-dots"></i> Reader Question</p>
+        <p>"I've been a bookkeeper for 22 years. My boss mentioned AI might handle some of what I do. What should I learn?" — David, 48, Texas</p>
+      </div>
+      <div class="issue-topics">
+        <span class="topic-tag">Jobs & AI</span><span class="topic-tag">Working Adults</span><span class="topic-tag">Future of Work</span>
+      </div>
+    </div>
+
+    <div class="issue-card">
+      <p class="issue-num">Issue #003</p>
+      <h3 class="issue-title">5 Things AI Can Do For Your Family Right Now — That You Probably Don't Know About</h3>
+      <p class="issue-preview">Help your kid with homework. Plan a week of dinners. Write a letter to your landlord. Summarize a confusing medical document. Find the best price on anything. AI can do all of this today — and this week we walk through each one step by step so your whole family can start using it tonight.</p>
+      <div class="age-row">
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Families</span>
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Parents</span>
+        <span class="age-tag"><i class="fa-solid fa-check"></i> Practical use</span>
+      </div>
+      <div class="reader-qa">
+        <p class="qa-label"><i class="fa-solid fa-comment-dots"></i> Reader Question</p>
+        <p>"I signed up for ChatGPT but I just stare at the blank box. I don't know what to ask it." — Linda, 52, Michigan</p>
+      </div>
+      <div class="issue-topics">
+        <span class="topic-tag">Practical AI</span><span class="topic-tag">Family</span><span class="topic-tag">Step-by-Step</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="background:var(--bg2); max-width:100%; padding: 80px 24px;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <p class="section-label">Every Issue</p>
+    <h2>What you get each Monday</h2>
+    <div class="divider"></div>
+    <div class="features-grid">
+      <div class="feature">
+        <i class="fa-solid fa-earth-americas feature-icon"></i>
+        <div class="feature-text"><h4>Plain English, Always</h4><p>No jargon. No PhD required. Every topic explained the way you'd explain it to a friend over coffee.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-magnifying-glass feature-icon cyan"></i>
+        <div class="feature-text"><h4>Deep Research Done For You</h4><p>We use AI to scour the internet for the latest, most relevant information — then translate it into something you can actually use.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-people-group feature-icon"></i>
+        <div class="feature-text"><h4>Every Age, Every Background</h4><p>Whether you're 16 or 76, a student or a retiree, a tech person or someone who just got a smartphone — this newsletter is for you.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-comment-dots feature-icon cyan"></i>
+        <div class="feature-text"><h4>Reader Q&A Every Week</h4><p>Real questions from real subscribers answered every issue. Submit yours — it might be featured next week.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-list-check feature-icon"></i>
+        <div class="feature-text"><h4>Step-by-Step Guides</h4><p>When we cover an AI tool, we walk you through it step by step. No assumptions about what you already know.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-shield-halved feature-icon cyan"></i>
+        <div class="feature-text"><h4>Honest, Not Hyped</h4><p>We don't tell you AI will save the world or end it. We tell you what it actually does, what it doesn't, and what you need to know right now.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER NEWSLETTERS -->
+<section>
+  <p class="section-label">The OVDV Family</p>
+  <h2>More newsletters you'll love</h2>
+  <p class="section-sub">Each newsletter crosses into the others. Find one, discover all four.</p>
+  <div class="divider"></div>
+  <div class="other-grid">
+    <a href="old-guy-ai.html" class="other-card cyan">
+      <p class="other-label"><i class="fa-solid fa-robot"></i> Newsletter 01</p>
+      <h3 class="other-name">The Old Guy AI</h3>
+      <p class="other-desc">Tech help that even seniors can understand. Phones, apps, email, AI tools — plain English, no judgment.</p>
+      <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
+    </a>
+    <a href="ai-bility.html" class="other-card green">
+      <p class="other-label"><i class="fa-solid fa-universal-access"></i> Newsletter 03</p>
+      <h3 class="other-name">AI-Bility</h3>
+      <p class="other-desc">AI Powered Ability for Everyone Who Needs It. Tools for people with disabilities and chronic illness.</p>
+      <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
+    </a>
+    <a href="ai-faith-and-you.html" class="other-card purple">
+      <p class="other-label"><i class="fa-solid fa-cross"></i> Newsletter 04</p>
+      <h3 class="other-name">AI*Faith*And You</h3>
+      <p class="other-desc">The Impact of AI on People of Faith. Both sides covered honestly — the promise and the concern.</p>
+      <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Orbitron',monospace; font-size:0.9rem; color:var(--primary); margin-bottom:12px;">AI FOR EVERY1</p>
+  <p>Part of the <a href="https://theoldguyai.com">OVDV Network</a> &nbsp;|&nbsp;
+     <a href="old-guy-ai.html" style="color:#00f5ff">The Old Guy AI</a> &nbsp;|&nbsp;
+     <a href="ai-bility.html" style="color:#39ff14">AI-Bility</a> &nbsp;|&nbsp;
+     <a href="ai-faith-and-you.html" style="color:#bf00ff">AI*Faith*And You</a>
+  </p>
+  <p style="margin-top:10px;">© 2026 Overhill Valley Digital Ventures. Saint Clair Shores, MI.</p>
+</footer>
+
+<script>
+function handleSub(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.sub-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<i class="fa-solid fa-check"></i> You\'re In!';
+  btn.style.background = 'rgba(255,0,110,0.2)';
+  btn.style.color = '#ff006e';
+  btn.style.boxShadow = '0 0 24px rgba(255,0,110,0.4)';
+  e.target.querySelector('input').value = '';
+  setTimeout(() => {
+    btn.innerHTML = orig;
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.boxShadow = '';
+  }, 3200);
+}
+</script>
+
+<!-- CURSOR: pink + cyan only -->
+<script>
+(function() {
+  document.body.style.cursor = 'none';
+  const COLORS = ['#ff006e','#00f5ff','#ff006e','#ff66a3','#00f5ff'];
+  const TRAIL = 20;
+  const dots = [];
+  const pos = Array.from({length:TRAIL},()=>({x:-100,y:-100}));
+  let mx=-100,my=-100,hov=false;
+  for(let i=0;i<TRAIL;i++){
+    const d=document.createElement('div');
+    const c=COLORS[i%COLORS.length];
+    const f=1-(i/TRAIL);
+    const s=Math.round(14*f)+2;
+    const o=0.8-(i/TRAIL)*0.2;
+    d.style.cssText=`position:fixed;pointer-events:none;border-radius:50%;z-index:999999;transform:translate(-50%,-50%);width:${s}px;height:${s}px;background:${c};opacity:${o};box-shadow:0 0 ${s*2}px ${s}px ${c}88;transition:width .15s,height .15s,box-shadow .15s,opacity .15s;will-change:transform`;
+    d._s=s;d._c=c;d._o=o;
+    document.body.appendChild(d);dots.push(d);
+  }
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[role="button"]'))hov=true;});
+  document.addEventListener('mouseout',e=>{if(e.target.closest('a,button,[role="button"]'))hov=false;});
+  const ease=0.35;
+  (function animate(){
+    pos[0].x+=(mx-pos[0].x)*ease;pos[0].y+=(my-pos[0].y)*ease;
+    for(let i=1;i<TRAIL;i++){const l=0.28-(i/TRAIL)*0.18;pos[i].x+=(pos[i-1].x-pos[i].x)*l;pos[i].y+=(pos[i-1].y-pos[i].y)*l;}
+    for(let i=0;i<TRAIL;i++){
+      const d=dots[i];d.style.left=pos[i].x+'px';d.style.top=pos[i].y+'px';
+      if(hov){const b=d._s*1.7;d.style.width=b+'px';d.style.height=b+'px';d.style.opacity=Math.min(d._o*1.3,1);d.style.boxShadow=`0 0 ${b*2.5}px ${b}px ${d._c}cc`;}
+      else{d.style.width=d._s+'px';d.style.height=d._s+'px';d.style.opacity=d._o;d.style.boxShadow=`0 0 ${d._s*2}px ${d._s}px ${d._c}88`;}
+    }
+    requestAnimationFrame(animate);
+  })();
+})();
+</script>
+</body>
+</html>
