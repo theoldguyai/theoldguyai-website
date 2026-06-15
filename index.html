@@ -490,8 +490,10 @@
 
     .newsletter-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .newsletter-card {
@@ -880,9 +882,9 @@
 
     .subscribe-cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 1400px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -890,7 +892,8 @@
       background: var(--bg-dark);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 14px;
-      padding: 24px 20px;
+      padding: 32px 28px;
+      font-size: 1.05rem;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
 
@@ -918,16 +921,16 @@
     .sub-aife .sub-brand-icon { background: rgba(57,255,20,0.1);  color: var(--neon-green); }
     .sub-siai .sub-brand-icon { background: rgba(255,215,0,0.1);  color: var(--neon-gold); }
 
-    .sub-brand-name {
+    .sub-brand-name { font-size: 1.1rem;
       font-family: var(--font-display);
       font-size: 0.83rem;
       font-weight: 700;
       line-height: 1.2;
     }
 
-    .sub-toga .sub-brand-name { color: var(--neon-cyan); }
-    .sub-aife .sub-brand-name { color: var(--neon-green); }
-    .sub-siai .sub-brand-name { color: var(--neon-gold); }
+    .sub-toga .sub-brand-name { font-size: 1.1rem; color: var(--neon-cyan); }
+    .sub-aife .sub-brand-name { font-size: 1.1rem; color: var(--neon-green); }
+    .sub-siai .sub-brand-name { font-size: 1.1rem; color: var(--neon-gold); }
 
     .sub-brand-tag {
       font-family: var(--font-ui);
@@ -1230,9 +1233,9 @@
       .footer-bottom { flex-direction: column; text-align: center; }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 700px) {
       .newsletter-cards,
-      .subscribe-cards,
+      .subscribe-cards { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
     }
 
@@ -1397,7 +1400,7 @@
   <div class="container">
     <div class="newsletters-header reveal">
       <div class="section-label" style="justify-content:center">Our Brands</div>
-      <h2 class="section-title">Three Brands. One Vision.</h2>
+      <h2 class="section-title">Four Brands. One Vision.</h2>
       <p class="section-subtitle" style="margin:0 auto;text-align:center">
         Distinct voices. Distinct audiences. All united by the belief that AI is the great equalizer of our generation.
       </p>
