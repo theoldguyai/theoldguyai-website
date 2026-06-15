@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Old Guy AI — Tech Help That Even Seniors Can Understand</title>
+<meta name="description" content="Plain-English tech help for seniors. Phones, apps, email, AI tools — explained simply. No jargon, no judgment."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  :root {
+    --primary: #00f5ff;
+    --accent:  #ffd700;
+    --bg:      #050a0f;
+    --bg2:     #0a1520;
+    --text:    #e8f4f8;
+    --muted:   #7a9ab0;
+    --card-bg: rgba(0,245,255,0.04);
+    --card-border: rgba(0,245,255,0.18);
+    --glow: 0 0 24px rgba(0,245,255,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(5,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,245,255,0.1);
+  }
+  .nav-logo { font-family: 'Orbitron', monospace; font-size: 1rem; color: var(--primary); letter-spacing: 2px; text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--primary); }
+  .nav-home { color: var(--accent) !important; font-weight: 600; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,245,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,245,255,0.08);
+    border: 1px solid rgba(0,245,255,0.3);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--primary); margin-bottom: 32px;
+  }
+  .hero-badge i { font-size: 0.7rem; }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .hero h1 span { color: var(--primary); text-shadow: var(--glow); }
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .hero-desc {
+    max-width: 580px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  /* ── SUBSCRIBE FORM ── */
+  .sub-form {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    max-width: 500px; width: 100%;
+  }
+  .sub-form input {
+    flex: 1; min-width: 220px;
+    background: rgba(0,245,255,0.06);
+    border: 1px solid rgba(0,245,255,0.3);
+    border-radius: 8px;
+    padding: 14px 20px;
+    color: var(--text); font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .sub-form input:focus { border-color: var(--primary); }
+  .sub-form input::placeholder { color: var(--muted); }
+  .sub-btn {
+    background: var(--primary);
+    color: #050a0f;
+    border: none; border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 1px;
+    cursor: none; transition: all 0.2s;
+    box-shadow: 0 0 20px rgba(0,245,255,0.4);
+    white-space: nowrap;
+  }
+  .sub-btn:hover { background: #fff; box-shadow: 0 0 32px rgba(0,245,255,0.7); }
+  .sub-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; }
+
+  /* ── STATS BAR ── */
+  .stats {
+    display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
+    padding: 40px 24px;
+    border-top: 1px solid rgba(0,245,255,0.08);
+    border-bottom: 1px solid rgba(0,245,255,0.08);
+    margin: 0 auto; max-width: 900px;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900; color: var(--primary); display: block; }
+  .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--primary); margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 700; color: #fff; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+
+  /* ── SAMPLE ISSUES ── */
+  .issues-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .issue-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .issue-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+  .issue-card:hover { border-color: rgba(0,245,255,0.45); transform: translateY(-4px); }
+  .issue-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .issue-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+  .issue-preview { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+  .issue-topics { display: flex; flex-wrap: wrap; gap: 6px; }
+  .topic-tag {
+    background: rgba(0,245,255,0.08);
+    border: 1px solid rgba(0,245,255,0.2);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-size: 0.72rem; color: var(--primary);
+  }
+
+  /* ── WHAT YOU GET ── */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .feature {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 20px;
+  }
+  .feature-icon { color: var(--primary); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+  .feature-text h4 { font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .feature-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── OTHER NEWSLETTERS ── */
+  .other-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .other-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 24px; text-decoration: none;
+    transition: all 0.2s; display: block;
+  }
+  .other-card:hover { transform: translateY(-3px); }
+  .other-card.faith { border-color: rgba(255,215,0,0.25); }
+  .other-card.faith:hover { border-color: rgba(255,215,0,0.5); }
+  .other-card.ability { border-color: rgba(57,255,20,0.25); }
+  .other-card.ability:hover { border-color: rgba(57,255,20,0.5); }
+  .other-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .other-card.faith .other-label { color: #ffd700; }
+  .other-card.ability .other-label { color: #39ff14; }
+  .other-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .other-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .other-arrow { font-size: 0.8rem; margin-top: 12px; }
+  .other-card.faith .other-arrow { color: #ffd700; }
+  .other-card.ability .other-arrow { color: #39ff14; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 40px 24px;
+    border-top: 1px solid rgba(0,245,255,0.08);
+    color: var(--muted); font-size: 0.82rem;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+
+  /* ── DIVIDER ── */
+  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--primary), transparent); margin-bottom: 40px; }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 14px; }
+    .stats { gap: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://theoldguyai.com" class="nav-logo">OVDV</a>
+  <div class="nav-links">
+    <a href="https://theoldguyai.com" class="nav-home"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="faith-and-ai.html" style="color:#ffd700"><i class="fa-solid fa-cross"></i> Faith & AI</a>
+    <a href="ai-bility.html" style="color:#39ff14"><i class="fa-solid fa-universal-access"></i> AI-Bility</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="fa-solid fa-signal"></i> Free Weekly Newsletter</div>
+  <h1>The <span>Old Guy AI</span></h1>
+  <p class="hero-tagline">Tech help that even seniors can understand.</p>
+  <p class="hero-desc">Every week I break down phones, apps, email, AI tools, and everyday technology in plain English — no jargon, no judgment, just honest guidance from someone who figured it out the hard way.</p>
+  <form class="sub-form" onsubmit="handleSub(event)">
+    <input type="email" placeholder="Your email address" required/>
+    <button type="submit" class="sub-btn"><i class="fa-solid fa-bolt"></i> Subscribe Free</button>
+  </form>
+  <p class="sub-note">No spam. Unsubscribe anytime. Just real help, every week.</p>
+</section>
+
+<!-- STATS -->
+<div style="background:var(--bg2); padding: 0 24px;">
+  <div class="stats">
+    <div class="stat"><span class="stat-num">Weekly</span><span class="stat-label">Every Tuesday</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Plain English</span></div>
+    <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Always</span></div>
+    <div class="stat"><span class="stat-num">Senior</span><span class="stat-label">Focused</span></div>
+  </div>
+</div>
+
+<!-- SAMPLE ISSUES -->
+<section>
+  <p class="section-label">Sample Issues</p>
+  <h2>What lands in your inbox</h2>
+  <p class="section-sub">Real topics, written like I'm sitting across the table from you. Here's a taste of what you'll get every Tuesday.</p>
+  <div class="divider"></div>
+  <div class="issues-grid">
+    <div class="issue-card">
+      <p class="issue-num">Issue #001</p>
+      <h3 class="issue-title">Your Phone Is Lying to You — Here's What Those Notifications Actually Mean</h3>
+      <p class="issue-preview">Every day your phone buzzes, beeps, and flashes little red numbers at you. Most of it is nothing. But some of it matters. This week I show you how to tell the difference — and how to silence the noise for good.</p>
+      <div class="issue-topics">
+        <span class="topic-tag">Smartphones</span>
+        <span class="topic-tag">Settings</span>
+        <span class="topic-tag">Notifications</span>
+      </div>
+    </div>
+    <div class="issue-card">
+      <p class="issue-num">Issue #002</p>
+      <h3 class="issue-title">I Asked AI to Help Me Write an Email — Here's Exactly What Happened</h3>
+      <p class="issue-preview">I walked through using ChatGPT to write a complaint letter to my insurance company. Step by step. What I typed, what it gave me, what I changed. If I can do this, you absolutely can too.</p>
+      <div class="issue-topics">
+        <span class="topic-tag">ChatGPT</span>
+        <span class="topic-tag">Email</span>
+        <span class="topic-tag">Beginner AI</span>
+      </div>
+    </div>
+    <div class="issue-card">
+      <p class="issue-num">Issue #003</p>
+      <h3 class="issue-title">The Medicare Scam Texts Are Getting Smarter — Here's the New Playbook</h3>
+      <p class="issue-preview">Scammers are now using AI to make their texts sound more real. I break down the three new tricks they're using in 2026, and give you the one question that always exposes them.</p>
+      <div class="issue-topics">
+        <span class="topic-tag">Scam Alerts</span>
+        <span class="topic-tag">Online Safety</span>
+        <span class="topic-tag">Medicare</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="background:var(--bg2); max-width:100%; padding: 80px 24px;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <p class="section-label">Every Issue</p>
+    <h2>What you get each Tuesday</h2>
+    <div class="divider"></div>
+    <div class="features-grid">
+      <div class="feature">
+        <i class="fa-solid fa-mobile-screen feature-icon"></i>
+        <div class="feature-text"><h4>Phone & Tablet Tips</h4><p>Practical tricks for iPhone and Android users — explained without assuming you know anything.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-robot feature-icon"></i>
+        <div class="feature-text"><h4>AI Tools, Simplified</h4><p>One AI tool per week, shown step by step. Real use cases for real life.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-shield-halved feature-icon"></i>
+        <div class="feature-text"><h4>Scam Alerts</h4><p>The latest scams targeting seniors, explained clearly so you can spot and avoid them.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-envelope feature-icon"></i>
+        <div class="feature-text"><h4>Email & App Help</h4><p>Gmail, Facebook, Zoom, Amazon — the apps you use every day, made easier.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-circle-question feature-icon"></i>
+        <div class="feature-text"><h4>Reader Q&A</h4><p>Real questions from real subscribers, answered every week. Your question might be next.</p></div>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-thumbs-up feature-icon"></i>
+        <div class="feature-text"><h4>No Judgment, Ever</h4><p>There's no such thing as a dumb tech question here. If you're confused, I've probably been confused too.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER NEWSLETTERS -->
+<section>
+  <p class="section-label">The OVDV Family</p>
+  <h2>More newsletters you'll love</h2>
+  <p class="section-sub">Each newsletter crosses into the others. Find one, discover all three.</p>
+  <div class="divider"></div>
+  <div class="other-grid">
+    <a href="faith-and-ai.html" class="other-card faith">
+      <p class="other-label"><i class="fa-solid fa-cross"></i> Newsletter 02</p>
+      <h3 class="other-name">Faith & AI Weekly</h3>
+      <p class="other-desc">Helping believers navigate AI with confidence. Practical AI tools for ministry, Bible study, and church life — with a Pastor's Take in every issue.</p>
+      <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
+    </a>
+    <a href="ai-bility.html" class="other-card ability">
+      <p class="other-label"><i class="fa-solid fa-universal-access"></i> Newsletter 03</p>
+      <h3 class="other-name">AI-Bility</h3>
+      <p class="other-desc">AI Powered Ability for Everyone Who Needs It. Tools for people with disabilities and chronic illness — voice, vision, mobility, and beyond.</p>
+      <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Orbitron',monospace; font-size:0.9rem; color:var(--primary); margin-bottom:12px;">THE OLD GUY AI</p>
+  <p>Part of the <a href="https://theoldguyai.com">OVDV Network</a> &nbsp;|&nbsp; <a href="faith-and-ai.html">Faith & AI Weekly</a> &nbsp;|&nbsp; <a href="ai-bility.html">AI-Bility</a></p>
+  <p style="margin-top:10px;">© 2026 Overhill Valley Digital Ventures. Saint Clair Shores, MI.</p>
+</footer>
+
+<script>
+function handleSub(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.sub-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<i class="fa-solid fa-check"></i> You\'re In!';
+  btn.style.cssText += ';background:rgba(0,245,255,0.2);border:1px solid rgba(0,245,255,0.5);color:#00f5ff';
+  e.target.querySelector('input').value = '';
+  setTimeout(() => { btn.innerHTML = orig; btn.style.cssText = ''; }, 3200);
+}
+</script>
+
+<!-- CURSOR: cyan + gold only -->
+<script>
+(function() {
+  document.body.style.cursor = 'none';
+  const COLORS = ['#00f5ff','#ffd700','#00f5ff','#b8eeff','#ffd700'];
+  const TRAIL = 20;
+  const dots = [];
+  const pos = Array.from({length:TRAIL},()=>({x:-100,y:-100}));
+  let mx=-100,my=-100,hov=false;
+  for(let i=0;i<TRAIL;i++){
+    const d=document.createElement('div');
+    const c=COLORS[i%COLORS.length];
+    const f=1-(i/TRAIL);
+    const s=Math.round(14*f)+2;
+    const o=0.8-(i/TRAIL)*0.2;
+    d.style.cssText=`position:fixed;pointer-events:none;border-radius:50%;z-index:999999;transform:translate(-50%,-50%);width:${s}px;height:${s}px;background:${c};opacity:${o};box-shadow:0 0 ${s*2}px ${s}px ${c}88;transition:width .15s,height .15s,box-shadow .15s,opacity .15s;will-change:transform`;
+    d._s=s;d._c=c;d._o=o;
+    document.body.appendChild(d);dots.push(d);
+  }
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,[role="button"]'))hov=true;});
+  document.addEventListener('mouseout',e=>{if(e.target.closest('a,button,[role="button"]'))hov=false;});
+  const ease=0.35;
+  (function animate(){
+    pos[0].x+=(mx-pos[0].x)*ease;pos[0].y+=(my-pos[0].y)*ease;
+    for(let i=1;i<TRAIL;i++){const l=0.28-(i/TRAIL)*0.18;pos[i].x+=(pos[i-1].x-pos[i].x)*l;pos[i].y+=(pos[i-1].y-pos[i].y)*l;}
+    for(let i=0;i<TRAIL;i++){
+      const d=dots[i];d.style.left=pos[i].x+'px';d.style.top=pos[i].y+'px';
+      if(hov){const b=d._s*1.7;d.style.width=b+'px';d.style.height=b+'px';d.style.opacity=Math.min(d._o*1.3,1);d.style.boxShadow=`0 0 ${b*2.5}px ${b}px ${d._c}cc`;}
+      else{d.style.width=d._s+'px';d.style.height=d._s+'px';d.style.opacity=d._o;d.style.boxShadow=`0 0 ${d._s*2}px ${d._s}px ${d._c}88`;}
+    }
+    requestAnimationFrame(animate);
+  })();
+})();
+</script>
+</body>
+</html>
