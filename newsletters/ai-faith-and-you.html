@@ -3,106 +3,160 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Faith & AI Weekly — Helping Believers Navigate AI</title>
-<meta name="description" content="Helping believers navigate AI with confidence. Practical AI tools for ministry, Bible study, and church life — with a Pastor's Take every week."/>
+<title>AI*Faith*And You — The Impact of AI on People of Faith</title>
+<meta name="description" content="The Impact of AI on People of Faith. Honest, balanced coverage of what AI means for believers — the promise, the concern, and everything in between."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
   :root {
-    --primary: #ffd700;
-    --accent:  #bf00ff;
-    --bg:      #0a0806;
-    --bg2:     #14100a;
-    --text:    #f5f0e8;
-    --muted:   #9a8a6a;
-    --card-bg: rgba(255,215,0,0.04);
-    --card-border: rgba(255,215,0,0.18);
-    --glow: 0 0 24px rgba(255,215,0,0.35);
+    --primary: #bf00ff;
+    --accent:  #ffd700;
+    --bg:      #080510;
+    --bg2:     #100820;
+    --text:    #f0eaff;
+    --muted:   #8a7aaa;
+    --card-bg: rgba(191,0,255,0.04);
+    --card-border: rgba(191,0,255,0.18);
+    --glow: 0 0 24px rgba(191,0,255,0.4);
+    --glow-gold: 0 0 24px rgba(255,215,0,0.35);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; cursor: none; overflow-x: hidden; }
 
+  /* ── BACKGROUND GRID ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(191,0,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(191,0,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 40px;
-    background: rgba(10,8,6,0.88); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,215,0,0.1);
+    background: rgba(8,5,16,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(191,0,255,0.12);
   }
   .nav-logo { font-family: 'Orbitron', monospace; font-size: 1rem; color: var(--primary); letter-spacing: 2px; text-decoration: none; }
   .nav-links { display: flex; gap: 24px; align-items: center; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
   .nav-links a:hover { color: var(--primary); }
 
+  /* ── HERO ── */
   .hero {
-    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 80px;
+    position: relative; overflow: hidden; z-index: 1;
   }
   .hero::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,215,0,0.07) 0%, transparent 70%);
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 20%, rgba(191,0,255,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(255,215,0,0.06) 0%, transparent 60%);
     pointer-events: none;
   }
-  /* Subtle cross watermark */
+  /* Cross watermark */
   .hero::after {
-    content: '\2627';
-    position: absolute; bottom: 10%; right: 8%;
-    font-size: 18rem; color: rgba(255,215,0,0.03);
-    pointer-events: none; line-height: 1;
+    content: '\271D';
+    position: absolute; bottom: 5%; right: 5%;
+    font-size: 22rem; color: rgba(191,0,255,0.04);
+    pointer-events: none; line-height: 1; z-index: 0;
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.3);
+    background: rgba(191,0,255,0.08); border: 1px solid rgba(191,0,255,0.35);
     border-radius: 100px; padding: 6px 18px;
     font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--primary); margin-bottom: 32px;
+    color: var(--primary); margin-bottom: 32px; position: relative; z-index: 1;
   }
   .hero h1 {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-size: clamp(2rem, 5.5vw, 4rem);
     font-weight: 900; line-height: 1.1; margin-bottom: 12px; color: #fff;
+    position: relative; z-index: 1;
   }
-  .hero h1 span { color: var(--primary); text-shadow: var(--glow); }
-  .hero-tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--accent); font-weight: 600; letter-spacing: 1px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(191,0,255,0.4); }
-  .hero-desc { max-width: 580px; font-size: 1.05rem; color: var(--muted); line-height: 1.7; margin-bottom: 48px; }
+  .hero h1 .star { color: var(--accent); text-shadow: var(--glow-gold); }
+  .hero h1 .faith { color: var(--primary); text-shadow: var(--glow); }
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--accent); font-weight: 600; letter-spacing: 1px;
+    margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,215,0,0.4);
+    position: relative; z-index: 1;
+  }
+  .hero-desc {
+    max-width: 600px; font-size: 1.05rem; color: var(--muted);
+    line-height: 1.75; margin-bottom: 48px; position: relative; z-index: 1;
+  }
 
-  .sub-form { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: 500px; width: 100%; }
+  /* ── BOTH SIDES BADGE ── */
+  .both-sides {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 40px; position: relative; z-index: 1;
+  }
+  .side-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border-radius: 100px; padding: 8px 20px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 1px;
+  }
+  .side-promise {
+    background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.35);
+    color: var(--accent);
+  }
+  .side-concern {
+    background: rgba(191,0,255,0.08); border: 1px solid rgba(191,0,255,0.35);
+    color: var(--primary);
+  }
+
+  /* ── SUBSCRIBE ── */
+  .sub-form {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    max-width: 500px; width: 100%; position: relative; z-index: 1;
+  }
   .sub-form input {
     flex: 1; min-width: 220px;
-    background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.3);
+    background: rgba(191,0,255,0.06); border: 1px solid rgba(191,0,255,0.3);
     border-radius: 8px; padding: 14px 20px; color: var(--text); font-size: 0.95rem;
     outline: none; transition: border-color 0.2s;
   }
   .sub-form input:focus { border-color: var(--primary); }
   .sub-form input::placeholder { color: var(--muted); }
   .sub-btn {
-    background: var(--primary); color: #0a0806;
-    border: none; border-radius: 8px; padding: 14px 28px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #080510; border: none; border-radius: 8px; padding: 14px 28px;
     font-size: 0.95rem; font-weight: 700; letter-spacing: 1px;
     cursor: none; transition: all 0.2s;
-    box-shadow: 0 0 20px rgba(255,215,0,0.4); white-space: nowrap;
+    box-shadow: 0 0 24px rgba(191,0,255,0.4); white-space: nowrap;
   }
-  .sub-btn:hover { background: #fff; box-shadow: 0 0 32px rgba(255,215,0,0.7); }
-  .sub-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; }
+  .sub-btn:hover { box-shadow: 0 0 40px rgba(191,0,255,0.7); transform: translateY(-2px); }
+  .sub-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; position: relative; z-index: 1; }
 
+  /* ── STATS ── */
   .stats {
     display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
     padding: 40px 24px;
-    border-top: 1px solid rgba(255,215,0,0.08); border-bottom: 1px solid rgba(255,215,0,0.08);
-    margin: 0 auto; max-width: 900px;
+    border-top: 1px solid rgba(191,0,255,0.08);
+    border-bottom: 1px solid rgba(191,0,255,0.08);
+    margin: 0 auto; max-width: 900px; position: relative; z-index: 1;
   }
   .stat { text-align: center; }
   .stat-num { font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900; color: var(--primary); display: block; }
   .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-  section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
   .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; }
   h2 { font-family: 'Orbitron', monospace; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 16px; }
-  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
-  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--primary), transparent); margin-bottom: 40px; }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 640px; margin-bottom: 48px; }
+  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent), transparent); margin-bottom: 40px; }
 
+  /* ── SAMPLE ISSUES ── */
   .issues-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
   .issue-card {
     background: var(--card-bg); border: 1px solid var(--card-border);
@@ -113,48 +167,74 @@
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
     background: linear-gradient(90deg, var(--primary), var(--accent));
   }
-  .issue-card:hover { border-color: rgba(255,215,0,0.45); transform: translateY(-4px); }
+  .issue-card:hover { border-color: rgba(191,0,255,0.45); transform: translateY(-4px); }
   .issue-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
   .issue-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4; }
-  .issue-preview { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+  .issue-preview { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
 
-  /* Pastor's Take box */
+  /* Both Sides breakdown */
+  .both-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .promise-box {
+    background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .concern-box {
+    background: rgba(191,0,255,0.06); border: 1px solid rgba(191,0,255,0.2);
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .box-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .promise-box .box-label { color: var(--accent); }
+  .concern-box .box-label { color: var(--primary); }
+  .box-text { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+
+  /* Pastor's Take */
   .pastors-take {
-    background: rgba(191,0,255,0.07);
-    border: 1px solid rgba(191,0,255,0.25);
+    background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.22);
     border-radius: 10px; padding: 14px 16px; margin-top: 14px;
   }
   .pastors-take-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .pastors-take p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; font-style: italic; }
 
   .issue-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-  .topic-tag { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); border-radius: 100px; padding: 3px 10px; font-size: 0.72rem; color: var(--primary); }
+  .topic-tag { background: rgba(191,0,255,0.08); border: 1px solid rgba(191,0,255,0.2); border-radius: 100px; padding: 3px 10px; font-size: 0.72rem; color: var(--primary); }
 
+  /* ── FEATURES ── */
   .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .feature { display: flex; gap: 14px; align-items: flex-start; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; }
   .feature-icon { color: var(--primary); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+  .feature-icon.gold { color: var(--accent); }
   .feature-text h4 { font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .feature-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
 
-  .other-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  /* ── OTHER NEWSLETTERS ── */
+  .other-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
   .other-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 24px; text-decoration: none; transition: all 0.2s; display: block; }
-  .other-card.cyan { border-color: rgba(0,245,255,0.25); }
+  .other-card.cyan { border-color: rgba(0,245,255,0.2); }
   .other-card.cyan:hover { border-color: rgba(0,245,255,0.5); transform: translateY(-3px); }
-  .other-card.ability { border-color: rgba(57,255,20,0.25); }
-  .other-card.ability:hover { border-color: rgba(57,255,20,0.5); transform: translateY(-3px); }
+  .other-card.pink { border-color: rgba(255,0,110,0.2); }
+  .other-card.pink:hover { border-color: rgba(255,0,110,0.5); transform: translateY(-3px); }
+  .other-card.green { border-color: rgba(57,255,20,0.2); }
+  .other-card.green:hover { border-color: rgba(57,255,20,0.5); transform: translateY(-3px); }
   .other-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
   .other-card.cyan .other-label { color: #00f5ff; }
-  .other-card.ability .other-label { color: #39ff14; }
+  .other-card.pink .other-label { color: #ff006e; }
+  .other-card.green .other-label { color: #39ff14; }
   .other-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
   .other-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
   .other-arrow { font-size: 0.8rem; margin-top: 12px; }
   .other-card.cyan .other-arrow { color: #00f5ff; }
-  .other-card.ability .other-arrow { color: #39ff14; }
+  .other-card.pink .other-arrow { color: #ff006e; }
+  .other-card.green .other-arrow { color: #39ff14; }
 
-  footer { text-align: center; padding: 40px 24px; border-top: 1px solid rgba(255,215,0,0.08); color: var(--muted); font-size: 0.82rem; }
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid rgba(191,0,255,0.08); color: var(--muted); font-size: 0.82rem; position: relative; z-index: 1; }
   footer a { color: var(--primary); text-decoration: none; }
 
-  @media (max-width: 600px) { nav { padding: 14px 20px; } .nav-links { gap: 14px; } .stats { gap: 28px; } }
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 14px; }
+    .stats { gap: 28px; }
+    .both-breakdown { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -163,7 +243,8 @@
   <a href="https://theoldguyai.com" class="nav-logo">OVDV</a>
   <div class="nav-links">
     <a href="https://theoldguyai.com" style="color:#ffd700"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="old-guy-ai.html" style="color:#00f5ff"><i class="fa-solid fa-microchip"></i> Old Guy AI</a>
+    <a href="old-guy-ai.html" style="color:#00f5ff"><i class="fa-solid fa-robot"></i> Old Guy AI</a>
+    <a href="ai-for-every1.html" style="color:#ff006e"><i class="fa-solid fa-people-group"></i> Every1</a>
     <a href="ai-bility.html" style="color:#39ff14"><i class="fa-solid fa-universal-access"></i> AI-Bility</a>
   </div>
 </nav>
@@ -171,9 +252,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge"><i class="fa-solid fa-cross"></i> Free Weekly Newsletter</div>
-  <h1>Faith &amp; AI <span>Weekly</span></h1>
-  <p class="hero-tagline">Helping believers navigate AI with confidence.</p>
-  <p class="hero-desc">Every week we bring you practical AI tools for ministry, Bible study, and church life — written from a place of faith, not fear. With a Pastor's Take in every issue.</p>
+  <h1>AI<span class="star">*</span><span class="faith">Faith</span><span class="star">*</span>And You</h1>
+  <p class="hero-tagline">The Impact of AI on People of Faith.</p>
+  <p class="hero-desc">Every week we explore what Artificial Intelligence means for believers — honestly, from both sides. The promise and the pitfall. The tool and the threat. The opportunity and the question. No agenda. Just truth.</p>
+  <div class="both-sides">
+    <span class="side-badge side-promise"><i class="fa-solid fa-sun"></i> The Promise of AI</span>
+    <span class="side-badge side-concern"><i class="fa-solid fa-triangle-exclamation"></i> The Concern for Faith</span>
+  </div>
   <form class="sub-form" onsubmit="handleSub(event)">
     <input type="email" placeholder="Your email address" required/>
     <button type="submit" class="sub-btn"><i class="fa-solid fa-cross"></i> Subscribe Free</button>
@@ -182,10 +267,10 @@
 </section>
 
 <!-- STATS -->
-<div style="background:var(--bg2); padding: 0 24px;">
+<div style="background:var(--bg2); padding: 0 24px; position:relative; z-index:1;">
   <div class="stats">
-    <div class="stat"><span class="stat-num">Weekly</span><span class="stat-label">Every Thursday</span></div>
-    <div class="stat"><span class="stat-num">Pastor</span><span class="stat-label">Reviewed</span></div>
+    <div class="stat"><span class="stat-num">Weekly</span><span class="stat-label">Every Friday</span></div>
+    <div class="stat"><span class="stat-num">Both</span><span class="stat-label">Sides Covered</span></div>
     <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Always</span></div>
     <div class="stat"><span class="stat-num">Faith</span><span class="stat-label">Anchored</span></div>
   </div>
@@ -195,45 +280,79 @@
 <section>
   <p class="section-label">Sample Issues</p>
   <h2>What lands in your inbox</h2>
-  <p class="section-sub">Practical. Grounded in faith. Written for real believers — not tech experts. Every issue includes a Pastor's Take from an active pastor in ministry.</p>
+  <p class="section-sub">Every issue covers the same topic from both sides — the promise AI brings to faith communities and the legitimate concerns believers should know about. No spin. No fear-mongering. Just honest information.</p>
   <div class="divider"></div>
   <div class="issues-grid">
+
     <div class="issue-card">
       <p class="issue-num">Issue #001</p>
-      <h3 class="issue-title">Can AI Help You Study the Bible? We Tested 3 Tools So You Don't Have To</h3>
-      <p class="issue-preview">We put three AI Bible study tools through their paces — Logos AI, YouVersion's new assistant, and plain ChatGPT. Here's what each one is good for, what to watch out for, and which one we'd actually recommend for your quiet time.</p>
+      <h3 class="issue-title">Can AI Write a Sermon? Pastors Are Doing It — Here's What the Bible Says About It</h3>
+      <p class="issue-preview">Over 60% of pastors now use AI for sermon preparation. This week we look at what that means for authenticity, the Holy Spirit's role, and the difference between a tool and a crutch — from both sides of the conversation.</p>
+      <div class="both-breakdown">
+        <div class="promise-box">
+          <p class="box-label"><i class="fa-solid fa-sun"></i> The Promise</p>
+          <p class="box-text">More time for pastoral care. Better research. Broader Scripture context in minutes.</p>
+        </div>
+        <div class="concern-box">
+          <p class="box-label"><i class="fa-solid fa-triangle-exclamation"></i> The Concern</p>
+          <p class="box-text">Authenticity at risk. AI has no faith. Can a machine-assisted sermon carry the Spirit?</p>
+        </div>
+      </div>
       <div class="pastors-take">
         <p class="pastors-take-label"><i class="fa-solid fa-church"></i> Pastor's Take</p>
-        <p>"AI can surface context and cross-references quickly, but discernment still comes from the Spirit and community. Use it as a research assistant, not a spiritual director."</p>
+        <p>"AI can research faster than any pastor. But the moment of conviction in a sermon comes from a man wrestling with God — not a language model."</p>
       </div>
       <div class="issue-topics">
-        <span class="topic-tag">Bible Study</span><span class="topic-tag">AI Tools</span><span class="topic-tag">Devotionals</span>
+        <span class="topic-tag">Sermon Prep</span><span class="topic-tag">Ministry</span><span class="topic-tag">Authenticity</span>
       </div>
     </div>
+
     <div class="issue-card">
       <p class="issue-num">Issue #002</p>
-      <h3 class="issue-title">Your Church's First AI Policy — A Simple Template Any Pastor Can Use</h3>
-      <p class="issue-preview">75% of pastors say theological misalignment is their top AI concern. This week we give you a one-page policy template you can bring to your leadership team — covering sermon prep, social media, and member privacy.</p>
+      <h3 class="issue-title">AI and the Image of God — What Does Genesis 1:27 Say About Creating Artificial Intelligence?</h3>
+      <p class="issue-preview">Theologians, philosophers, and AI researchers are all asking the same question from different angles: if humans are made in God's image and humans create AI — what does that make AI? This week we dig into the theology and the technology together.</p>
+      <div class="both-breakdown">
+        <div class="promise-box">
+          <p class="box-label"><i class="fa-solid fa-sun"></i> The Promise</p>
+          <p class="box-text">AI as an expression of human creativity — a reflection of the creative nature God gave us.</p>
+        </div>
+        <div class="concern-box">
+          <p class="box-label"><i class="fa-solid fa-triangle-exclamation"></i> The Concern</p>
+          <p class="box-text">Creating artificial "minds" raises deep questions about the uniqueness of human consciousness and the soul.</p>
+        </div>
+      </div>
       <div class="pastors-take">
         <p class="pastors-take-label"><i class="fa-solid fa-church"></i> Pastor's Take</p>
-        <p>"Every church needs guardrails before they need them. This template gives you a starting point for a conversation your congregation is already having — whether you know it or not."</p>
+        <p>"We've always used tools. The question isn't whether we build AI — it's whether we remain humble enough to remember we are not God, even when we're building things that seem god-like."</p>
       </div>
       <div class="issue-topics">
-        <span class="topic-tag">Church Leadership</span><span class="topic-tag">AI Policy</span><span class="topic-tag">Ministry</span>
+        <span class="topic-tag">Theology</span><span class="topic-tag">Genesis</span><span class="topic-tag">Ethics</span>
       </div>
     </div>
+
     <div class="issue-card">
       <p class="issue-num">Issue #003</p>
-      <h3 class="issue-title">AI for Senior Saints — How Older Congregation Members Can Use AI to Stay Connected</h3>
-      <p class="issue-preview">Many of the seniors in your congregation feel left behind by technology. This week we look at three simple AI tools that help older believers stay connected to their faith community — and how your church can introduce them gently.</p>
+      <h3 class="issue-title">AI Bible Study Tools — 3 That Help and 2 That Could Lead You Astray</h3>
+      <p class="issue-preview">Not all AI Bible tools are created equal. Some genuinely deepen your understanding of Scripture. Others produce confident-sounding answers that are theologically wrong. This week we test five tools and tell you exactly which ones to trust — and which ones to question.</p>
+      <div class="both-breakdown">
+        <div class="promise-box">
+          <p class="box-label"><i class="fa-solid fa-sun"></i> The Promise</p>
+          <p class="box-text">Instant cross-references, historical context, and original language insights available to everyone.</p>
+        </div>
+        <div class="concern-box">
+          <p class="box-label"><i class="fa-solid fa-triangle-exclamation"></i> The Concern</p>
+          <p class="box-text">AI hallucinates. It can produce doctrinally incorrect interpretations with complete confidence.</p>
+        </div>
+      </div>
       <div class="pastors-take">
         <p class="pastors-take-label"><i class="fa-solid fa-church"></i> Pastor's Take</p>
-        <p>"We have a responsibility to the whole body. Technology that excludes our elders isn't progress — it's a failure of discipleship. These tools can actually bring people closer."</p>
+        <p>"A congregation should use AI like you'd use a commentary — as a starting point, not a final authority. Scripture interprets Scripture. AI does not."</p>
       </div>
       <div class="issue-topics">
-        <span class="topic-tag">Senior Ministry</span><span class="topic-tag">Accessibility</span><span class="topic-tag">Community</span>
+        <span class="topic-tag">Bible Study</span><span class="topic-tag">AI Tools</span><span class="topic-tag">Discernment</span>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -241,32 +360,32 @@
 <section style="background:var(--bg2); max-width:100%; padding: 80px 24px;">
   <div style="max-width:1000px; margin:0 auto;">
     <p class="section-label">Every Issue</p>
-    <h2>What you get each Thursday</h2>
+    <h2>What you get each Friday</h2>
     <div class="divider"></div>
     <div class="features-grid">
       <div class="feature">
+        <i class="fa-solid fa-scale-balanced feature-icon gold"></i>
+        <div class="feature-text"><h4>Both Sides, Every Time</h4><p>Every topic covered from the promise and the concern. No agenda. No fear-mongering. Just honest, balanced information for believers.</p></div>
+      </div>
+      <div class="feature">
         <i class="fa-solid fa-church feature-icon"></i>
-        <div class="feature-text"><h4>Ministry AI Tools</h4><p>Sermon prep, bulletin writing, outreach — one practical tool explained clearly each week.</p></div>
+        <div class="feature-text"><h4>Pastor's Take</h4><p>Every issue includes a pastoral perspective from an active minister — real discernment for real questions from someone in the trenches of ministry.</p></div>
       </div>
       <div class="feature">
-        <i class="fa-solid fa-bible feature-icon"></i>
-        <div class="feature-text"><h4>Bible Study Resources</h4><p>AI tools that deepen your Scripture study without replacing the Holy Spirit's guidance.</p></div>
+        <i class="fa-solid fa-bible feature-icon gold"></i>
+        <div class="feature-text"><h4>Scripture and Technology</h4><p>What does the Bible actually say — or not say — about AI? We dig into the text so you don't have to guess.</p></div>
       </div>
       <div class="feature">
-        <i class="fa-solid fa-cross feature-icon"></i>
-        <div class="feature-text"><h4>Pastor's Take</h4><p>Every issue includes a pastoral perspective from an active minister — real discernment for real questions.</p></div>
+        <i class="fa-solid fa-magnifying-glass feature-icon"></i>
+        <div class="feature-text"><h4>AI Tool Reviews for Faith</h4><p>Bible study tools, sermon prep assistants, prayer apps — we test them and tell you honestly what's worth your time.</p></div>
       </div>
       <div class="feature">
-        <i class="fa-solid fa-shield-halved feature-icon"></i>
-        <div class="feature-text"><h4>Ethics & Discernment</h4><p>We don't just say "use AI." We help you think through what's appropriate for your faith community.</p></div>
+        <i class="fa-solid fa-shield-halved feature-icon gold"></i>
+        <div class="feature-text"><h4>Doctrinal Discernment</h4><p>When AI answers conflict with Scripture or established doctrine, we call it out clearly and explain why it matters.</p></div>
       </div>
       <div class="feature">
         <i class="fa-solid fa-people-group feature-icon"></i>
-        <div class="feature-text"><h4>Church Communications</h4><p>AI tools for newsletters, social media, and announcements — without losing your congregation's voice.</p></div>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-heart feature-icon"></i>
-        <div class="feature-text"><h4>Faith First, Always</h4><p>Technology serves the mission. We never forget that. Neither should your church.</p></div>
+        <div class="feature-text"><h4>Community of All Traditions</h4><p>Protestant, Catholic, non-denominational — all believers are welcome here. We focus on what unites us: faith in God and questions about the future.</p></div>
       </div>
     </div>
   </div>
@@ -276,27 +395,37 @@
 <section>
   <p class="section-label">The OVDV Family</p>
   <h2>More newsletters you'll love</h2>
-  <p class="section-sub">Each newsletter crosses into the others. Find one, discover all three.</p>
+  <p class="section-sub">Each newsletter crosses into the others. Find one, discover all four.</p>
   <div class="divider"></div>
   <div class="other-grid">
     <a href="old-guy-ai.html" class="other-card cyan">
-      <p class="other-label"><i class="fa-solid fa-microchip"></i> Newsletter 01</p>
+      <p class="other-label"><i class="fa-solid fa-robot"></i> Newsletter 01</p>
       <h3 class="other-name">The Old Guy AI</h3>
       <p class="other-desc">Tech help that even seniors can understand. Phones, apps, email, AI tools — plain English, no judgment.</p>
       <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
     </a>
-    <a href="ai-bility.html" class="other-card ability">
+    <a href="ai-for-every1.html" class="other-card pink">
+      <p class="other-label"><i class="fa-solid fa-people-group"></i> Newsletter 02</p>
+      <h3 class="other-name">AI for Every1</h3>
+      <p class="other-desc">Down to Earth Information for People of All Ages. AI explained clearly for anyone who wants to understand.</p>
+      <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
+    </a>
+    <a href="ai-bility.html" class="other-card green">
       <p class="other-label"><i class="fa-solid fa-universal-access"></i> Newsletter 03</p>
       <h3 class="other-name">AI-Bility</h3>
-      <p class="other-desc">AI Powered Ability for Everyone Who Needs It. Tools and resources for people with disabilities and chronic illness.</p>
+      <p class="other-desc">AI Powered Ability for Everyone Who Needs It. Tools for people with disabilities and chronic illness.</p>
       <p class="other-arrow"><i class="fa-solid fa-arrow-right"></i> Read more</p>
     </a>
   </div>
 </section>
 
 <footer>
-  <p style="font-family:'Orbitron',monospace; font-size:0.9rem; color:var(--primary); margin-bottom:12px;">FAITH & AI WEEKLY</p>
-  <p>Part of the <a href="https://theoldguyai.com">OVDV Network</a> &nbsp;|&nbsp; <a href="old-guy-ai.html">The Old Guy AI</a> &nbsp;|&nbsp; <a href="ai-bility.html">AI-Bility</a></p>
+  <p style="font-family:'Orbitron',monospace; font-size:0.9rem; color:var(--primary); margin-bottom:12px;">AI*FAITH*AND YOU</p>
+  <p>Part of the <a href="https://theoldguyai.com">OVDV Network</a> &nbsp;|&nbsp;
+     <a href="old-guy-ai.html" style="color:#00f5ff">The Old Guy AI</a> &nbsp;|&nbsp;
+     <a href="ai-for-every1.html" style="color:#ff006e">AI for Every1</a> &nbsp;|&nbsp;
+     <a href="ai-bility.html" style="color:#39ff14">AI-Bility</a>
+  </p>
   <p style="margin-top:10px;">© 2026 Overhill Valley Digital Ventures. Saint Clair Shores, MI.</p>
 </footer>
 
@@ -306,17 +435,24 @@ function handleSub(e) {
   const btn = e.target.querySelector('.sub-btn');
   const orig = btn.innerHTML;
   btn.innerHTML = '<i class="fa-solid fa-check"></i> You\'re In!';
-  btn.style.cssText += ';background:rgba(255,215,0,0.2);border:1px solid rgba(255,215,0,0.5);color:#ffd700';
+  btn.style.background = 'rgba(191,0,255,0.2)';
+  btn.style.color = '#bf00ff';
+  btn.style.boxShadow = '0 0 24px rgba(191,0,255,0.4)';
   e.target.querySelector('input').value = '';
-  setTimeout(() => { btn.innerHTML = orig; btn.style.cssText = ''; }, 3200);
+  setTimeout(() => {
+    btn.innerHTML = orig;
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.boxShadow = '';
+  }, 3200);
 }
 </script>
 
-<!-- CURSOR: gold + purple only -->
+<!-- CURSOR: purple + gold only -->
 <script>
 (function() {
   document.body.style.cursor = 'none';
-  const COLORS = ['#ffd700','#bf00ff','#ffd700','#ffe566','#bf00ff'];
+  const COLORS = ['#bf00ff','#ffd700','#bf00ff','#d966ff','#ffd700'];
   const TRAIL = 20;
   const dots = [];
   const pos = Array.from({length:TRAIL},()=>({x:-100,y:-100}));
