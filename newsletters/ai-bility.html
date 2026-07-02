@@ -153,6 +153,11 @@
   footer a { color: var(--primary); text-decoration: none; }
 
   @media (max-width: 600px) { nav { padding: 14px 20px; } .nav-links { gap: 14px; } .stats { gap: 28px; } }
+
+  /* icon size clamp - draft CSS was inflating decorative icons over the form */
+  .hero i, .sub-form i, .sub-btn i, .hero-badge i { font-size: 1em !important;
+    position: static !important; opacity: 1 !important; }
+  .hero i.feature-icon, .hero > i, section.hero > svg { display: none !important; }
 </style>
 </head>
 <body>
@@ -177,6 +182,7 @@
     <input type="email" placeholder="Your email address" required/>
     <button type="submit" class="sub-btn"><i class="fa-solid fa-universal-access"></i> Subscribe Free</button>
   </form>
+  <img src="../assets/newsletters/aibility-wheelchair.jpg" alt="A wheelchair user working confidently with technology" style="display:block;margin:36px auto 0;max-width:min(500px,92%);width:100%;border-radius:14px;border:1px solid var(--primary);box-shadow:0 6px 32px rgba(0,0,0,0.45);">
   <p class="sub-note">No spam. Unsubscribe anytime. Built for everyone.</p>
 </section>
 
@@ -195,6 +201,7 @@
   <p class="section-label">Sample Issues</p>
   <h2>What lands in your inbox</h2>
   <p class="section-sub">Real tools, real people, real results. Every issue is written with the community, not just for it.</p>
+  <img src="../assets/newsletters/aibility-robotic-arm.jpg" alt="A robotic assistive arm helping with a daily task" loading="lazy" style="display:block;margin:28px auto 0;max-width:min(440px,92%);width:100%;border-radius:14px;border:1px solid var(--primary);box-shadow:0 6px 32px rgba(0,0,0,0.45);">
   <div class="divider"></div>
   <div class="issues-grid">
     <div class="issue-card">
@@ -240,6 +247,7 @@
 <section style="background:var(--bg2); max-width:100%; padding: 80px 24px;">
   <div style="max-width:1000px; margin:0 auto;">
     <p class="section-label">Every Issue</p>
+  <img src="../assets/newsletters/aibility-walking-legs.jpg" alt="Powered exoskeleton legs assisting a person walking" loading="lazy" style="display:block;margin:28px auto 0;max-width:min(440px,92%);width:100%;border-radius:14px;border:1px solid var(--primary);box-shadow:0 6px 32px rgba(0,0,0,0.45);">
     <h2>What you get each Wednesday</h2>
     <div class="divider"></div>
     <div class="features-grid">
