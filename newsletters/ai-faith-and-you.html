@@ -244,6 +244,9 @@
   /* mobile: hide decorative hero watermark (subtle on desktop, devours a phone screen) */
   @media (max-width: 768px) { .hero::after { display: none !important; } }
   .hero::after { display: none !important; } /* emoji watermark: opaque on phones */
+  .beehiiv-embed-wrap iframe, .beehiiv-embed-wrap > div, .beehiiv-embed-wrap embed {
+    width: 100% !important; min-width: 100% !important; max-width: 100% !important;
+  }
 </style>
 </head>
 <body>
@@ -268,7 +271,7 @@
     <span class="side-badge side-promise"><i class="fa-solid fa-sun"></i> The Promise of AI</span>
     <span class="side-badge side-concern"><i class="fa-solid fa-triangle-exclamation"></i> The Concern for Faith</span>
   </div>
-  <div class="beehiiv-embed-wrap" style="max-width:480px;margin:0 auto;">
+  <div class="beehiiv-embed-wrap" style="width:100%;max-width:640px;margin:0 auto;">
 <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="cbf4e380-1705-4998-84a9-7b7f12dbd12b"></script>
 </div>
 <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
