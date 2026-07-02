@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don't Get Scammed — Ask The Old Guy!</title>
+<meta name="description" content="Paste a suspicious text, email, or phone message and get a plain-English read on the warning signs. Free, private, from The Old Guy AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c1220; --card: #131b2e; --ink: #f2f4f8; --muted: #b8c2d4;
+    --green: #39ff14; --red: #ff5252; --amber: #ffb347; --teal: #4dd0e1;
+    --line: rgba(255,255,255,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Atkinson Hyperlegible', Arial, sans-serif;
+    font-size: 20px; line-height: 1.6;
+    padding: 24px 16px 60px;
+  }
+  main { max-width: 760px; margin: 0 auto; }
+  .brand { font-family: 'Orbitron', monospace; font-size: 0.85rem; letter-spacing: 3px;
+    color: var(--green); text-align: center; margin-bottom: 14px; }
+  .brand a { color: var(--green); text-decoration: none; }
+  h1 { font-size: clamp(1.7rem, 5vw, 2.6rem); text-align: center; line-height: 1.25; margin-bottom: 10px; }
+  h1 .accent { color: var(--green); }
+  .promise { text-align: center; color: var(--muted); font-size: 1.05rem; max-width: 620px;
+    margin: 0 auto 30px; }
+  .checker { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 26px 22px; }
+  label { display: block; font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+  textarea {
+    width: 100%; min-height: 190px; resize: vertical;
+    background: #0a0f1c; color: var(--ink); border: 2px solid var(--line);
+    border-radius: 12px; padding: 16px; font: inherit; font-size: 1.05rem;
+  }
+  textarea:focus { outline: 3px solid var(--green); outline-offset: 2px; border-color: transparent; }
+  .caution-note { color: var(--amber); font-size: 0.95rem; margin-top: 10px; }
+  button.check {
+    display: block; width: 100%; margin-top: 18px; padding: 18px;
+    font: inherit; font-size: 1.25rem; font-weight: 700; cursor: pointer;
+    background: var(--green); color: #06210a; border: none; border-radius: 12px;
+  }
+  button.check:hover { filter: brightness(1.08); }
+  button.check:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  button.check:disabled { opacity: 0.6; cursor: wait; }
+  .status { margin-top: 16px; font-size: 1.05rem; color: var(--muted); text-align: center; }
+  #result { margin-top: 28px; display: none; }
+  .verdict { border-radius: 14px; padding: 18px 20px; font-size: 1.5rem; font-weight: 700;
+    text-align: center; margin-bottom: 6px; }
+  .verdict.high { background: rgba(255,82,82,0.14); border: 2px solid var(--red); color: var(--red); }
+  .verdict.careful { background: rgba(255,179,71,0.12); border: 2px solid var(--amber); color: var(--amber); }
+  .verdict.noflags { background: rgba(77,208,225,0.10); border: 2px solid var(--teal); color: var(--teal); }
+  .headline { font-size: 1.15rem; text-align: center; margin: 14px 4px 22px; }
+  .section-title { font-weight: 700; font-size: 1.15rem; margin: 22px 0 10px; }
+  .flag { background: #0a0f1c; border: 1px solid var(--line); border-left: 5px solid var(--red);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .flag b { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .flag span { color: var(--muted); font-size: 1rem; }
+  ol.todo { padding-left: 26px; }
+  ol.todo li { margin-bottom: 12px; }
+  .reminder { margin-top: 20px; padding: 14px 16px; background: rgba(57,255,20,0.07);
+    border: 1px solid rgba(57,255,20,0.35); border-radius: 10px; font-size: 1.05rem; }
+  .error-box { margin-top: 20px; padding: 16px; border: 2px solid var(--amber);
+    border-radius: 12px; color: var(--ink); background: rgba(255,179,71,0.08); display: none;
+    font-size: 1.05rem; }
+  .trust { margin-top: 34px; display: grid; gap: 14px; }
+  .trust p { color: var(--muted); font-size: 1rem; padding-left: 26px; position: relative; }
+  .trust p::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .newsletter { margin-top: 44px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 26px 22px; text-align: center; }
+  .newsletter h2 { font-size: 1.4rem; margin-bottom: 8px; }
+  .newsletter p { color: var(--muted); margin-bottom: 18px; font-size: 1.02rem; }
+  footer { text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.95rem; }
+  footer a { color: var(--green); }
+  @media (prefers-reduced-motion: no-preference) {
+    #result.show { animation: rise .35s ease; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="brand"><a href="https://www.theoldguyai.com">THE OLD GUY AI</a></p>
+  <h1>Don't Get Scammed, <span class="accent">Ask The Old Guy!</span></h1>
+  <p class="promise">Got a text, email, or phone call that feels off? Paste it below and I'll give you
+  a plain-English read on the warning signs. Free, private, no sign-up.</p>
+
+  <section class="checker">
+    <label for="msg">Paste the suspicious message here:</label>
+    <textarea id="msg" placeholder="Copy the whole text or email and paste it here — the more I can see, the better I can help."></textarea>
+    <p class="caution-note">One rule first: never paste passwords, account numbers, or your Social
+    Security number — I don't need them to check.</p>
+    <button class="check" id="go">Check It for Me</button>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <div class="error-box" id="errbox"></div>
+
+    <div id="result" aria-live="polite">
+      <div class="verdict" id="verdict"></div>
+      <p class="headline" id="headline"></p>
+      <div id="flagswrap">
+        <p class="section-title">The warning signs I see:</p>
+        <div id="flags"></div>
+      </div>
+      <p class="section-title">What to do now:</p>
+      <ol class="todo" id="todo"></ol>
+      <div class="reminder" id="reminder"></div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <p>Nothing you paste is saved. It's checked, answered, and gone.</p>
+    <p>I never say a message is "safe" — even a clean-looking one deserves a quick call to the
+    company using the number on your card or statement.</p>
+    <p>Built by a real 60-something with 30+ years of tech experience helping folks like us.</p>
+  </section>
+
+  <section class="newsletter">
+    <h2>Stay one step ahead of the scammers</h2>
+    <p>Every issue of my free newsletter includes a Scam Watch — the newest tricks aimed at
+    people like us, and how to dodge them. Plain English, no jargon, no judgment.</p>
+    <div style="max-width:480px;margin:0 auto;">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="cbf4e380-1705-4998-84a9-7b7f12dbd12b"></script>
+    </div>
+  </section>
+
+  <footer>
+    <p>Part of <a href="https://www.theoldguyai.com">The Old Guy AI</a> — tech help that even
+    seniors can understand.<br>This tool gives general guidance, not legal or financial advice.
+    When in doubt, verify directly.</p>
+  </footer>
+</main>
+
+<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+<script>
+(function () {
+  var API = "https://oldguy-scamcheck.onrender.com/api/check";
+  var btn = document.getElementById("go"), msg = document.getElementById("msg");
+  var status = document.getElementById("status"), errbox = document.getElementById("errbox");
+  var result = document.getElementById("result");
+  var patience = null;
+
+  function setStatus(t) { status.textContent = t; }
+  function showError(t) { errbox.textContent = t; errbox.style.display = "block"; }
+  function clearOutput() {
+    errbox.style.display = "none"; errbox.textContent = "";
+    result.style.display = "none"; result.classList.remove("show");
+  }
+
+  function render(d) {
+    var v = document.getElementById("verdict");
+    v.textContent = d.verdict;
+    v.className = "verdict " + (d.verdict === "HIGH RISK" ? "high" :
+                  d.verdict === "BE CAREFUL" ? "careful" : "noflags");
+    document.getElementById("headline").textContent = d.headline || "";
+
+    var flags = document.getElementById("flags"); flags.innerHTML = "";
+    var wrap = document.getElementById("flagswrap");
+    if (d.red_flags && d.red_flags.length) {
+      wrap.style.display = "block";
+      d.red_flags.forEach(function (f) {
+        var div = document.createElement("div"); div.className = "flag";
+        var b = document.createElement("b"); b.textContent = f.flag;
+        var s = document.createElement("span"); s.textContent = f.explanation;
+        div.appendChild(b); div.appendChild(s); flags.appendChild(div);
+      });
+    } else { wrap.style.display = "none"; }
+
+    var todo = document.getElementById("todo"); todo.innerHTML = "";
+    (d.what_to_do || []).forEach(function (step) {
+      var li = document.createElement("li"); li.textContent = step; todo.appendChild(li);
+    });
+    document.getElementById("reminder").textContent = d.reminder || "";
+    result.style.display = "block"; result.classList.add("show");
+    result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  btn.addEventListener("click", function () {
+    var text = msg.value.trim();
+    clearOutput();
+    if (text.length < 20) {
+      showError("Paste the whole message first — the more of it I can see, the better I can help.");
+      return;
+    }
+    btn.disabled = true;
+    setStatus("The Old Guy is reading it over...");
+    patience = setTimeout(function () {
+      setStatus("Still here — waking up the checker. The first check of the day can take up to a minute.");
+    }, 8000);
+
+    fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text })
+    }).then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(patience); setStatus(""); btn.disabled = false;
+        if (d.error) { showError(d.error); return; }
+        render(d);
+      })
+      .catch(function () {
+        clearTimeout(patience); setStatus(""); btn.disabled = false;
+        showError("I couldn't reach the checker just now. Give it another try in a minute — " +
+          "and remember, the manual rule always works: verify directly using a number you already have.");
+      });
+  });
+})();
+</script>
+</body>
+</html>
