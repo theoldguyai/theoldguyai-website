@@ -1890,12 +1890,16 @@
   /* Subscribe handler */
   function handleSubscribe(e, brand) {
     e.preventDefault();
+    const input = e.target.querySelector('input');
+    const email = (input.value || '').trim();
+    if (!email || email.indexOf('@') === -1) { input.focus(); return; }
     const btn = e.target.querySelector('.sub-btn');
-    const origHTML = btn.innerHTML;
     btn.innerHTML = '<i class="fa-solid fa-check"></i> You\'re In!';
     btn.style.cssText += ';background:rgba(57,255,20,0.2);border-color:rgba(57,255,20,0.5);color:#39ff14';
-    e.target.querySelector('input').value = '';
-    setTimeout(() => { btn.innerHTML = origHTML; btn.style.cssText = ''; }, 3200);
+    setTimeout(() => {
+      window.location.href = 'https://theoldguyai.beehiiv.com/subscribe?email=' + encodeURIComponent(email)
+        + '&utm_source=theoldguyai.com&utm_medium=site&utm_campaign=' + encodeURIComponent(brand);
+    }, 700);
   }
 
   /* Smooth scroll */
