@@ -79,6 +79,9 @@
     #result.show { animation: rise .35s ease; }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   }
+  .bh-wrap iframe, .bh-wrap > div, div[class*="beehiiv"] iframe {
+    width: 100% !important; min-width: 0 !important; max-width: 100% !important;
+  }
 </style>
 </head>
 <body>
@@ -121,7 +124,7 @@
     <h2>Stay one step ahead of the scammers</h2>
     <p>Every issue of my free newsletter includes a Scam Watch — the newest tricks aimed at
     people like us, and how to dodge them. Plain English, no jargon, no judgment.</p>
-    <div style="max-width:480px;margin:0 auto;">
+    <div class="bh-wrap" style="width:100%;max-width:640px;margin:0 auto;">
       <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="cbf4e380-1705-4998-84a9-7b7f12dbd12b"></script>
     </div>
   </section>
