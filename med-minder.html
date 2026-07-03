@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Med Minder — Design Preview — The Old Guy AI</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#0c1220; --card:#131b2e; --ink:#f2f4f8; --muted:#b8c2d4;
+  --green:#39ff14; --amber:#ffb347; --red:#ff5252; --line:rgba(255,255,255,0.12); }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',Arial,sans-serif;
+  font-size:20px;line-height:1.55;padding:0 14px 60px}
+main{max-width:680px;margin:0 auto}
+.preview-banner{background:var(--amber);color:#241a00;font-weight:700;text-align:center;
+  padding:10px 14px;margin:0 -14px 18px;font-size:1rem}
+.brand{font-family:'Orbitron',monospace;font-size:.8rem;letter-spacing:3px;color:var(--green);
+  text-align:center;margin:14px 0 10px}
+h1{font-size:clamp(1.6rem,5vw,2.2rem);text-align:center;margin-bottom:4px}
+h1 span{color:var(--green)}
+.promise{text-align:center;color:var(--muted);font-size:1rem;margin-bottom:18px}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:18px}
+.tabs button{font:inherit;font-size:1.1rem;font-weight:700;padding:14px 26px;border-radius:12px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tabs button.active{background:var(--green);color:#06210a;border-color:var(--green)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:16px}
+h2{font-size:1.35rem;margin-bottom:12px}
+.dose{border:2px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.dose.due{border-color:var(--green)}
+.dose.missed{border-color:var(--red);background:rgba(255,82,82,.08)}
+.dose.done{opacity:.55}
+.dose-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+.dose-name{font-size:1.3rem;font-weight:700}
+.dose-time{font-size:1.15rem;color:var(--muted)}
+.dose-state{font-weight:700;font-size:1rem;margin-top:2px}
+.dose.missed .dose-state{color:var(--red)}
+.dose.done .dose-state{color:var(--green)}
+.ack{display:flex;gap:8px;margin-top:14px}
+.ack button{flex:1;font:inherit;font-size:1.15rem;font-weight:700;padding:16px 6px;border-radius:12px;
+  border:none;cursor:pointer}
+.ack .taken{background:var(--green);color:#06210a}
+.ack .skip{background:transparent;color:var(--muted);border:2px solid var(--line)}
+.ack .later{background:transparent;color:var(--amber);border:2px solid var(--amber)}
+.empty{color:var(--muted);text-align:center;padding:20px 0}
+label{display:block;font-weight:700;margin:14px 0 6px;font-size:1.05rem}
+input[type=text],input[type=time],input[type=number]{width:100%;background:#0a0f1c;color:var(--ink);
+  border:2px solid var(--line);border-radius:12px;padding:14px;font:inherit;font-size:1.15rem}
+.times-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.times-row input{flex:1}
+.times-row button{font:inherit;font-size:1rem;padding:12px;border-radius:10px;border:1px solid var(--line);
+  background:#0a0f1c;color:var(--muted);cursor:pointer}
+.big{display:block;width:100%;margin-top:16px;padding:18px;font:inherit;font-size:1.2rem;font-weight:700;
+  background:var(--green);color:#06210a;border:none;border-radius:12px;cursor:pointer}
+.big.secondary{background:transparent;color:var(--green);border:2px solid var(--green)}
+.med-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.med-row b{font-size:1.15rem}
+.med-row .muted{color:var(--muted);font-size:.98rem}
+.med-row button{font:inherit;font-size:.95rem;padding:8px 14px;border-radius:10px;
+  border:1px solid var(--red);background:transparent;color:var(--red);cursor:pointer}
+.pill-warn{color:var(--amber);font-weight:700}
+.selfcheck{border:1px solid var(--amber);border-radius:12px;padding:12px 14px;color:var(--amber);
+  font-size:.95rem;margin-bottom:16px}
+.ring{position:fixed;inset:0;background:rgba(12,18,32,.96);display:none;align-items:center;
+  justify-content:center;z-index:50;text-align:center;padding:20px}
+.ring.on{display:flex}
+.ring-inner{max-width:500px}
+.ring h2{font-size:2rem;color:var(--green);margin-bottom:10px}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:.9rem}
+footer a{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="preview-banner">DESIGN PREVIEW ONLY — do not use for real medication. A web page cannot ring when it's closed; the real Med Minder will be a proper app that can.</div>
+<main>
+  <p class="brand">THE OLD GUY AI</p>
+  <h1>Med <span>Minder</span></h1>
+  <p class="promise">Big buttons. No account. Your list never leaves this device.</p>
+
+  <div class="selfcheck" id="selfcheck"></div>
+
+  <div class="tabs">
+    <button id="tab-today" class="active" onclick="showView('today')">Today</button>
+    <button id="tab-meds" onclick="showView('meds')">My Medications</button>
+  </div>
+
+  <section class="card" id="view-today">
+    <h2 id="today-h">Today</h2>
+    <div id="dose-list"></div>
+  </section>
+
+  <section class="card" id="view-meds" style="display:none">
+    <h2>Add a medication — three steps</h2>
+    <label>1. What is it called?</label>
+    <input type="text" id="med-name" placeholder="e.g., Lisinopril, Vitamin D">
+    <label>2. What time(s) do you take it?</label>
+    <div id="times"></div>
+    <button class="big secondary" style="margin-top:6px" onclick="addTimeRow()">+ Add another time</button>
+    <label>3. Pills left in the bottle (optional — for refill reminders)</label>
+    <input type="number" id="med-pills" min="0" placeholder="Leave blank to skip">
+    <button class="big" onclick="addMed()">Save This Medication</button>
+    <p class="empty" id="med-status" style="padding:8px 0"></p>
+    <h2 style="margin-top:20px">Your list</h2>
+    <div id="med-list"></div>
+  </section>
+
+  <footer>
+    <p>Med Minder is part of <a href="https://www.theoldguyai.com">The Old Guy AI</a>.<br>
+    This preview validates the design only. It gives no medical or dosing advice — your
+    medication schedule comes from your doctor and pharmacist, always.</p>
+  </footer>
+</main>
+
+<div class="ring" id="ring">
+  <div class="ring-inner">
+    <h2 id="ring-title">Time for your medication</h2>
+    <p id="ring-sub" style="font-size:1.2rem;margin-bottom:18px"></p>
+    <div class="ack">
+      <button class="taken" onclick="ringAck('taken')">I TOOK IT</button>
+      <button class="later" onclick="ringAck('later')">REMIND ME IN 1 HOUR</button>
+    </div>
+    <button class="big secondary" onclick="ringAck('skip')">Skip this dose</button>
+  </div>
+</div>
+
+<script>
+function load(k, f){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function save(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+function todayKey(){ var d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function nowMinutes(){ var d=new Date(); return d.getHours()*60+d.getMinutes(); }
+function toMinutes(t){ var p=t.split(":"); return (+p[0])*60+(+p[1]); }
+function niceTime(t){ var p=t.split(":"); var h=+p[0], ap=h>=12?"PM":"AM"; h=h%12||12; return h+":"+p[1]+" "+ap; }
+
+var meds = load("mm_meds", []);
+var log = load("mm_log", {});
+var snooze = load("mm_snooze", {});
+var alerted = {};
+
+function doseKey(med, time){ return med + "@" + time; }
+function todayLog(){ log[todayKey()] = log[todayKey()] || {}; return log[todayKey()]; }
+
+function doseState(med, time){
+  var st = todayLog()[doseKey(med,time)];
+  if (st) return st;
+  var due = toMinutes(time), now = nowMinutes();
+  var snoozed = snooze[todayKey()+doseKey(med,time)];
+  if (snoozed && now < snoozed) return "later";
+  if (now > due + 60) return "missed";
+  if (now >= due) return "due";
+  return "upcoming";
+}
+
+function setDose(med, time, state){
+  todayLog()[doseKey(med,time)] = state;
+  if (state === "taken"){
+    var m = meds.filter(function(x){ return x.name===med; })[0];
+    if (m && typeof m.pills === "number" && m.pills > 0){ m.pills--; save("mm_meds", meds); }
+  }
+  save("mm_log", log); renderToday(); renderMeds();
+}
+
+function snoozeDose(med, time){
+  snooze[todayKey()+doseKey(med,time)] = nowMinutes() + 60;
+  save("mm_snooze", snooze);
+  delete todayLog()[doseKey(med,time)];
+  save("mm_log", log); renderToday();
+}
+
+function renderToday(){
+  var d = new Date();
+  document.getElementById("today-h").textContent = "Today — " +
+    d.toLocaleDateString(undefined,{weekday:"long", month:"long", day:"numeric"});
+  var list = document.getElementById("dose-list"); list.innerHTML = "";
+  var doses = [];
+  meds.forEach(function(m){ m.times.forEach(function(t){ doses.push({med:m, time:t}); }); });
+  doses.sort(function(a,b){ return toMinutes(a.time)-toMinutes(b.time); });
+  if (!doses.length){ list.innerHTML = "<p class='empty'>No medications yet. Add one under My Medications — it takes three steps.</p>"; return; }
+  doses.forEach(function(x){
+    var st = doseState(x.med.name, x.time);
+    var div = document.createElement("div");
+    div.className = "dose " + (st==="missed"?"missed": st==="due"?"due": (st==="taken"||st==="skip")?"done":"");
+    var stateText = {taken:"\u2713 Taken", skip:"Skipped", missed:"MISSED \u2014 talk to your pharmacist if unsure what to do",
+                     due:"Due now", later:"Snoozed \u2014 will ask again", upcoming:"Coming up"}[st];
+    div.innerHTML = "<div class='dose-head'><span class='dose-name'>"+x.med.name+"</span>"+
+      "<span class='dose-time'>"+niceTime(x.time)+"</span></div>"+
+      "<div class='dose-state'>"+stateText+"</div>";
+    if (st!=="taken" && st!=="skip"){
+      var ack = document.createElement("div"); ack.className="ack";
+      ack.innerHTML = "<button class='taken'>I TOOK IT</button><button class='later'>1 HOUR</button><button class='skip'>SKIP</button>";
+      ack.children[0].onclick = function(){ setDose(x.med.name, x.time, "taken"); };
+      ack.children[1].onclick = function(){ snoozeDose(x.med.name, x.time); };
+      ack.children[2].onclick = function(){ setDose(x.med.name, x.time, "skip"); };
+      div.appendChild(ack);
+    }
+    list.appendChild(div);
+  });
+}
+
+function addTimeRow(val){
+  var wrap = document.getElementById("times");
+  var row = document.createElement("div"); row.className = "times-row";
+  var inp = document.createElement("input"); inp.type = "time"; inp.value = val || "08:00";
+  var rm = document.createElement("button"); rm.textContent = "remove";
+  rm.onclick = function(){ if (wrap.children.length > 1) wrap.removeChild(row); };
+  row.appendChild(inp); row.appendChild(rm); wrap.appendChild(row);
+}
+
+function addMed(){
+  var name = document.getElementById("med-name").value.trim();
+  var times = Array.prototype.map.call(document.querySelectorAll("#times input"), function(i){ return i.value; }).filter(Boolean);
+  var pills = document.getElementById("med-pills").value;
+  var status = document.getElementById("med-status");
+  if (!name){ status.textContent = "Give it a name first."; return; }
+  if (!times.length){ status.textContent = "Pick at least one time."; return; }
+  meds = meds.filter(function(m){ return m.name !== name; });
+  meds.push({name:name, times:times, pills: pills===""?null:+pills});
+  save("mm_meds", meds);
+  document.getElementById("med-name").value = ""; document.getElementById("med-pills").value = "";
+  document.getElementById("times").innerHTML = ""; addTimeRow();
+  status.textContent = "Saved. It's on today's list now.";
+  renderMeds(); renderToday();
+}
+
+function renderMeds(){
+  var list = document.getElementById("med-list"); list.innerHTML = "";
+  if (!meds.length){ list.innerHTML = "<p class='empty'>Nothing yet.</p>"; return; }
+  meds.forEach(function(m){
+    var row = document.createElement("div"); row.className = "med-row";
+    var pills = (typeof m.pills === "number") ?
+      (m.pills <= 7 ? " \u2022 <span class='pill-warn'>" + m.pills + " pills left \u2014 time to refill</span>"
+                    : " \u2022 " + m.pills + " pills left") : "";
+    row.innerHTML = "<div><b>"+m.name+"</b><br><span class='muted'>"+
+      m.times.map(niceTime).join(", ")+pills+"</span></div>";
+    var del = document.createElement("button"); del.textContent = "Remove";
+    del.onclick = function(){
+      if (confirm("Remove "+m.name+" from your list?")){
+        meds = meds.filter(function(x){ return x.name !== m.name; });
+        save("mm_meds", meds); renderMeds(); renderToday();
+      }
+    };
+    row.appendChild(del); list.appendChild(row);
+  });
+}
+
+var ringing = null;
+function checkDue(){
+  meds.forEach(function(m){
+    m.times.forEach(function(t){
+      var key = doseKey(m.name, t);
+      var st = doseState(m.name, t);
+      var snoozed = snooze[todayKey()+key];
+      var fireAt = snoozed || toMinutes(t);
+      if ((st==="due" || st==="later") && nowMinutes() >= fireAt && !alerted[todayKey()+key]){
+        alerted[todayKey()+key] = true;
+        ringing = {med:m.name, time:t};
+        document.getElementById("ring-title").textContent = "Time for your " + m.name;
+        document.getElementById("ring-sub").textContent = "Scheduled for " + niceTime(t) + ".";
+        document.getElementById("ring").className = "ring on";
+        try {
+          var ctx = new (window.AudioContext||window.webkitAudioContext)();
+          var o = ctx.createOscillator(), g = ctx.createGain();
+          o.connect(g); g.connect(ctx.destination);
+          o.frequency.value = 660; g.gain.value = 0.06;
+          o.start(); setTimeout(function(){ o.stop(); }, 600);
+        } catch(e) {}
+      }
+    });
+  });
+}
+function ringAck(state){
+  document.getElementById("ring").className = "ring";
+  if (!ringing) return;
+  if (state === "later") snoozeDose(ringing.med, ringing.time);
+  else setDose(ringing.med, ringing.time, state);
+  ringing = null;
+}
+setInterval(checkDue, 20000);
+
+document.getElementById("selfcheck").innerHTML =
+  "<b>Preview self-check:</b> this web version can only remind you while this page is open on screen. " +
+  "It cannot ring from a closed phone \u2014 which is exactly why the real Med Minder will be a proper app. " +
+  "The real app will run this same check against your phone's alarm permissions and tell you plainly if anything is broken.";
+
+function showView(v){
+  ["today","meds"].forEach(function(x){
+    document.getElementById("view-"+x).style.display = (x===v)?"block":"none";
+    document.getElementById("tab-"+x).className = (x===v)?"active":"";
+  });
+}
+addTimeRow(); renderToday(); renderMeds(); checkDue();
+</script>
+</body>
+</html>
