@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flare Journal — by The Old Guy AI</title>
+<meta name="description" content="A simple, private symptom journal. Track how you feel, spot patterns in plain English, and print a report for your doctor. Nothing leaves your device.">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#0c1220; --card:#131b2e; --ink:#f2f4f8; --muted:#b8c2d4;
+  --green:#39ff14; --amber:#ffb347; --red:#ff5252; --line:rgba(255,255,255,0.12); }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',Arial,sans-serif;
+  font-size:19px;line-height:1.6;padding:20px 14px 60px}
+main{max-width:760px;margin:0 auto}
+.brand{font-family:'Orbitron',monospace;font-size:.8rem;letter-spacing:3px;color:var(--green);
+  text-align:center;margin-bottom:12px}
+.brand a{color:var(--green);text-decoration:none}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);text-align:center;margin-bottom:6px}
+h1 span{color:var(--green)}
+.promise{text-align:center;color:var(--muted);font-size:1rem;max-width:600px;margin:0 auto 8px}
+.preview-tag{display:block;text-align:center;color:var(--amber);font-size:.9rem;margin-bottom:20px}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.tabs button{font:inherit;font-size:1.05rem;font-weight:700;padding:12px 22px;border-radius:10px;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tabs button.active{background:var(--green);color:#06210a;border-color:var(--green)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;margin-bottom:18px}
+h2{font-size:1.3rem;margin-bottom:12px}
+h3{font-size:1.1rem;margin:16px 0 8px}
+.sym-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)}
+.sym-name{flex:1 1 130px;font-weight:700;font-size:1.05rem}
+.sev{display:flex;gap:6px}
+.sev button{width:46px;height:46px;font:inherit;font-size:1.1rem;font-weight:700;border-radius:10px;
+  border:1px solid var(--line);background:#0a0f1c;color:var(--muted);cursor:pointer}
+.sev button.on{background:var(--green);color:#06210a;border-color:var(--green)}
+.sev-legend{color:var(--muted);font-size:.85rem;margin:6px 0 2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{font:inherit;font-size:.98rem;padding:10px 16px;border-radius:999px;
+  border:1px solid var(--line);background:#0a0f1c;color:var(--muted);cursor:pointer}
+.chips button.on{background:rgba(57,255,20,.15);border-color:var(--green);color:var(--green)}
+textarea{width:100%;min-height:80px;background:#0a0f1c;color:var(--ink);border:2px solid var(--line);
+  border-radius:10px;padding:12px;font:inherit;font-size:1rem;margin-top:6px}
+input[type=text]{background:#0a0f1c;color:var(--ink);border:2px solid var(--line);border-radius:10px;
+  padding:10px 12px;font:inherit;font-size:1rem}
+.big{display:block;width:100%;margin-top:16px;padding:16px;font:inherit;font-size:1.15rem;font-weight:700;
+  background:var(--green);color:#06210a;border:none;border-radius:12px;cursor:pointer}
+.big.secondary{background:transparent;color:var(--green);border:2px solid var(--green)}
+.status{text-align:center;color:var(--green);margin-top:10px;min-height:1.4em}
+.entry{border-bottom:1px solid var(--line);padding:12px 0}
+.entry b{font-size:1.05rem}
+.entry .muted{color:var(--muted);font-size:.95rem}
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0}
+.bar-label{width:110px;font-size:.95rem;color:var(--muted)}
+.bar{height:16px;background:var(--green);border-radius:4px;min-width:2px}
+.summary p{margin-bottom:10px}
+.warn{color:var(--amber);font-size:.92rem}
+footer{text-align:center;margin-top:30px;color:var(--muted);font-size:.9rem}
+footer a{color:var(--green)}
+#report-area{display:none}
+@media print {
+  body{background:#fff;color:#000;font-size:12pt;padding:0}
+  main > *:not(#report-area){display:none !important}
+  #report-area{display:block !important;color:#000}
+  #report-area h2,#report-area h3{color:#000}
+  .bar{background:#666}
+  .bar-label{color:#333}
+}
+</style>
+</head>
+<body>
+<main>
+  <p class="brand"><a href="https://www.theoldguyai.com">THE OLD GUY AI</a></p>
+  <h1>Flare <span>Journal</span></h1>
+  <p class="promise">A simple, private way to keep track of how you feel — and spot the patterns worth telling your doctor about.</p>
+  <span class="preview-tag">Early preview • everything stays on this device • not medical advice</span>
+
+  <div class="tabs">
+    <button id="tab-today" class="active" onclick="showView('today')">Today</button>
+    <button id="tab-history" onclick="showView('history')">History</button>
+    <button id="tab-patterns" onclick="showView('patterns')">Patterns</button>
+    <button id="tab-doctor" onclick="showView('doctor')">Doctor Report</button>
+  </div>
+
+  <section class="card" id="view-today">
+    <h2 id="today-title">How are you today?</h2>
+    <p class="sev-legend">Tap a number for each one that bothered you: 1 = barely there, 5 = severe. Leave it blank if it didn't.</p>
+    <div id="symptom-rows"></div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <input type="text" id="new-symptom" placeholder="Add your own (e.g., Knee pain)" style="flex:1 1 200px">
+      <button class="big secondary" style="width:auto;margin-top:0;padding:10px 18px" onclick="addSymptom()">Add</button>
+    </div>
+    <h3>Anything that might have played a part today?</h3>
+    <div class="chips" id="trigger-chips"></div>
+    <h3>Notes (optional)</h3>
+    <textarea id="notes" placeholder="Anything else worth remembering about today"></textarea>
+    <button class="big" onclick="saveToday()">Save Today's Entry</button>
+    <p class="status" id="save-status"></p>
+  </section>
+
+  <section class="card" id="view-history" style="display:none">
+    <h2>Your recent days</h2>
+    <div id="history-list"></div>
+    <button class="big secondary" onclick="exportData()">Download a backup of my journal</button>
+    <p class="status" id="export-status"></p>
+  </section>
+
+  <section class="card" id="view-patterns" style="display:none">
+    <h2>What the last few weeks show</h2>
+    <div class="summary" id="pattern-summary"></div>
+    <h3>Symptom days (last 30 days)</h3>
+    <div id="pattern-bars"></div>
+    <p class="warn" style="margin-top:12px">These are patterns in your own notes, not a diagnosis. The person to interpret them is your doctor.</p>
+  </section>
+
+  <section class="card" id="view-doctor" style="display:none">
+    <h2>Print a report for your doctor</h2>
+    <p>One page, plain English: which symptoms showed up, how often, how bad, and what seemed to go along with them. Doctors love patients who bring this.</p>
+    <button class="big" onclick="printReport()">Print My Report</button>
+  </section>
+
+  <div id="report-area"></div>
+
+  <footer>
+    <p>Flare Journal is part of <a href="https://www.theoldguyai.com">The Old Guy AI</a>.<br>
+    Your entries never leave this device. This tool tracks — it does not diagnose, treat, or advise.<br>
+    Free weekly plain-English tech help: <a href="https://theoldguyai.beehiiv.com/subscribe">join the newsletter</a>.</p>
+  </footer>
+</main>
+
+<script>
+var DEFAULT_SYMPTOMS = ["Pain", "Fatigue", "Headache", "Stiffness", "Brain fog"];
+var TRIGGERS = ["Poor sleep", "Stress", "Weather change", "New food", "Overdid it", "Missed medication"];
+
+function load(key, fallback) {
+  try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch (e) { return fallback; }
+}
+function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+function todayKey() {
+  var d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function niceDate(k) {
+  var p = k.split("-");
+  return new Date(p[0], p[1]-1, p[2]).toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"});
+}
+
+var symptoms = load("flare_symptoms", DEFAULT_SYMPTOMS.slice());
+var entries = load("flare_entries", {});
+var draft = entries[todayKey()] || { symptoms:{}, triggers:[], notes:"" };
+
+function renderToday() {
+  document.getElementById("today-title").textContent = "How are you today? (" + niceDate(todayKey()) + ")";
+  var wrap = document.getElementById("symptom-rows"); wrap.innerHTML = "";
+  symptoms.forEach(function(name) {
+    var row = document.createElement("div"); row.className = "sym-row";
+    var label = document.createElement("div"); label.className = "sym-name"; label.textContent = name;
+    var sev = document.createElement("div"); sev.className = "sev";
+    for (var i = 1; i <= 5; i++) (function(i) {
+      var b = document.createElement("button");
+      b.textContent = i;
+      if (draft.symptoms[name] === i) b.className = "on";
+      b.onclick = function() {
+        if (draft.symptoms[name] === i) delete draft.symptoms[name];
+        else draft.symptoms[name] = i;
+        renderToday();
+      };
+      sev.appendChild(b);
+    })(i);
+    row.appendChild(label); row.appendChild(sev); wrap.appendChild(row);
+  });
+  var chips = document.getElementById("trigger-chips"); chips.innerHTML = "";
+  TRIGGERS.forEach(function(t) {
+    var b = document.createElement("button");
+    b.textContent = t;
+    if (draft.triggers.indexOf(t) !== -1) b.className = "on";
+    b.onclick = function() {
+      var ix = draft.triggers.indexOf(t);
+      if (ix === -1) draft.triggers.push(t); else draft.triggers.splice(ix, 1);
+      renderToday();
+    };
+    chips.appendChild(b);
+  });
+  document.getElementById("notes").value = draft.notes || "";
+}
+
+function addSymptom() {
+  var inp = document.getElementById("new-symptom");
+  var name = inp.value.trim();
+  if (!name) return;
+  if (symptoms.indexOf(name) === -1) { symptoms.push(name); save("flare_symptoms", symptoms); }
+  inp.value = ""; renderToday();
+}
+
+function saveToday() {
+  draft.notes = document.getElementById("notes").value;
+  entries[todayKey()] = draft;
+  save("flare_entries", entries);
+  document.getElementById("save-status").textContent = "Saved. Come back tomorrow - patterns need days.";
+}
+
+function lastNDays(n) {
+  var keys = [];
+  for (var i = 0; i < n; i++) {
+    var d = new Date(); d.setDate(d.getDate() - i);
+    keys.push(d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"));
+  }
+  return keys;
+}
+
+function renderHistory() {
+  var list = document.getElementById("history-list"); list.innerHTML = "";
+  var keys = Object.keys(entries).sort().reverse().slice(0, 30);
+  if (!keys.length) { list.innerHTML = "<p class='muted'>No entries yet. Start with today.</p>"; return; }
+  keys.forEach(function(k) {
+    var e = entries[k];
+    var div = document.createElement("div"); div.className = "entry";
+    var syms = Object.keys(e.symptoms).map(function(s){ return s + " (" + e.symptoms[s] + "/5)"; }).join(", ") || "No symptoms marked";
+    var trig = e.triggers.length ? " \u2022 " + e.triggers.join(", ") : "";
+    div.innerHTML = "<b>" + niceDate(k) + "</b><br><span class='muted'>" + syms + trig + "</span>" +
+      (e.notes ? "<br><span class='muted'>\u201C" + e.notes.replace(/</g,"&lt;") + "\u201D</span>" : "");
+    list.appendChild(div);
+  });
+}
+
+function analyze(days) {
+  var keys = lastNDays(days).filter(function(k){ return entries[k]; });
+  var stats = {};
+  keys.forEach(function(k) {
+    var e = entries[k];
+    Object.keys(e.symptoms).forEach(function(s) {
+      stats[s] = stats[s] || { days:0, total:0, withTrig:{} };
+      stats[s].days++; stats[s].total += e.symptoms[s];
+      e.triggers.forEach(function(t) { stats[s].withTrig[t] = (stats[s].withTrig[t]||0) + 1; });
+    });
+  });
+  return { keys: keys, stats: stats, logged: keys.length };
+}
+
+function renderPatterns() {
+  var a = analyze(30);
+  var box = document.getElementById("pattern-summary"); box.innerHTML = "";
+  if (a.logged < 3) {
+    box.innerHTML = "<p>Keep going - after three or four days of entries, I can start showing you real patterns.</p>";
+    document.getElementById("pattern-bars").innerHTML = ""; return;
+  }
+  var parts = ["<p>You've logged <b>" + a.logged + " of the last 30 days</b>. Here's the plain-English read:</p>"];
+  Object.keys(a.stats).sort(function(x,y){ return a.stats[y].days - a.stats[x].days; }).forEach(function(s) {
+    var st = a.stats[s];
+    var avg = (st.total / st.days).toFixed(1);
+    var line = "<b>" + s + "</b> showed up on " + st.days + " day" + (st.days>1?"s":"") + ", averaging " + avg + " out of 5.";
+    var topTrig = Object.keys(st.withTrig).sort(function(x,y){ return st.withTrig[y]-st.withTrig[x]; })[0];
+    if (topTrig && st.withTrig[topTrig] >= 3 && st.withTrig[topTrig] >= st.days * 0.5) {
+      line += " It seems to show up most often on days you marked <b>" + topTrig.toLowerCase() + "</b> - worth mentioning to your doctor.";
+    }
+    parts.push("<p>" + line + "</p>");
+  });
+  box.innerHTML = parts.join("");
+  var bars = document.getElementById("pattern-bars"); bars.innerHTML = "";
+  Object.keys(a.stats).forEach(function(s) {
+    var row = document.createElement("div"); row.className = "bar-row";
+    var pct = Math.round(100 * a.stats[s].days / a.logged);
+    row.innerHTML = "<div class='bar-label'>" + s + "</div><div class='bar' style='width:" + (pct*2.2) + "px'></div><div class='muted' style='font-size:.9rem'>" + a.stats[s].days + " days</div>";
+    bars.appendChild(row);
+  });
+}
+
+function printReport() {
+  var a = analyze(30);
+  var r = document.getElementById("report-area");
+  var lines = ["<h2>Symptom Report - last 30 days</h2>",
+    "<p>Prepared with Flare Journal (theoldguyai.com). Patient-recorded; " + a.logged + " days logged. Generated " + new Date().toLocaleDateString() + ".</p>"];
+  if (!a.logged) { lines.push("<p>No entries recorded yet.</p>"); }
+  Object.keys(a.stats).forEach(function(s) {
+    var st = a.stats[s]; var avg = (st.total/st.days).toFixed(1);
+    var trigs = Object.keys(st.withTrig).sort(function(x,y){ return st.withTrig[y]-st.withTrig[x]; })
+      .slice(0,3).map(function(t){ return t + " (" + st.withTrig[t] + " days)"; }).join(", ");
+    lines.push("<h3>" + s + "</h3><p>Occurred on " + st.days + " of " + a.logged + " logged days. Average severity " + avg + "/5." +
+      (trigs ? " Factors noted on those days: " + trigs + "." : "") + "</p>");
+  });
+  var notes = lastNDays(30).filter(function(k){ return entries[k] && entries[k].notes; })
+    .map(function(k){ return "<p><b>" + niceDate(k) + ":</b> " + entries[k].notes.replace(/</g,"&lt;") + "</p>"; });
+  if (notes.length) { lines.push("<h3>Patient notes</h3>"); lines = lines.concat(notes.slice(0,15)); }
+  lines.push("<p style='margin-top:14px'><i>This is a patient-kept journal, not a medical record or diagnosis.</i></p>");
+  r.innerHTML = lines.join("");
+  window.print();
+}
+
+function exportData() {
+  var blob = new Blob([JSON.stringify({symptoms:symptoms, entries:entries}, null, 1)], {type:"application/json"});
+  var aEl = document.createElement("a");
+  aEl.href = URL.createObjectURL(blob);
+  aEl.download = "flare-journal-backup.json";
+  aEl.click();
+  document.getElementById("export-status").textContent = "Backup downloaded. Keep it somewhere safe.";
+}
+
+function showView(v) {
+  ["today","history","patterns","doctor"].forEach(function(x) {
+    document.getElementById("view-"+x).style.display = (x===v) ? "block" : "none";
+    document.getElementById("tab-"+x).className = (x===v) ? "active" : "";
+  });
+  if (v === "history") renderHistory();
+  if (v === "patterns") renderPatterns();
+}
+
+renderToday();
+</script>
+</body>
+</html>
