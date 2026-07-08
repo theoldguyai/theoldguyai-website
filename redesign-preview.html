@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="a">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>The Old Guy AI — Redesign Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="a"]{--bg:#141a2e;--bg2:#1b2340;--card:#1e2747;--ink:#f4f1e8;--mut:#a8b0c8;
+  --acc:#e0913a;--accink:#2b1a05;--line:rgba(244,241,232,.10);--glow1:rgba(224,145,58,.13);--glow2:rgba(90,120,220,.10)}
+:root[data-theme="b"]{--bg:#22303f;--bg2:#283a4d;--card:#2c3e52;--ink:#f0ede4;--mut:#9fb0c1;
+  --acc:#d9a441;--accink:#2b2205;--line:rgba(240,237,228,.10);--glow1:rgba(217,164,65,.12);--glow2:rgba(127,176,138,.10)}
+:root[data-theme="c"]{--bg:#13262b;--bg2:#183237;--card:#1d3a40;--ink:#eef4f2;--mut:#93b3ad;
+  --acc:#e07a3f;--accink:#2b1305;--line:rgba(238,244,242,.10);--glow1:rgba(224,122,63,.13);--glow2:rgba(77,182,172,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',Arial,sans-serif;
+  font-size:18px;line-height:1.65}
+h1,h2,h3,.wordmark{font-family:'Sora',sans-serif}
+img{max-width:100%;display:block}
+a{color:var(--acc)}
+nav{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(18px,5vw,54px);background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.wordmark{font-weight:700;font-size:1.05rem;letter-spacing:2.5px;color:var(--ink);text-decoration:none}
+.wordmark span{color:var(--acc)}
+.navlinks{display:flex;gap:26px;align-items:center}
+.navlinks a{color:var(--mut);text-decoration:none;font-size:.95rem}
+.navlinks a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--acc);color:var(--accink);font-weight:700;text-decoration:none;
+  padding:13px 26px;border-radius:12px;font-size:1rem;border:none;cursor:pointer;transition:transform .18s,filter .18s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--acc);border:2px solid var(--acc)}
+.hero{position:relative;overflow:hidden;padding:clamp(46px,8vw,96px) clamp(18px,5vw,54px) clamp(40px,6vw,80px)}
+.hero::before{content:'';position:absolute;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,var(--glow1),transparent 62%);top:-220px;right:-140px;pointer-events:none}
+.hero::after{content:'';position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,var(--glow2),transparent 62%);bottom:-200px;left:-160px;pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,4vw,60px);
+  align-items:center;max-width:1180px;margin:0 auto}
+.kicker{font-family:'Sora',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:3px;color:var(--acc);margin-bottom:16px}
+.hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.12;margin-bottom:18px}
+.hero .sub{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--mut);max-width:34em;margin-bottom:26px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.vidframe{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.65)}
+.vidframe video{width:100%;display:block}
+.vidchip{position:absolute;left:16px;bottom:14px;background:color-mix(in srgb,var(--bg) 72%,transparent);
+  backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;
+  padding:7px 16px;font-size:.85rem;color:var(--ink)}
+.vidchip b{color:var(--acc)}
+section{padding:clamp(40px,6vw,76px) clamp(18px,5vw,54px)}
+.inner{max-width:1180px;margin:0 auto}
+.sec-kicker{font-family:'Sora',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:3px;color:var(--acc);margin-bottom:10px}
+.sec-title{font-size:clamp(1.5rem,2.6vw,2.1rem);margin-bottom:8px}
+.sec-sub{color:var(--mut);max-width:46em;margin-bottom:34px}
+.pub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.pub{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;transition:transform .22s,box-shadow .22s;position:relative}
+.pub:hover{transform:translateY(-6px);box-shadow:0 26px 50px -24px rgba(0,0,0,.6)}
+.pub .bar{height:4px}
+.pub img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.pub .body{padding:16px 18px 18px}
+.pub h3{font-size:1.12rem;margin-bottom:4px}
+.pub p{font-size:.92rem;color:var(--mut)}
+.pub .live{position:absolute;top:14px;right:14px;background:var(--acc);color:var(--accink);
+  font-size:.72rem;font-weight:700;letter-spacing:1.5px;padding:5px 11px;border-radius:999px}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.tool{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(180deg,var(--card),var(--bg2));
+  border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:var(--ink);
+  transition:transform .22s}
+.tool:hover{transform:translateY(-4px)}
+.tool .ic{font-size:1.7rem;line-height:1}
+.tool h3{font-size:1.05rem;margin-bottom:4px}
+.tool p{font-size:.9rem;color:var(--mut)}
+.about{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(26px,4vw,56px);align-items:center}
+.about img{border-radius:20px;border:1px solid var(--line)}
+.subscribe{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);
+  border-radius:24px;padding:clamp(30px,4vw,48px);text-align:center}
+.subscribe h2{font-size:clamp(1.4rem,2.4vw,1.9rem);margin-bottom:8px}
+.subscribe p{color:var(--mut);max-width:38em;margin:0 auto 22px}
+.bh-wrap{width:100%;max-width:640px;margin:0 auto}
+.bh-wrap iframe{width:100%!important;min-width:0!important;max-width:100%!important}
+footer{border-top:1px solid var(--line);padding:30px clamp(18px,5vw,54px);color:var(--mut);
+  font-size:.9rem;text-align:center}
+.theme-pill{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--acc);color:var(--accink);
+  border:none;font-family:'Sora',sans-serif;font-weight:600;font-size:.85rem;padding:12px 18px;
+  border-radius:999px;cursor:pointer;box-shadow:0 10px 26px -8px rgba(0,0,0,.5)}
+@media(max-width:840px){.hero-grid,.about{grid-template-columns:1fr}.navlinks a:not(.btn){display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="wordmark" href="#">THE OLD GUY <span>AI</span></a>
+  <div class="navlinks">
+    <a href="#publications">Newsletters</a>
+    <a href="#tools">Free tools</a>
+    <a href="#about">About</a>
+    <a class="btn" href="#subscribe">Join free</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="kicker">AI-POWERED MEDIA FOR SENIORS &amp; PEOPLE WITH DISABILITIES</p>
+      <h1>Technology, explained by someone who remembers rotary phones</h1>
+      <p class="sub">Plain-English newsletters, free tools, and honest help — from a real 60-something with 30 years in the trenches. No jargon. No judgment. Nothing to buy.</p>
+      <div class="cta-row">
+        <a class="btn" href="#subscribe">Join free — weekly</a>
+        <a class="btn ghost" href="scam-check.html">Try the scam checker</a>
+      </div>
+    </div>
+    <div class="vidframe">
+      <video autoplay muted loop playsinline poster="assets/newsletters/toga-old-guy-tablet.jpg">
+        <source src="assets/redesign/phone-morph.mp4" type="video/mp4">
+      </video>
+      <div class="vidchip"><b>1965 → 2026</b> · same call, same you</div>
+    </div>
+  </div>
+</header>
+
+<section id="publications">
+  <div class="inner">
+    <p class="sec-kicker">FOUR PUBLICATIONS, ONE PROMISE</p>
+    <h2 class="sec-title">Plain English, every time</h2>
+    <p class="sec-sub">Pick the letter that fits your life — they're all free, and they all talk to you like a neighbor, not a manual.</p>
+    <div class="pub-grid">
+      <div class="pub"><div class="bar" style="background:#5cb87a"></div><img src="assets/newsletters/toga-old-guy-tablet.jpg" alt="The Old Guy AI"><span class="live">LIVE</span>
+        <div class="body"><h3>The Old Guy AI</h3><p>Everyday tech help for seniors — fixes, scams, and AI without the hype.</p></div></div>
+      <div class="pub"><div class="bar" style="background:#d98a5f"></div><img src="assets/newsletters/aibility-robotic-arm.jpg" alt="AI-Bility">
+        <div class="body"><h3>AI-Bility</h3><p>Breakthrough tech for people with disabilities and chronic illness.</p></div></div>
+      <div class="pub"><div class="bar" style="background:#b08ec4"></div><img src="assets/newsletters/afay-pastor.jpg" alt="AI Faith And You">
+        <div class="body"><h3>AI·Faith·And You</h3><p>Where new technology meets old wisdom — helpful or harmful?</p></div></div>
+      <div class="pub"><div class="bar" style="background:#6fa8c9"></div><img src="assets/newsletters/aife-class.jpg" alt="AI 4 Every 1">
+        <div class="body"><h3>AI 4 Every 1</h3><p>AI explained for absolutely everyone — no experience required.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="inner">
+    <p class="sec-kicker">FREE TOOLS</p>
+    <h2 class="sec-title">Built for you, not for techies</h2>
+    <p class="sec-sub">No sign-ups, no tricks — use them right now.</p>
+    <div class="tool-grid">
+      <a class="tool" href="scam-check.html"><span class="ic">🛡️</span><span><h3>Don't Get Scammed — Ask The Old Guy!</h3><p>Paste a suspicious text or email, get a plain-English read on the warning signs.</p></span></a>
+      <a class="tool" href="assets/Email-Not-Working-Checklist-TheOldGuyAI.pdf"><span class="ic">🖨️</span><span><h3>Printable fix-it checklist</h3><p>The five email fixes on one page. Print it, keep it by the computer.</p></span></a>
+      <a class="tool" href="https://theoldguyai.beehiiv.com/p/my-email-is-not-working-5-simple-fixes"><span class="ic">📬</span><span><h3>Read Issue #001</h3><p>My Email Is Not Working — 5 Simple Fixes. See what the newsletter is like.</p></span></a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="inner about">
+    <img src="assets/newsletters/toga-toolman.jpg" alt="The Old Guy with his tools">
+    <div>
+      <p class="sec-kicker">WHO'S THE OLD GUY?</p>
+      <h2 class="sec-title">If I can do it, anyone can</h2>
+      <p style="color:var(--mut);margin-bottom:14px">I'm Sean — 60-something, thirty-plus years of fixing phones, computers, and "the internet is broken." I've helped people in their twenties and people in their nineties, and I've learned one thing: nobody is bad with technology. Technology has just been bad at explaining itself.</p>
+      <p style="color:var(--mut)">Every week I explain one piece of it in plain English — the same way I would across your kitchen table.</p>
+    </div>
+  </div>
+</section>
+
+<section id="subscribe">
+  <div class="inner subscribe">
+    <h2>Get the next issue free</h2>
+    <p>One email a week. Plain English. Unsubscribe anytime — no hard feelings.</p>
+    <div class="bh-wrap">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="cbf4e380-1705-4998-84a9-7b7f12dbd12b"></script>
+    </div>
+  </div>
+</section>
+<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+
+<footer>
+  <p>Overhill Valley Digital Ventures · The Old Guy AI · theoldguyai.com<br>Tech help that even seniors can understand.</p>
+</footer>
+
+<button class="theme-pill" id="themer">Theme A · tap to switch</button>
+<script>
+(function(){
+  var themes=["a","b","c"],names={a:"A · Midnight Copper",b:"B · Dusk Slate & Gold",c:"C · Deep Teal & Ember"},i=0;
+  var btn=document.getElementById("themer");
+  btn.textContent="Theme "+names.a;
+  btn.addEventListener("click",function(){
+    i=(i+1)%3;
+    document.documentElement.setAttribute("data-theme",themes[i]);
+    btn.textContent="Theme "+names[themes[i]];
+  });
+})();
+</script>
+</body>
+</html>
